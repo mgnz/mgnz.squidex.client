@@ -1,0 +1,81 @@
+{
+    "fields": [
+        {
+            "name": "stringfield1",
+            "properties": {
+                "editor": "Input",
+                "fieldType": "String"
+            },
+            "isLocked": false,
+            "isHidden": false,
+            "isDisabled": false,
+            "partitioning": "invariant",
+            "nested": []
+        },
+        {
+            "name": "datetimefield1",
+            "properties": {
+                "editor": "DateTime",
+                "fieldType": "DateTime"
+            },
+            "isLocked": false,
+            "isHidden": false,
+            "isDisabled": false,
+            "partitioning": "invariant",
+            "nested": []
+        },
+        {
+            "name": "stringfield2",
+            "properties": {
+                "editor": "Input",
+                "fieldType": "String"
+            },
+            "isLocked": false,
+            "isHidden": false,
+            "isDisabled": false,
+            "partitioning": "invariant",
+            "nested": []
+        },
+        {
+            "name": "arrayfield1",
+            "properties": {
+                "editor": "Default",
+                "fieldType": "Array"
+            },
+            "isLocked": false,
+            "isHidden": false,
+            "isDisabled": false,
+            "partitioning": "invariant",
+            "nested": [
+                {
+                    "fieldId": "6",
+                    "name": "array1nestedstring1",
+                    "properties": {
+                        "editor": "Input",
+                        "isRequired": false,
+                        "isListField": false,
+                        "fieldType": "String",
+                        "inlineEditable": false
+                    },
+                    "isLocked": false,
+                    "isHidden": false,
+                    "isDisabled": false,
+                    "parentId": "4"
+                }
+            ]
+        },
+        {
+            "name": "numberfield1",
+            "properties": {
+                "editor": "Input",
+                "fieldType": "Number"
+            },
+            "isLocked": false,
+            "isHidden": false,
+            "isDisabled": false,
+            "partitioning": "invariant",
+            "nested": []
+        }
+    ],
+    "properties": {}
+}

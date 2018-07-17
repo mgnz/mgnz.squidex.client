@@ -1,0 +1,107 @@
+{
+  "total": 1,
+  "items": [
+    {
+      "id": "89050301-f4dc-45d0-a801-02ff590f330f",
+      "createdBy": "subject:5aed40358d8caa13b8e26d1a",
+      "lastModifiedBy": "subject:5aed40358d8caa13b8e26d1a",
+      "data": {
+        "stringfield": {
+          "iv": "stringfield value"
+        },
+        "localizablestringfield": {
+          "sm": "localizablestringfield sm value",
+          "en": "localizablestringfield en value"
+        },
+        "datetimefield": {
+          "iv": "2018-07-09T11:15:12Z"
+        },
+        "numberfield": {
+          "iv": 1
+        },
+        "arrayfield": {
+          "iv": [
+            {
+              "arraystringfield1": "arraystringfield1 value 1",
+              "arraydatetimefield1": "2018-07-09T11:15:25Z"
+            },
+            {
+              "arraystringfield1": "arraystringfield1 value 2",
+              "arraydatetimefield1": "2018-07-09T11:15:36Z"
+            }
+          ]
+        },
+        "geolocationfield": {
+          "iv": {
+            "latitude": -44.93991652716803,
+            "longitude": 170.33203125
+          }
+        },
+        "tagsfield": {
+          "iv": [
+            "a",
+            "b",
+            "c"
+          ]
+        },
+        "assetsfield": {
+          "iv": []
+        },
+        "referencesfield": {
+          "iv": []
+        }
+      },
+      "dataDraft": {
+        "stringfield": {
+          "iv": "stringfield value"
+        },
+        "localizablestringfield": {
+          "sm": "localizablestringfield sm value",
+          "en": "localizablestringfield en value"
+        },
+        "datetimefield": {
+          "iv": "2018-07-09T11:15:12Z"
+        },
+        "numberfield": {
+          "iv": 1
+        },
+        "arrayfield": {
+          "iv": [
+            {
+              "arraystringfield1": "arraystringfield1 value 1",
+              "arraydatetimefield1": "2018-07-09T11:15:25Z"
+            },
+            {
+              "arraystringfield1": "arraystringfield1 value 2",
+              "arraydatetimefield1": "2018-07-09T11:15:36Z"
+            }
+          ]
+        },
+        "geolocationfield": {
+          "iv": {
+            "latitude": -44.93991652716803,
+            "longitude": 170.33203125
+          }
+        },
+        "tagsfield": {
+          "iv": [
+            "a",
+            "b",
+            "c"
+          ]
+        },
+        "assetsfield": {
+          "iv": []
+        },
+        "referencesfield": {
+          "iv": []
+        }
+      },
+      "isPending": false,
+      "created": "2018-07-09T11:16:05Z",
+      "lastModified": "2018-07-09T11:16:05Z",
+      "status": "Published",
+      "version": 1
+    }
+  ]
+}
