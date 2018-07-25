@@ -16,7 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\MGNZ.Squidex.Client.Common\MGNZ.Squidex.Client.Common.csproj" />
     <ProjectReference Include="..\..\src\MGNZ.Squidex.Client\MGNZ.Squidex.Client.csproj" />
   </ItemGroup>
 

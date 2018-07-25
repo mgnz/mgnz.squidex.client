@@ -5,8 +5,6 @@ VisualStudioVersion = 15.0.27703.2042
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MGNZ.Squidex.Client", "src\MGNZ.Squidex.Client\MGNZ.Squidex.Client.csproj", "{C59578D9-4819-4D99-B98F-6EE5B15F7D04}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MGNZ.Squidex.Client.Common", "src\MGNZ.Squidex.Client.Common\MGNZ.Squidex.Client.Common.csproj", "{17C3E766-1A5E-4B32-A9D3-6A7853B8A764}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MGNZ.Squidex.Client.Tests", "test\MGNZ.Squidex.Client.Tests\MGNZ.Squidex.Client.Tests.csproj", "{BC5B0C4B-A218-4849-BEA5-55DE93782788}"
 EndProject
 Global
@@ -19,10 +17,6 @@ Global
 		{C59578D9-4819-4D99-B98F-6EE5B15F7D04}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C59578D9-4819-4D99-B98F-6EE5B15F7D04}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C59578D9-4819-4D99-B98F-6EE5B15F7D04}.Release|Any CPU.Build.0 = Release|Any CPU
-		{17C3E766-1A5E-4B32-A9D3-6A7853B8A764}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{17C3E766-1A5E-4B32-A9D3-6A7853B8A764}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{17C3E766-1A5E-4B32-A9D3-6A7853B8A764}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{17C3E766-1A5E-4B32-A9D3-6A7853B8A764}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BC5B0C4B-A218-4849-BEA5-55DE93782788}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BC5B0C4B-A218-4849-BEA5-55DE93782788}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BC5B0C4B-A218-4849-BEA5-55DE93782788}.Release|Any CPU.ActiveCfg = Release|Any CPU
