@@ -4,7 +4,7 @@ namespace MGNZ.Squidex.Client.Tests.Stories
   using System.Net.Http;
   using System.Threading.Tasks;
 
-  using MGNZ.Squidex.Client.Common.Transport;
+  using MGNZ.Squidex.Client.Model;
   using MGNZ.Squidex.Client.Handlers;
 
   using Refit;

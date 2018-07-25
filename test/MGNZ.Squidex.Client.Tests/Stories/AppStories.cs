@@ -2,7 +2,7 @@ namespace MGNZ.Squidex.Client.Tests.Stories
 {
   using System.Threading.Tasks;
 
-  using MGNZ.Squidex.Client.Common.Transport;
+  using MGNZ.Squidex.Client.Model;
 
   public class AppStories : AuthenticatedSessionStory
   {

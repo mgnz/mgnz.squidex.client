@@ -2,7 +2,7 @@ namespace MGNZ.Squidex.Client.Tests.AssetModels
 {
   using System;
 
-  using MGNZ.Squidex.Client.Common.Model;
+  using MGNZ.Squidex.Client.Model;
 
   using Newtonsoft.Json;
 

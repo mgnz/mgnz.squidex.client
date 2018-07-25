@@ -13,8 +13,4 @@
     <Folder Include="Handlers\" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\MGNZ.Squidex.Client.Common\MGNZ.Squidex.Client.Common.csproj" />
-  </ItemGroup>
-
 </Project>

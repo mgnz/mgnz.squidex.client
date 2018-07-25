@@ -8,8 +8,8 @@ namespace MGNZ.Squidex.Client.Tests
 
   using FluentAssertions;
 
-  using MGNZ.Squidex.Client.Common.Model;
-  using MGNZ.Squidex.Client.Common.Transport;
+  using MGNZ.Squidex.Client.Model;
+  using MGNZ.Squidex.Client.Model;
   using MGNZ.Squidex.Client.Handlers;
   using MGNZ.Squidex.Client.Tests.AssetModels;
   using MGNZ.Squidex.Client.Tests.Stories;
