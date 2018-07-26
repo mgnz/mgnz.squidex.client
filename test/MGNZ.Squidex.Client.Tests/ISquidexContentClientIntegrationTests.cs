@@ -12,7 +12,10 @@ namespace MGNZ.Squidex.Client.Tests
   using MGNZ.Squidex.Client.Model;
   using MGNZ.Squidex.Client.Handlers;
   using MGNZ.Squidex.Client.Tests.AssetModels;
+  using MGNZ.Squidex.Client.Tests.Plumbing;
   using MGNZ.Squidex.Client.Tests.Stories;
+
+  using Microsoft.Extensions.Configuration;
 
   using Newtonsoft.Json;
 
@@ -20,17 +23,33 @@ namespace MGNZ.Squidex.Client.Tests
 
   using Xunit;
 
+  // https://docs.microsoft.com/en-us/aspnet/core/fundamentals/configuration/?view=aspnetcore-2.1&tabs=basicconfiguration
+  // https://blogs.msdn.microsoft.com/fkaduk/2017/02/22/using-strongly-typed-configuration-in-net-core-console-app/
+
   [Collection("Sequential Squidex Integration Tests")]
   [Trait("category", "squidex-api-integration")]
-  public class SquidexClientIntegrationTestBase
+  public class SquidexClientIntegrationTestBase : ConfigurationAwareTestBase
   {
+    private TestConfigurationOptions _options;
     private ISquidexAppSchemaClient _authenticatedSchemaClient;
     private ISquidexContentClient _authenticatedContentClient;
     private ISquidexOAuthClient _plainOAuthClient;
     private Lazy<dynamic> _schemaAsset;
 
-    protected string BaseAddress => "http://playpen.cms.mad.geek.nz:80";
-    protected Uri BaseAddressUri => new Uri(this.BaseAddress);
+    private TestConfigurationOptions Options
+    {
+      get
+      {
+        if (this._options == null)
+        {
+          this._options = new TestConfigurationOptions();
+          var config = base.GetConfigurationRoot();
+          config.GetSection("options").Bind(this._options);
+        }
+
+        return this._options;
+      }
+    }
 
     protected Lazy<dynamic> Schema1Asset => this._schemaAsset ?? (this._schemaAsset = new Lazy<dynamic>(() => this.LoadAsset("MGNZ.Vendor.Squidex.Client.Tests.Assets.ReferenceMultipleSchema.json")));
 
@@ -40,7 +59,7 @@ namespace MGNZ.Squidex.Client.Tests
       {
         return this._plainOAuthClient ??
                (this._plainOAuthClient =
-                 RestService.For<ISquidexOAuthClient>(this.BaseAddress));
+                 RestService.For<ISquidexOAuthClient>(this.Options.BaseAddressUri.AbsolutePath));
       }
     }
 
@@ -52,9 +71,9 @@ namespace MGNZ.Squidex.Client.Tests
                (this._authenticatedSchemaClient =
                  RestService.For<ISquidexAppSchemaClient>(
                    new HttpClient(new AccessTokenHttpClientHandler(() =>
-                     this.GetOAuthValueKnownUser(this.TempoaryHardCodedTestClientAUT)))
+                     this.GetOAuthValueKnownUser(this.Options.Clients["mgnz-aut-developer"])))
                    {
-                     BaseAddress = this.BaseAddressUri
+                     BaseAddress = this.Options.BaseAddressUri
                    }));
       }
     }
@@ -67,9 +86,9 @@ namespace MGNZ.Squidex.Client.Tests
                (this._authenticatedContentClient =
                  RestService.For<ISquidexContentClient>(
                    new HttpClient(new AccessTokenHttpClientHandler(() =>
-                     this.GetOAuthValueKnownUser(this.TempoaryHardCodedEditorClientAUT)))
+                     this.GetOAuthValueKnownUser(this.Options.Clients["mgnz-aut-editor"])))
                    {
-                     BaseAddress = this.BaseAddressUri
+                     BaseAddress = this.Options.BaseAddressUri
                    }));
       }
     }
