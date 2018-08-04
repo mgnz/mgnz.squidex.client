@@ -9,31 +9,33 @@ namespace MGNZ.Squidex.Client.Tests
 
   using Xunit;
 
-  public class ISquidexSchemaClientIntegrationTests : SquidexClientIntegrationTestBase
+  public class ISquidexSchemaClientIntegrationTests : SquidexClientIntegrationTest
   {
     [Fact]
     public async Task EndToEnd_HappyPath()
     {
-      var stories = new SchemaStories();
-      var knownUser = stories.TempoaryHardCodedTestClientAUT;
+      var oauthStories = new OAuthStories(this.Options);
+      var schemaStories = new SchemaStories(this.Options);
+      var knownUser = this.Options.Clients["mgnz-aut-developer"];
 
-      var oauthToken = await stories.GetOAuthToken(knownUser.OAuthAppName, knownUser.OAuthClientId, knownUser.OAuthClientSecret);
+      var oauthToken =
+        await oauthStories.GetOAuthToken(knownUser.OAuthAppName, knownUser.OAuthClientId, knownUser.OAuthClientSecret);
 
       // todo : create app for the test; untill then verify we dont have any unexpected schemas on the app
 
       {
         // predcondition
-        var allschemas = await stories.GetSchemas("aut");
+        var allschemas = await schemaStories.GetSchemas("aut");
         int count = Convert.ToInt32(allschemas.Count);
         count.Should().Be(0, "Test cannot start because there are unexpected Schemas on the target endpoint");
       }
 
       // setup
-      await stories.PostSchema("aut", this.Schema1Asset.Value, "schema1name");
-      await stories.PostSchema("aut", this.Schema1Asset.Value, "schema2name");
+      await schemaStories.PostSchema("aut", this.Schema1Asset.Value, "schema1name");
+      await schemaStories.PostSchema("aut", this.Schema1Asset.Value, "schema2name");
 
       {
-        var allschemas = await stories.GetSchemas("aut");
+        var allschemas = await schemaStories.GetSchemas("aut");
         int count = Convert.ToInt32(allschemas.Count);
         count.Should().Be(2);
         string schema1name = Convert.ToString(allschemas[0].name);
@@ -43,8 +45,8 @@ namespace MGNZ.Squidex.Client.Tests
       }
 
       {
-        await stories.PublishSchema("aut", "schema1name");
-        var schema1 = await stories.GetSchema("aut", "schema1name");
+        await schemaStories.PublishSchema("aut", "schema1name");
+        var schema1 = await schemaStories.GetSchema("aut", "schema1name");
         string schema1name = Convert.ToString(schema1.name);
         bool schema1published = Convert.ToBoolean(schema1.isPublished);
         schema1name.Should().Be("schema1name");
@@ -52,8 +54,8 @@ namespace MGNZ.Squidex.Client.Tests
       }
 
       {
-        await stories.UnpublishSchema("aut", "schema1name");
-        var schema1 = await stories.GetSchema("aut", "schema1name");
+        await schemaStories.UnpublishSchema("aut", "schema1name");
+        var schema1 = await schemaStories.GetSchema("aut", "schema1name");
         string schema1name = Convert.ToString(schema1.name);
         bool schema1published = Convert.ToBoolean(schema1.isPublished);
         schema1name.Should().Be("schema1name");
@@ -61,9 +63,9 @@ namespace MGNZ.Squidex.Client.Tests
       }
 
       {
-        await stories.DeleteSchema("aut", "schema1name");
-        await stories.DeleteSchema("aut", "schema2name");
-        var allschemas = await stories.GetSchemas("aut");
+        await schemaStories.DeleteSchema("aut", "schema1name");
+        await schemaStories.DeleteSchema("aut", "schema2name");
+        var allschemas = await schemaStories.GetSchemas("aut");
         int count = Convert.ToInt32(allschemas.Count);
         count.Should().Be(0);
       }

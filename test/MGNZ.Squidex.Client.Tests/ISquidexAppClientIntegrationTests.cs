@@ -7,12 +7,12 @@ namespace MGNZ.Squidex.Client.Tests
 
   using Xunit;
 
-  public class ISquidexAppClientIntegrationTests : SquidexClientIntegrationTestBase
+  public class ISquidexAppClientIntegrationTests : SquidexClientIntegrationTest
   {
-    [Fact]
+    [Fact(Skip = "needs refreshed admin token")]
     public async Task EndToEnd_HappyPath()
     {
-      var stories = new AppStories();
+      var stories = new AppStories(this.Options);
 
       var app1Name = $"{Guid.NewGuid().ToString("D")}-aut";
       var app2Name = $"{Guid.NewGuid().ToString("D")}-aut";
