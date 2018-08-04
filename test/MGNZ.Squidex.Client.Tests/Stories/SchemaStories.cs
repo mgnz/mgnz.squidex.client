@@ -25,7 +25,7 @@ namespace MGNZ.Squidex.Client.Tests.Stories
       {
         return this._authenticatedSchemaClient ?? (this._authenticatedSchemaClient =
                  RestService.For<ISquidexAppSchemaClient>(
-                   new HttpClient(new AccessTokenHttpClientHandler(() =>
+                   new HttpClient(new LazyAccessTokenHttpClientHandler(() =>
                      this._oAuthStories.GetOAuthValueKnownUser(this.Options.Clients["aut-developer"])))
                    {
                      BaseAddress = this.Options.BaseAddressUri

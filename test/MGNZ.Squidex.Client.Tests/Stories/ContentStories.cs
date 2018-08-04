@@ -28,7 +28,7 @@ namespace MGNZ.Squidex.Client.Tests.Stories
         return this._authenticatedContentClient ??
                (this._authenticatedContentClient =
                  RestService.For<ISquidexContentClient>(
-                   new HttpClient(new AccessTokenHttpClientHandler(() =>
+                   new HttpClient(new LazyAccessTokenHttpClientHandler(() =>
                      this._oAuthStories.GetOAuthValueKnownUser(this.Options.Clients["aut-editor"])))
                    {
                      BaseAddress = this.Options.BaseAddressUri

@@ -14,8 +14,4 @@
     <PackageReference Include="Refit" Version="4.6.16" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Handlers\" />
-  </ItemGroup>
-
 </Project>

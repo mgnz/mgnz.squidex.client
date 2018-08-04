@@ -23,7 +23,7 @@ namespace MGNZ.Squidex.Client.Tests.Stories
       return this._authenticatedAppClient ?? (this._authenticatedAppClient =
                RestService.For<ISquidexAppClient>(
                  new HttpClient(
-                   new AccessTokenHttpClientHandler(() => Task.FromResult(this.Options.AdministratorToken)))
+                   new LazyAccessTokenHttpClientHandler(() => Task.FromResult(this.Options.AdministratorToken)))
                  {
                    BaseAddress = this.Options.BaseAddressUri
                  }));
