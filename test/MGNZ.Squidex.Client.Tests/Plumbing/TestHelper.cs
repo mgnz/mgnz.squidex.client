@@ -13,6 +13,7 @@ namespace MGNZ.Squidex.Client.Tests.Plumbing
       {
         builder.SetBasePath(outputPath);
         builder.AddJsonFile("testsettings.json", true);
+        builder.AddJsonFile("testsettings.aut.json", true);
       }
 
       //if (userSecrets != null)
