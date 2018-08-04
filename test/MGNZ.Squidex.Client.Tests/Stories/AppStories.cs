@@ -1,11 +1,33 @@
 namespace MGNZ.Squidex.Client.Tests.Stories
 {
+  using System.Net.Http;
   using System.Threading.Tasks;
 
+  using MGNZ.Squidex.Client.Handlers;
   using MGNZ.Squidex.Client.Model;
+  using MGNZ.Squidex.Client.Tests.Plumbing;
 
-  public class AppStories : AuthenticatedSessionStory
+  using Refit;
+
+  public class AppStories : StoryBase
   {
+    private ISquidexAppClient _authenticatedAppClient;
+
+    public AppStories(TestConfigurationOptions options) : base(options)
+    {
+    }
+
+    protected ISquidexAppClient GetSystemUserAuthenticatedAppClient()
+    {
+      return this._authenticatedAppClient ?? (this._authenticatedAppClient =
+               RestService.For<ISquidexAppClient>(
+                 new HttpClient(
+                   new AccessTokenHttpClientHandler(() => Task.FromResult(this.Options.AdministratorToken)))
+                 {
+                   BaseAddress = this.Options.BaseAddressUri
+                 }));
+    }
+
     public async Task<dynamic> CreateApplication(string appName)
     {
       var request = new CreateAppRequest
@@ -13,28 +35,28 @@ namespace MGNZ.Squidex.Client.Tests.Stories
         Name = appName
       };
 
-      return await this.SystemUserAuthenticatedAppClient.CreateApp(request);
+      return await this.GetSystemUserAuthenticatedAppClient().CreateApp(request);
     }
 
     public async Task<dynamic> GetApps()
     {
-      return await this.SystemUserAuthenticatedAppClient.GetAllApps();
+      return await this.GetSystemUserAuthenticatedAppClient().GetAllApps();
     }
 
     public async Task<dynamic> DeleteApp(string appName)
     {
-      return await this.SystemUserAuthenticatedAppClient.DeleteApp(appName);
+      return await this.GetSystemUserAuthenticatedAppClient().DeleteApp(appName);
     }
 
     public async Task<dynamic> CreateClient(string appName, string clientName)
     {
-      return await this.SystemUserAuthenticatedAppClient.CreateClient(appName,
+      return await this.GetSystemUserAuthenticatedAppClient().CreateClient(appName,
         new CreateClientRequest {Name = clientName});
     }
 
     public async Task<dynamic> GetClients(string appName)
     {
-      return await this.SystemUserAuthenticatedAppClient.GetAllClients(appName);
+      return await this.GetSystemUserAuthenticatedAppClient().GetAllClients(appName);
     }
 
     public async Task<dynamic> UpdateClient(string appName, string clientName, string permission)
@@ -44,7 +66,7 @@ namespace MGNZ.Squidex.Client.Tests.Stories
         Perrmision = permission
       };
 
-      return await this.SystemUserAuthenticatedAppClient.UpdateClient(appName, clientName, request);
+      return await this.GetSystemUserAuthenticatedAppClient().UpdateClient(appName, clientName, request);
     }
   }
 }
