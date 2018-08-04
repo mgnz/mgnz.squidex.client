@@ -6,9 +6,9 @@ namespace MGNZ.Squidex.Client.Tests
   using FluentAssertions;
 
   using MGNZ.Squidex.Client.Model;
-  using MGNZ.Squidex.Client.Model.Transport;
   using MGNZ.Squidex.Client.Tests.AssetModels;
   using MGNZ.Squidex.Client.Tests.Stories;
+  using MGNZ.Squidex.Client.Transport;
 
   using Newtonsoft.Json;
 

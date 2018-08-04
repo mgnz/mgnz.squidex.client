@@ -1,6 +1,6 @@
-namespace MGNZ.Squidex.Client.Model
+namespace MGNZ.Squidex.Client.Transport
 {
-  using Model;
+  using MGNZ.Squidex.Client.Model;
 
   public class SquidexQueryResponse<TModel>
   {

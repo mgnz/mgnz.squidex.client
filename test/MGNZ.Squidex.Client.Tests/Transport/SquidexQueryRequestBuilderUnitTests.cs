@@ -6,7 +6,7 @@ namespace MGNZ.Squidex.Client.Tests.Transport
   using FluentAssertions;
 
   using MGNZ.Squidex.Client.Model;
-  using MGNZ.Squidex.Client.Model.Transport;
+  using MGNZ.Squidex.Client.Transport;
 
   using Xunit;
 

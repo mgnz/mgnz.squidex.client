@@ -4,6 +4,7 @@ namespace MGNZ.Squidex.Client.Tests.Stories
 
   using MGNZ.Squidex.Client.Model;
   using MGNZ.Squidex.Client.Tests.Plumbing;
+  using MGNZ.Squidex.Client.Transport;
 
   using Refit;
 

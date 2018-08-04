@@ -4,6 +4,7 @@ namespace MGNZ.Squidex.Client
 
   using MGNZ.Squidex.Client.Model;
   using MGNZ.Squidex.Client.Model;
+  using MGNZ.Squidex.Client.Transport;
 
   using Refit;
 

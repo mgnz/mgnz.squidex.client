@@ -1,4 +1,4 @@
-namespace MGNZ.Squidex.Client.Model.Transport
+namespace MGNZ.Squidex.Client.Transport
 {
   using System;
 
