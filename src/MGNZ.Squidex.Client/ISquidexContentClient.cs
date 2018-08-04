@@ -20,11 +20,11 @@ namespace MGNZ.Squidex.Client
       [AliasAs("$search")] string search = null, [AliasAs("$filter")] string filter = null);
 
     [Post("/api/content/{app}/{schema}/")]
-    Task<SquidexItemContent<TModel>> Create<TModel>(string app, string schema,
+    Task<ItemContent<TModel>> Create<TModel>(string app, string schema,
       [Body(BodySerializationMethod.Json)] TModel content);
 
     [Get("/api/content/{app}/{schema}/{id}/")]
-    Task<SquidexItemContent<TModel>> Get<TModel>(string app, string schema, string id);
+    Task<ItemContent<TModel>> Get<TModel>(string app, string schema, string id);
 
     [Put("/api/content/{app}/{schema}/{id}")]
     Task<TModel> Put<TModel>(string app, string schema, string id, [Body(BodySerializationMethod.Json)] TModel content);

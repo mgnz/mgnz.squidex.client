@@ -5,6 +5,6 @@ namespace MGNZ.Squidex.Client.Transport
   public class SquidexQueryResponse<TModel>
   {
     public int Total { get; set; }
-    public SquidexItemContent<TModel>[] Items { get; set; }
+    public ItemContent<TModel>[] Items { get; set; }
   }
 }

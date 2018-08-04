@@ -50,12 +50,12 @@ namespace MGNZ.Squidex.Client.Tests.Stories
       return await this.AuthenticatedContentClient.Query<TModel>(app, schema, top, skip, orderBy, search, filter);
     }
 
-    public async Task<SquidexItemContent<TModel>> Create<TModel>(string app, string schema, TModel content)
+    public async Task<ItemContent<TModel>> Create<TModel>(string app, string schema, TModel content)
     {
       return await this.AuthenticatedContentClient.Create(app, schema, content);
     }
 
-    public async Task<SquidexItemContent<TModel>> Get<TModel>(string app, string schema, string id)
+    public async Task<ItemContent<TModel>> Get<TModel>(string app, string schema, string id)
     {
       return await this.AuthenticatedContentClient.Get<TModel>(app, schema, id);
     }

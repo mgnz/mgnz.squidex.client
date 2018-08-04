@@ -86,11 +86,11 @@ namespace MGNZ.Squidex.Client.Tests
 
       // test patch the things
       {
-        var patched1expected = new ReferenceMultipleAssetModel { StringField = new SquidexInvariantFieldItem<string>() { Iv = "updated in patch" } };
+        var patched1expected = new ReferenceMultipleAssetModel { StringField = new InvariantField<string>() { Iv = "updated in patch" } };
         var patched1byId = await contentStories.Patch("aut", "schema1name", record1Id, patched1expected);
         patched1byId.StringField.Iv.Should().Be(patched1expected.StringField.Iv, because: $"at stage patch things");
 
-        //var patched2expected = new ReferenceMultipleAssetModel { StringField = new SquidexInvariantFieldItem<string>() { Iv = "updated in patch" } };
+        //var patched2expected = new ReferenceMultipleAssetModel { StringField = new InvariantField<string>() { Iv = "updated in patch" } };
         //var patched2byId = await stories.Patch("aut", "schema1name", record2Id, patched2expected);
         //patched2byId.StringField.Iv.Should().Be(patched2expected.StringField.Iv, because: $"at stage patch things");
       }
@@ -143,7 +143,7 @@ namespace MGNZ.Squidex.Client.Tests
       inserted1Actual.NumberField.Iv.Should().Be(record1Expected.NumberField.Iv, because: $"at stage {asserting}");
     }
 
-    private static string AssertReference(SquidexItemContent<ReferenceMultipleAssetModel> inserted1Actual, ReferenceMultipleAssetModel record1Expected, string asserting)
+    private static string AssertReference(ItemContent<ReferenceMultipleAssetModel> inserted1Actual, ReferenceMultipleAssetModel record1Expected, string asserting)
     {
       AssertReference(inserted1Actual.Data, record1Expected, asserting);
       inserted1Actual.Id.Should().NotBeNullOrEmpty(because: $"at stage {asserting}").And.NotBeNullOrWhiteSpace(because: $"at stage {asserting}");

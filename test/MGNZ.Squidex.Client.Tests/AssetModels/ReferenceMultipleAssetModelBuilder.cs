@@ -26,31 +26,31 @@ namespace MGNZ.Squidex.Client.Tests.AssetModels
     {
       return new ReferenceMultipleAssetModel()
       {
-        StringField = new SquidexInvariantFieldItem<string>() {Iv = $"{seed} stringfield"},
-        LocalizableStringField = new SquidexLanguagetFieldItem() {{"en", $"{seed} language item en"}, {"sm", $"{seed} language item sm"}},
-        DateTimeField = new SquidexInvariantFieldItem<DateTime>() {Iv = DateTime.Now.AddHours(-20)},
-        NumberField = new SquidexInvariantFieldItem<Int32>() {Iv = seed.GetHashCode()},
-        ArrayField = new SquidexArrayFieldItem<ReferenceMultipleChildAssetModel>()
+        StringField = new InvariantField<string>() {Iv = $"{seed} stringfield"},
+        LocalizableStringField = new LocalizableField() {{"en", $"{seed} language item en"}, {"sm", $"{seed} language item sm"}},
+        DateTimeField = new InvariantField<DateTime>() {Iv = DateTime.Now.AddHours(-20)},
+        NumberField = new InvariantField<Int32>() {Iv = seed.GetHashCode()},
+        ArrayField = new ArrayField<ReferenceMultipleChildAssetModel>()
         {
           Iv = new[ ]
           {
             new ReferenceMultipleChildAssetModel()
             {
-              //ArrayDateTimeField1 = new SquidexInvariantFieldItem<DateTime>() {Iv = DateTime.Now},
-              ArrayStringField1 = new SquidexInvariantFieldItem<string>() {Iv = "blah"}
+              //ArrayDateTimeField1 = new InvariantField<DateTime>() {Iv = DateTime.Now},
+              ArrayStringField1 = new InvariantField<string>() {Iv = "blah"}
             },
             new ReferenceMultipleChildAssetModel()
             {
-              //ArrayDateTimeField1 = new SquidexInvariantFieldItem<DateTime>() {Iv = DateTime.Now},
-              ArrayStringField1 = new SquidexInvariantFieldItem<string>() {Iv = "blah"}
+              //ArrayDateTimeField1 = new InvariantField<DateTime>() {Iv = DateTime.Now},
+              ArrayStringField1 = new InvariantField<string>() {Iv = "blah"}
             },
           }
         },
-        //AssetsField = new SquidexAssetItem() { Iv = new[] { "" } },
-        GeolocationField = new SquidexGeolocationFieldItem() {Iv = new SquidexGeolocationElement() {Latitude = 66.6, Longitude = 77.7}},
-        //ReferencesField = new SquidexReferenceItem() { Iv = new[] { "" } },
-        BooleanField = new SquidexInvariantFieldItem<bool>() {Iv = true},
-        TagsField = new SquidexCategoryItem() {Iv = new[ ]
+        //AssetsField = new AssetField() { Iv = new[] { "" } },
+        GeolocationField = new GeolocationField() {Iv = new GeolocationElement() {Latitude = 66.6, Longitude = 77.7}},
+        //ReferencesField = new ReferenceField() { Iv = new[] { "" } },
+        BooleanField = new InvariantField<bool>() {Iv = true},
+        TagsField = new CategoriesField() {Iv = new[ ]
         {
           $"{seed} tag a", $"{seed} tag b", $"{seed} tag c"
 
