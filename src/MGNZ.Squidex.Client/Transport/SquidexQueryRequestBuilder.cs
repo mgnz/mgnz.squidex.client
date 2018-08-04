@@ -1,4 +1,4 @@
-namespace MGNZ.Squidex.Client.Model
+namespace MGNZ.Squidex.Client.Model.Transport
 {
   using System;
 
@@ -39,7 +39,7 @@ namespace MGNZ.Squidex.Client.Model
           }
           else
             throw new ArgumentOutOfRangeException(nameof(requestedPage), requestedPage,
-              "Accepted values; either 'all' or a number");
+              $"Found '{requestedPage}', expected values; either 'all' or an integer");
 
           break;
         }
