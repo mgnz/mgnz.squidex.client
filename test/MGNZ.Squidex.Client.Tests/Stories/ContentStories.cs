@@ -37,13 +37,13 @@ namespace MGNZ.Squidex.Client.Tests.Stories
     }
 
 
-    public async Task<SquidexQueryResponse<TModel>> Query<TModel>(string app, string schema,
-      SquidexQueryRequest request)
+    public async Task<QueryResponse<TModel>> Query<TModel>(string app, string schema,
+      QueryRequest request)
     {
       return await this.AuthenticatedContentClient.Query<TModel>(app, schema, request);
     }
 
-    public async Task<SquidexQueryResponse<TModel>> Query<TModel>(string app, string schema, int top = 20, int skip = 0,
+    public async Task<QueryResponse<TModel>> Query<TModel>(string app, string schema, int top = 20, int skip = 0,
       string orderBy = null, string search = null,
       string filter = null)
     {

@@ -2,11 +2,11 @@ namespace MGNZ.Squidex.Client.Transport
 {
   using System;
 
-  public static class SquidexQueryRequestBuilder
+  public static class QueryRequestBuilder
   {
-    public static SquidexQueryRequest Build(string requestedPage = "all", string requestedOrderBy = null, string requestedFilter = null, string requestedSearch = null)
+    public static QueryRequest Build(string requestedPage = "all", string requestedOrderBy = null, string requestedFilter = null, string requestedSearch = null)
     {
-      var request = new SquidexQueryRequest
+      var request = new QueryRequest
       {
         OrderBy = requestedOrderBy
       };

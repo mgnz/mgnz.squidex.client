@@ -2,7 +2,7 @@ namespace MGNZ.Squidex.Client.Transport
 {
   using Newtonsoft.Json;
 
-  public class SquidexGetOAuthTokenResponse
+  public class GetOAuthTokenResponse
   {
     [JsonProperty("access_token")] public string AccessToken { get; set; }
     [JsonProperty("expires_in")] public int ExpiresIn { get; set; }

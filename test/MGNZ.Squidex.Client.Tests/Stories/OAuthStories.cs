@@ -29,15 +29,15 @@ namespace MGNZ.Squidex.Client.Tests.Stories
       return response.AccessToken;
     }
 
-    public async Task<SquidexGetOAuthTokenResponse> GetOauthTokenKnownUser(KnownUserOAuthCreds creds)
+    public async Task<GetOAuthTokenResponse> GetOauthTokenKnownUser(KnownUserOAuthCreds creds)
     {
       return await this.GetOAuthToken(creds.OAuthAppName, creds.OAuthClientId, creds.OAuthClientSecret);
     }
 
-    public async Task<SquidexGetOAuthTokenResponse> GetOAuthToken(string oauthAppName, string oauthClientId,
+    public async Task<GetOAuthTokenResponse> GetOAuthToken(string oauthAppName, string oauthClientId,
       string oauthClientSecret)
     {
-      var response = await this.GetOAuthClient().GetToken(new SquidexGetOAuthTokenRequest
+      var response = await this.GetOAuthClient().GetToken(new GetOAuthTokenRequest
       {
         ClientId = $"{oauthAppName}:{oauthClientId}",
         ClientSecret = oauthClientSecret

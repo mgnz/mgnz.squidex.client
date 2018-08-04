@@ -97,7 +97,7 @@ namespace MGNZ.Squidex.Client.Tests
 
       // query
       {
-        var request = SquidexQueryRequestBuilder.Build(requestedFilter: $"data/stringfield/iv eq '{record2Expected.StringField.Iv}'");
+        var request = QueryRequestBuilder.Build(requestedFilter: $"data/stringfield/iv eq '{record2Expected.StringField.Iv}'");
         //var query = await stories.Query<ReferenceMultipleAssetModel>("aut", "schema1name", request);
         var query = await contentStories.Query<ReferenceMultipleAssetModel>("aut", "schema1name",
           request.Top, request.Skip, request.OrderBy, request.Search, request.Filter);

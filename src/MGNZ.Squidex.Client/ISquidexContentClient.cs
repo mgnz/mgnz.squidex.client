@@ -12,10 +12,10 @@ namespace MGNZ.Squidex.Client
   public interface ISquidexContentClient
   {
     [Get("/api/content/{app}/{schema}")]
-    Task<SquidexQueryResponse<TModel>> Query<TModel>(string app, string schema, [Query] SquidexQueryRequest request);
+    Task<QueryResponse<TModel>> Query<TModel>(string app, string schema, [Query] QueryRequest request);
 
     [Get("/api/content/{app}/{schema}")]
-    Task<SquidexQueryResponse<TModel>> Query<TModel>(string app, string schema, [AliasAs("$top")] int top = 20,
+    Task<QueryResponse<TModel>> Query<TModel>(string app, string schema, [AliasAs("$top")] int top = 20,
       [AliasAs("$skip")] int skip = 0, [AliasAs("$orderby")] string orderBy = null,
       [AliasAs("$search")] string search = null, [AliasAs("$filter")] string filter = null);
 
