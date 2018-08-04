@@ -1,0 +1,16 @@
+{
+  "BaseAddressUri": "",
+  "AdministratorToken": "",
+  "Clients": {
+    "aut-developer": {
+      "OAuthAppName": "",
+      "OAuthClientId": "",
+      "OAuthClientSecret": ""
+    },
+    "aut-editor": {
+      "OAuthAppName": "",
+      "OAuthClientId": "",
+      "OAuthClientSecret": ""
+    }
+  }
+}

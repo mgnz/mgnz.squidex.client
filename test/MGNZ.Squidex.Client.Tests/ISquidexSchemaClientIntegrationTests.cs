@@ -16,7 +16,7 @@ namespace MGNZ.Squidex.Client.Tests
     {
       var oauthStories = new OAuthStories(this.Options);
       var schemaStories = new SchemaStories(this.Options);
-      var knownUser = this.Options.Clients["mgnz-aut-developer"];
+      var knownUser = this.Options.Clients["aut-developer"];
 
       var oauthToken =
         await oauthStories.GetOAuthToken(knownUser.OAuthAppName, knownUser.OAuthClientId, knownUser.OAuthClientSecret);
