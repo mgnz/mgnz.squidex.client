@@ -1,6 +1,4 @@
 
-# mgnz.squidex.client
-
 A netstandard2 client library for accessing the Squidex REST API; built on top of Refit.
 
 nuget : https://www.nuget.org/packages/MGNZ.Squidex.Client/
