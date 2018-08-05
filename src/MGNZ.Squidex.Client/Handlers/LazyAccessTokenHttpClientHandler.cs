@@ -6,7 +6,7 @@ namespace MGNZ.Squidex.Client.Handlers
   using System.Threading;
   using System.Threading.Tasks;
 
-  public class LazyAccessTokenHttpClientHandler : HttpClientHandler
+  internal class LazyAccessTokenHttpClientHandler : HttpClientHandler
   {
     private readonly Lazy<Func<Task<string>>> _tokenHandler;
 
