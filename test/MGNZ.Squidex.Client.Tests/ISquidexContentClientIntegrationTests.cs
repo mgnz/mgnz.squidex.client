@@ -1,115 +1,23 @@
 namespace MGNZ.Squidex.Client.Tests
 {
   using System;
-  using System.IO;
-  using System.Net.Http;
-  using System.Reflection;
   using System.Threading.Tasks;
 
   using FluentAssertions;
 
-  using MGNZ.Squidex.Client.Common.Model;
-  using MGNZ.Squidex.Client.Common.Transport;
-  using MGNZ.Squidex.Client.Handlers;
+  using MGNZ.Squidex.Client.Model;
   using MGNZ.Squidex.Client.Tests.AssetModels;
   using MGNZ.Squidex.Client.Tests.Stories;
+  using MGNZ.Squidex.Client.Transport;
 
   using Newtonsoft.Json;
 
-  using Refit;
-
   using Xunit;
 
-  [Collection("Sequential Squidex Integration Tests")]
-  [Trait("category", "squidex-api-integration")]
-  public class SquidexClientIntegrationTestBase
-  {
-    private ISquidexAppSchemaClient _authenticatedSchemaClient;
-    private ISquidexContentClient _authenticatedContentClient;
-    private ISquidexOAuthClient _plainOAuthClient;
-    private Lazy<dynamic> _schemaAsset;
+  // https://docs.microsoft.com/en-us/aspnet/core/fundamentals/configuration/?view=aspnetcore-2.1&tabs=basicconfiguration
+  // https://blogs.msdn.microsoft.com/fkaduk/2017/02/22/using-strongly-typed-configuration-in-net-core-console-app/
 
-    protected string BaseAddress => "http://playpen.cms.mad.geek.nz:80";
-    protected Uri BaseAddressUri => new Uri(this.BaseAddress);
-
-    protected Lazy<dynamic> Schema1Asset => this._schemaAsset ?? (this._schemaAsset = new Lazy<dynamic>(() => this.LoadAsset("MGNZ.Vendor.Squidex.Client.Tests.Assets.ReferenceMultipleSchema.json")));
-
-    protected ISquidexOAuthClient PlainOAuthClient
-    {
-      get
-      {
-        return this._plainOAuthClient ??
-               (this._plainOAuthClient =
-                 RestService.For<ISquidexOAuthClient>(this.BaseAddress));
-      }
-    }
-
-    protected ISquidexAppSchemaClient AuthenticatedSchemaClient
-    {
-      get
-      {
-        return this._authenticatedSchemaClient ??
-               (this._authenticatedSchemaClient =
-                 RestService.For<ISquidexAppSchemaClient>(
-                   new HttpClient(new AccessTokenHttpClientHandler(() =>
-                     this.GetOAuthValueKnownUser(this.TempoaryHardCodedTestClientAUT)))
-                   {
-                     BaseAddress = this.BaseAddressUri
-                   }));
-      }
-    }
-
-    protected ISquidexContentClient AuthenticatedContentClient
-    {
-      get
-      {
-        return this._authenticatedContentClient ??
-               (this._authenticatedContentClient =
-                 RestService.For<ISquidexContentClient>(
-                   new HttpClient(new AccessTokenHttpClientHandler(() =>
-                     this.GetOAuthValueKnownUser(this.TempoaryHardCodedEditorClientAUT)))
-                   {
-                     BaseAddress = this.BaseAddressUri
-                   }));
-      }
-    }
-
-    private KnownUserOAuthCreds TempoaryHardCodedTestClientAUT => new KnownUserOAuthCreds
-    {
-      OAuthAppName = "aut",
-      OAuthClientId = "mgnz-aut-testclient",
-      OAuthClientSecret = "V3DJ6r8UJgulQIx0nMDWxIhGInBp7bx2DI/QvIkyUnQ="
-    };
-
-    private KnownUserOAuthCreds TempoaryHardCodedEditorClientAUT => new KnownUserOAuthCreds
-    {
-      OAuthAppName = "aut",
-      OAuthClientId = "mgnz-aut-testeditor",
-      OAuthClientSecret = "rRLoIyQbFo8btOfxiI2kn5LjN7aObqyeSHhnvPiIxoU="
-    };
-
-    private async Task<string> GetOAuthValueKnownUser(KnownUserOAuthCreds creds)
-    {
-      var response = await this.PlainOAuthClient.GetToken(new SquidexGetOAuthTokenRequest
-      {
-        ClientId = $"{creds.OAuthAppName}:{creds.OAuthClientId}",
-        ClientSecret = creds.OAuthClientSecret
-      });
-      return response.AccessToken;
-    }
-
-    protected dynamic LoadAsset(string path) => JsonConvert.DeserializeObject(this.StreamToString(this.GetManifestResourceStream(path)));
-    private Stream GetManifestResourceStream(string fullyQualifiedNamespace) => this.GetManifestResourceStream(typeof(SquidexClientIntegrationTestBase).GetTypeInfo().Assembly, fullyQualifiedNamespace);
-    private Stream GetManifestResourceStream(Assembly assembly, string fullyQualifiedNamespace) => assembly.GetManifestResourceStream(fullyQualifiedNamespace);
-
-    protected string StreamToString(Stream inputStream)
-    {
-      using (var reader = new StreamReader(inputStream))
-        return reader.ReadToEnd();
-    }
-  }
-
-  public class ISquidexContentClientIntegrationTests : SquidexClientIntegrationTestBase
+  public class ISquidexContentClientIntegrationTests : SquidexClientIntegrationTest
   {
     [Fact]
     public async Task EndToEnd_HappyPath()
@@ -118,18 +26,20 @@ namespace MGNZ.Squidex.Client.Tests
       {
         DateFormatString = "yyyy-MM-ddTHH:mm:ssZ"
       };
+      var schemaStories = new SchemaStories(this.Options);
+      var contentStories = new ContentStories(this.Options);
 
       {
         // assert no schemas on the AUT application
-        //var all = await this.AuthenticatedSchemaClient.GetAllSchemas("aut");
-        //int count = Convert.ToInt32(all.Count);
-        //count.Should().Be(0, "Test cannot start because there are unexpected Schemas on the target endpoint");
+        var all = await schemaStories.GetSchemas("aut");
+        int count = Convert.ToInt32(all.Count);
+        count.Should().Be(0, "Test cannot start because there are unexpected Schemas on the target endpoint");
 
         // create schema
-        //var referenceSchema = this.Schema1Asset.Value;
-        //referenceSchema.name = "schema1name";
-        //var created = await this.AuthenticatedSchemaClient.CreateSchema("aut", referenceSchema);
-        //var published = await this.AuthenticatedSchemaClient.PublishSchema("aut", "schema1name");
+        var referenceSchema = this.Schema1Asset.Value;
+        referenceSchema.name = "schema1name";
+        var created = await schemaStories.PostSchema("aut", referenceSchema);
+        var published = await schemaStories.PublishSchema("aut", "schema1name");
       }
 
       var record1Expected = ReferenceMultipleAssetModelBuilder.Reference1.Value;
@@ -140,88 +50,88 @@ namespace MGNZ.Squidex.Client.Tests
 
       // test insert things
       {
-        var inserted1Actual = await this.AuthenticatedContentClient.Create("aut", "schema1name", record1Expected);
+        var inserted1Actual = await contentStories.Create("aut", "schema1name", record1Expected);
         record1Id = AssertReference(inserted1Actual, record1Expected, "inserting things");
 
 
-        var inserted2Actual = await this.AuthenticatedContentClient.Create("aut", "schema1name", record2Expected);
+        var inserted2Actual = await contentStories.Create("aut", "schema1name", record2Expected);
         record2Id = AssertReference(inserted2Actual, record2Expected, "inserting things");
       }
 
       // publish the things
       {
-        await this.AuthenticatedContentClient.Publish("aut", "schema1name", record1Id);
-        await this.AuthenticatedContentClient.Publish("aut", "schema1name", record2Id);
+        await contentStories.Publish("aut", "schema1name", record1Id);
+        await contentStories.Publish("aut", "schema1name", record2Id);
       }
 
       // test get things
       {
-        var get1byId = await this.AuthenticatedContentClient.Get<ReferenceMultipleAssetModel>("aut", "schema1name", record1Id);
+        var get1byId = await contentStories.Get<ReferenceMultipleAssetModel>("aut", "schema1name", record1Id);
         AssertReference(get1byId, record1Expected, "getting things");
 
-        var get2byId = await this.AuthenticatedContentClient.Get<ReferenceMultipleAssetModel>("aut", "schema1name", record2Id);
+        var get2byId = await contentStories.Get<ReferenceMultipleAssetModel>("aut", "schema1name", record2Id);
         AssertReference(get2byId, record2Expected, "getting things");
       }
 
       // test put the things
       {
         var updated1 = ReferenceMultipleAssetModelBuilder.PutReference(record1Expected);
-        var update1byId = await this.AuthenticatedContentClient.Put("aut", "schema1name", record1Id, updated1);
+        var update1byId = await contentStories.Put("aut", "schema1name", record1Id, updated1);
         AssertReference(update1byId, record1Expected, "put things");
 
         //var updated2 = ReferenceMultipleAssetModelBuilder.PutReference(record2Expected);
-        //var update2byId = await this.AuthenticatedContentClient.Put("aut", "schema1name", record2Id, updated2);
+        //var update2byId = await stories.Put("aut", "schema1name", record2Id, updated2);
         //AssertReference(update2byId, record2Expected, "put things");
       }
 
       // test patch the things
       {
-        var patched1expected = new ReferenceMultipleAssetModel { StringField = new SquidexInvariantFieldItem<string>() { Iv = "updated in patch" } };
-        var patched1byId = await this.AuthenticatedContentClient.Patch("aut", "schema1name", record1Id, patched1expected);
+        var patched1expected = new ReferenceMultipleAssetModel { StringField = new InvariantField<string>() { Iv = "updated in patch" } };
+        var patched1byId = await contentStories.Patch("aut", "schema1name", record1Id, patched1expected);
         patched1byId.StringField.Iv.Should().Be(patched1expected.StringField.Iv, because: $"at stage patch things");
 
-        //var patched2expected = new ReferenceMultipleAssetModel { StringField = new SquidexInvariantFieldItem<string>() { Iv = "updated in patch" } };
-        //var patched2byId = await this.AuthenticatedContentClient.Patch("aut", "schema1name", record2Id, patched2expected);
+        //var patched2expected = new ReferenceMultipleAssetModel { StringField = new InvariantField<string>() { Iv = "updated in patch" } };
+        //var patched2byId = await stories.Patch("aut", "schema1name", record2Id, patched2expected);
         //patched2byId.StringField.Iv.Should().Be(patched2expected.StringField.Iv, because: $"at stage patch things");
       }
 
       // query
       {
-        var request = SquidexQueryRequestBuilder.Build(requestedFilter: $"data/stringfield/iv eq '{record2Expected.StringField.Iv}'");
-        //var query = await this.AuthenticatedContentClient.Query<ReferenceMultipleAssetModel>("aut", "schema1name", request);
-        var query = await this.AuthenticatedContentClient.Query<ReferenceMultipleAssetModel>("aut", "schema1name",
+        var request = QueryRequestBuilder.Build(requestedFilter: $"data/stringfield/iv eq '{record2Expected.StringField.Iv}'");
+        //var query = await stories.Query<ReferenceMultipleAssetModel>("aut", "schema1name", request);
+        var query = await contentStories.Query<ReferenceMultipleAssetModel>("aut", "schema1name",
           request.Top, request.Skip, request.OrderBy, request.Search, request.Filter);
 
       }
 
       // unpublish
       {
-        await this.AuthenticatedContentClient.Unpublish("aut", "schema1name", record1Id);
+        await contentStories.Unpublish("aut", "schema1name", record1Id);
       }
 
       // delete
       {
-        await this.AuthenticatedContentClient.Delete("aut", "schema1name", record1Id);
+        await contentStories.Delete("aut", "schema1name", record1Id);
       }
 
       // archive
       {
-        await this.AuthenticatedContentClient.Archive("aut", "schema1name", record2Id);
+        await contentStories.Archive("aut", "schema1name", record2Id);
       }
 
       // restore
       {
-        await this.AuthenticatedContentClient.Restore("aut", "schema1name", record2Id);
+        await contentStories.Restore("aut", "schema1name", record2Id);
       }
 
       // query
 
       {
         // clean up
-        //await this.AuthenticatedSchemaClient.DeleteSchema("aut", "schema1name");
-        //var all = await this.AuthenticatedSchemaClient.GetAllSchemas("aut");
-        //int count = Convert.ToInt32(all.Count);
-        //count.Should().Be(0);
+        await schemaStories.DeleteSchema("aut", "schema1name");
+        var all = await schemaStories.GetSchemas("aut");
+        int count = Convert.ToInt32(all.Count);
+        count.Should().Be(0);
       }
     }
 
@@ -233,7 +143,7 @@ namespace MGNZ.Squidex.Client.Tests
       inserted1Actual.NumberField.Iv.Should().Be(record1Expected.NumberField.Iv, because: $"at stage {asserting}");
     }
 
-    private static string AssertReference(SquidexItemContent<ReferenceMultipleAssetModel> inserted1Actual, ReferenceMultipleAssetModel record1Expected, string asserting)
+    private static string AssertReference(ItemContent<ReferenceMultipleAssetModel> inserted1Actual, ReferenceMultipleAssetModel record1Expected, string asserting)
     {
       AssertReference(inserted1Actual.Data, record1Expected, asserting);
       inserted1Actual.Id.Should().NotBeNullOrEmpty(because: $"at stage {asserting}").And.NotBeNullOrWhiteSpace(because: $"at stage {asserting}");

@@ -1,9 +1,9 @@
-namespace MGNZ.Squidex.Client.Common.Model
+namespace MGNZ.Squidex.Client.Model
 {
   using System;
   using Newtonsoft.Json;
 
-  public class SquidexItemContent<TModel>
+  public class ItemContent<TModel>
   {
     [JsonProperty(PropertyName = "id")] public string Id { get; set; }
     [JsonProperty(PropertyName = "data")] public TModel Data { get; set; }

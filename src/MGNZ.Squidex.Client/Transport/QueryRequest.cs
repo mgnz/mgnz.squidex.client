@@ -1,8 +1,8 @@
-namespace MGNZ.Squidex.Client.Common.Transport
+namespace MGNZ.Squidex.Client.Transport
 {
   using Newtonsoft.Json;
 
-  public class SquidexQueryRequest
+  public class QueryRequest
   {
     [JsonProperty(PropertyName = "$filter")] public string Filter { get; set; }
     [JsonProperty(PropertyName = "$orderby")] public string OrderBy { get; set; }

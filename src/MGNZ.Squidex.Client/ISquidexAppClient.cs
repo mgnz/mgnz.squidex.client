@@ -2,7 +2,7 @@ namespace MGNZ.Squidex.Client
 {
   using System.Threading.Tasks;
 
-  using MGNZ.Squidex.Client.Common.Transport;
+  using MGNZ.Squidex.Client.Transport;
 
   using Refit;
 

@@ -2,19 +2,16 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageProjectUrl>https://github.com/mgnz/mgnz.squidex.client</PackageProjectUrl>
+    <Product>MGNZ.Squidex.Client</Product>
+    <Company>https://github.com/shiggan</Company>
+    <Authors>https://github.com/shiggan</Authors>
+    <Description>Client Library for Squidex (the headless cms built on .net core) : https://github.com/Squidex/squidex</Description>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
     <PackageReference Include="Refit" Version="4.6.16" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Handlers\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\MGNZ.Squidex.Client.Common\MGNZ.Squidex.Client.Common.csproj" />
   </ItemGroup>
 
 </Project>

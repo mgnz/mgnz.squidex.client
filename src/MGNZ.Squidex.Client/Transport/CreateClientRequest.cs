@@ -1,4 +1,4 @@
-namespace MGNZ.Squidex.Client.Common.Transport
+namespace MGNZ.Squidex.Client.Transport
 {
   using Newtonsoft.Json;
 

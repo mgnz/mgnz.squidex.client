@@ -6,15 +6,15 @@ namespace MGNZ.Squidex.Client.Handlers
   using System.Threading;
   using System.Threading.Tasks;
 
-  public class AccessTokenHttpClientHandler : HttpClientHandler
+  internal class LazyAccessTokenHttpClientHandler : HttpClientHandler
   {
-    private readonly Func<Task<string>> getToken;
+    private readonly Lazy<Func<Task<string>>> _tokenHandler;
 
-    public AccessTokenHttpClientHandler(Func<Task<string>> getToken)
+    public LazyAccessTokenHttpClientHandler(Func<Task<string>> tokenHandler)
     {
-      if (getToken == null) throw new ArgumentNullException(nameof(getToken));
+      if (tokenHandler == null) throw new ArgumentNullException(nameof(tokenHandler));
 
-      this.getToken = getToken;
+      this._tokenHandler = new Lazy<Func<Task<string>>>(() => tokenHandler);
     }
 
     protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request,
@@ -23,12 +23,21 @@ namespace MGNZ.Squidex.Client.Handlers
       var authorizationHeadder = request.Headers.Authorization;
       if (authorizationHeadder != null)
       {
-        var token = await this.getToken().ConfigureAwait(false);
+        var token = await this.GetToken().ConfigureAwait(false);
 
         request.Headers.Authorization = new AuthenticationHeaderValue(authorizationHeadder.Scheme, token);
       }
 
       return await base.SendAsync(request, cancellationToken).ConfigureAwait(false);
+    }
+
+    private async Task<string> GetToken()
+    {
+      // todo : log the fact we are getting the token (info)
+
+      var token = await this._tokenHandler.Value().ConfigureAwait(false);
+
+      return token;
     }
   }
 }

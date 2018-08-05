@@ -7,8 +7,28 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Assets\ReferenceMultipleData1.json" />
+    <None Remove="Assets\ReferenceMultipleSchema.json" />
+    <None Remove="Assets\SchemaIntegrationSchema1Asset.json" />
+    <None Remove="Assets\SchemaIntegrationSchema1NestedAsset.json" />
+    <None Remove="Assets\SchemaIntegrationSchema1ScriptsAsset.json" />
+    <None Remove="testsettings.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="testsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="FluentAssertions" Version="5.4.1" />
     <PackageReference Include="FluentAssertions.Analyzers" Version="0.11.3" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="2.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="2.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.1.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="1.1.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.7.0" />
     <PackageReference Include="xunit" Version="2.3.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
@@ -16,7 +36,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\MGNZ.Squidex.Client.Common\MGNZ.Squidex.Client.Common.csproj" />
+    <EmbeddedResource Include="Assets\ReferenceMultipleData1.json" />
+    <EmbeddedResource Include="Assets\ReferenceMultipleSchema.json" />
+    <EmbeddedResource Include="Assets\SchemaIntegrationSchema1Asset.json" />
+    <EmbeddedResource Include="Assets\SchemaIntegrationSchema1NestedAsset.json" />
+    <EmbeddedResource Include="Assets\SchemaIntegrationSchema1ScriptsAsset.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\src\MGNZ.Squidex.Client\MGNZ.Squidex.Client.csproj" />
   </ItemGroup>
 

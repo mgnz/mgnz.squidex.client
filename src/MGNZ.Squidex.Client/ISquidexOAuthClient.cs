@@ -2,7 +2,7 @@ namespace MGNZ.Squidex.Client
 {
   using System.Threading.Tasks;
 
-  using MGNZ.Squidex.Client.Common.Transport;
+  using MGNZ.Squidex.Client.Transport;
 
   using Refit;
 
@@ -10,7 +10,7 @@ namespace MGNZ.Squidex.Client
   public interface ISquidexOAuthClient
   {
     [Post("/identity-server/connect/token")]
-    Task<SquidexGetOAuthTokenResponse> GetToken([Body(BodySerializationMethod.UrlEncoded)]
-      SquidexGetOAuthTokenRequest request);
+    Task<GetOAuthTokenResponse> GetToken([Body(BodySerializationMethod.UrlEncoded)]
+      GetOAuthTokenRequest request);
   }
 }

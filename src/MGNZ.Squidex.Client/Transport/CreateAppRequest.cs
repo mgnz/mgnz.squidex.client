@@ -1,6 +1,7 @@
-namespace MGNZ.Squidex.Client.Common.Transport
+namespace MGNZ.Squidex.Client.Transport
 {
   using System;
+
   using Newtonsoft.Json;
 
   public class CreateAppRequest

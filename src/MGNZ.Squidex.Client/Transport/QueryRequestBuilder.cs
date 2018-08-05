@@ -1,16 +1,17 @@
-namespace MGNZ.Squidex.Client.Common.Transport
+namespace MGNZ.Squidex.Client.Transport
 {
   using System;
 
-  public class SquidexQueryRequestBuilder
+  public static class QueryRequestBuilder
   {
-    public static SquidexQueryRequest Build(string requestedPage = "all", string requestedOrderBy = null, string requestedFilter = null, string requestedSearch = null)
+    public static QueryRequest Build(string requestedPage = "all", string requestedOrderBy = null, string requestedFilter = null, string requestedSearch = null)
     {
-      var request = new SquidexQueryRequest();
+      var request = new QueryRequest
+      {
+        OrderBy = requestedOrderBy
+      };
 
-      request.OrderBy = requestedOrderBy;
-
-      if((string.IsNullOrWhiteSpace(requestedFilter) || string.IsNullOrEmpty(requestedFilter) == false) && (string.IsNullOrWhiteSpace(requestedSearch) || string.IsNullOrEmpty(requestedSearch)) == false)
+      if ((string.IsNullOrWhiteSpace(requestedFilter) || string.IsNullOrEmpty(requestedFilter) == false) && (string.IsNullOrWhiteSpace(requestedSearch) || string.IsNullOrEmpty(requestedSearch)) == false)
         throw new ArgumentException($"{nameof(requestedFilter)} and {nameof(requestedSearch)} are mutually exclusive; please provide either a {nameof(requestedFilter)} or a {nameof(requestedSearch)}");
 
       request.Filter = requestedFilter;
@@ -39,7 +40,7 @@ namespace MGNZ.Squidex.Client.Common.Transport
           }
           else
             throw new ArgumentOutOfRangeException(nameof(requestedPage), requestedPage,
-              "Accepted values; either 'all' or a number");
+              $"Found '{requestedPage}', expected values; either 'all' or an integer");
 
           break;
         }

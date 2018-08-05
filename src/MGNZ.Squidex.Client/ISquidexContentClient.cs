@@ -2,8 +2,8 @@ namespace MGNZ.Squidex.Client
 {
   using System.Threading.Tasks;
 
-  using MGNZ.Squidex.Client.Common.Model;
-  using MGNZ.Squidex.Client.Common.Transport;
+  using MGNZ.Squidex.Client.Model;
+  using MGNZ.Squidex.Client.Transport;
 
   using Refit;
 
@@ -12,19 +12,19 @@ namespace MGNZ.Squidex.Client
   public interface ISquidexContentClient
   {
     [Get("/api/content/{app}/{schema}")]
-    Task<SquidexQueryResponse<TModel>> Query<TModel>(string app, string schema, [Query] SquidexQueryRequest request);
+    Task<QueryResponse<TModel>> Query<TModel>(string app, string schema, [Query] QueryRequest request);
 
     [Get("/api/content/{app}/{schema}")]
-    Task<SquidexQueryResponse<TModel>> Query<TModel>(string app, string schema, [AliasAs("$top")] int top = 20,
+    Task<QueryResponse<TModel>> Query<TModel>(string app, string schema, [AliasAs("$top")] int top = 20,
       [AliasAs("$skip")] int skip = 0, [AliasAs("$orderby")] string orderBy = null,
       [AliasAs("$search")] string search = null, [AliasAs("$filter")] string filter = null);
 
     [Post("/api/content/{app}/{schema}/")]
-    Task<SquidexItemContent<TModel>> Create<TModel>(string app, string schema,
+    Task<ItemContent<TModel>> Create<TModel>(string app, string schema,
       [Body(BodySerializationMethod.Json)] TModel content);
 
     [Get("/api/content/{app}/{schema}/{id}/")]
-    Task<SquidexItemContent<TModel>> Get<TModel>(string app, string schema, string id);
+    Task<ItemContent<TModel>> Get<TModel>(string app, string schema, string id);
 
     [Put("/api/content/{app}/{schema}/{id}")]
     Task<TModel> Put<TModel>(string app, string schema, string id, [Body(BodySerializationMethod.Json)] TModel content);
