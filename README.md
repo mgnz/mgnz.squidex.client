@@ -3,6 +3,10 @@ A netstandard2 client library for accessing the Squidex REST API; built on top o
 
 nuget : https://www.nuget.org/packages/MGNZ.Squidex.Client/
 
+## current focus
+
+Things are a bit quiet here because I am spending most time working on a command line client that uses this library over at https://github.com/mgnz/mgnz.squidex.cli once that is a bit more polished the intention is to come back here and fix up the remaining issues.
+
 ## done bits
 
 - OAuthClient : gets a token (you need to supply a HttpClientHandler to get the key in fligt; see SimpleAccessTokenHttpClientHandler for a sample reference; also see https://github.com/mgnz/mgnz.squidex.client/issues/2 for a case to make this less retarded).
