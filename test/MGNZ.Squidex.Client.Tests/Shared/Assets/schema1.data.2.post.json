@@ -1,0 +1,32 @@
+{
+  "stringfield": { "iv": "data 2 stringfield value" },
+  "localizablestringfield": {
+    "en": "localizablestringfield value en",
+    "sm": "localizablestringfield  value sm"
+  },
+  "datetimefield": { "iv": "2018-11-13T07:57:34Z" },
+  "numberfield": { "iv": 666777 },
+  "arrayfield": {
+    "iv": [
+      {
+        "arraystringfield1": "arraystringfield1 value",
+        "arraydatetimefield1": "2018-11-13T07:57:52Z"
+      },
+      {
+        "arraystringfield1": "arraystringfield1 value",
+        "arraydatetimefield1": "2018-11-13T07:57:58Z"
+      }
+    ]
+  },
+  "assetsfield": { "iv": null },
+  "geolocationfield": {
+    "iv": {
+      "latitude": -45.88581415265299,
+      "longitude": 170.57995319366455
+    }
+  },
+  "referencesfield": { "iv": null },
+  "booleanfield": { "iv": true },
+  "jsonfield": { "iv": { "blah": "blah-value" } },
+  "tagsfield": { "iv": [ "tag-a", "tag-x" ] }
+}

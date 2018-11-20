@@ -1,0 +1,110 @@
+{
+  "fields": [
+    {
+      "name": "stringfield",
+      "properties": {
+        "editor": "Input",
+        "fieldType": "String"
+      },
+      "partitioning": "invariant"
+    },
+    {
+      "name": "localizablestringfield",
+      "properties": {
+        "editor": "Input",
+        "fieldType": "String"
+      },
+      "partitioning": "language"
+    },
+    {
+      "name": "datetimefield",
+      "properties": {
+        "editor": "DateTime",
+        "fieldType": "DateTime"
+      },
+      "partitioning": "invariant"
+    },
+    {
+      "name": "numberfield",
+      "properties": {
+        "editor": "Input",
+        "fieldType": "Number"
+      },
+      "partitioning": "invariant"
+    },
+    {
+      "name": "arrayfield",
+      "properties": {
+        "editor": "Default",
+        "fieldType": "Array"
+      },
+      "partitioning": "invariant",
+      "nested": [
+        {
+          "name": "arraystringfield1",
+          "properties": {
+            "editor": "Input",
+            "fieldType": "String"
+          }
+        },
+        {
+          "name": "arraydatetimefield1",
+          "properties": {
+            "editor": "DateTime",
+            "fieldType": "DateTime"
+          }
+        }
+      ]
+    },
+    {
+      "name": "assetsfield",
+      "properties": {
+        "editor": "Default",
+        "fieldType": "Assets"
+      },
+      "partitioning": "invariant"
+    },
+    {
+      "name": "geolocationfield",
+      "properties": {
+        "editor": "Map",
+        "fieldType": "Geolocation"
+      },
+      "partitioning": "invariant"
+    },
+    {
+      "name": "referencesfield",
+      "properties": {
+        "editor": "Default",
+        "fieldType": "References",
+        "schemaId": "00000000-0000-0000-0000-000000000000"
+      },
+      "partitioning": "invariant"
+    },
+    {
+      "name": "booleanfield",
+      "properties": {
+        "editor": "Checkbox",
+        "fieldType": "Boolean"
+      },
+      "partitioning": "invariant"
+    },
+    {
+      "name": "jsonfield",
+      "properties": {
+        "editor": "Default",
+        "fieldType": "Json"
+      },
+      "partitioning": "invariant"
+    },
+    {
+      "name": "tagsfield",
+      "properties": {
+        "editor": "Default",
+        "fieldType": "Tags"
+      },
+      "partitioning": "invariant"
+    }
+  ],
+  "properties": {}
+}
