@@ -6,7 +6,7 @@ namespace MGNZ.Squidex.Client
 
   public static class SquidexOAuthClientExtensions
   {
-    public static async Task<string> GetToken(this ISquidexOAuthClient that, string oauthAppName, string oauthClientId, string oauthClientSecret)
+    public static async Task<GetOAuthTokenResponse> GetToken(this ISquidexOAuthClient that, string oauthAppName, string oauthClientId, string oauthClientSecret)
     {
       // mabye just move this to the inteface
 
@@ -16,7 +16,7 @@ namespace MGNZ.Squidex.Client
         ClientSecret = oauthClientSecret
       });
 
-      return response.AccessToken;
+      return response;
     }
   }
 }
