@@ -1,13 +1,32 @@
 namespace MGNZ.Squidex.Client
 {
   using System;
+  using System.IO;
   using System.Linq;
   using System.Threading.Tasks;
 
   using MGNZ.Squidex.Client.Model;
 
+  using Refit;
+
   public static class SquidexAttachmentClientExtensions
   {
+    public static async Task<AttachmentContent> Post(this ISquidexAttachmentClient that, string app, string fileName, string mimeType, Stream stream)
+    {
+      return await that.Post(app, new[]
+      {
+        new StreamPart(stream, fileName, mimeType)
+      });
+    }
+
+    public static async Task<AttachmentContent> Update(this ISquidexAttachmentClient that, string app, string id, string fileName, string mimeType, Stream stream)
+    {
+      return await that.Update(app, id, new[]
+      {
+        new StreamPart(stream, fileName, mimeType)
+      });
+    }
+
     public static async Task<bool> AttachmentExists(this ISquidexAttachmentClient that, string application,
       string name = null)
     {
