@@ -21,14 +21,14 @@ namespace MGNZ.Squidex.Client
     [Put("/api/apps/{app}/assets/{id}/content")]
     Task<AttachmentContent> Update(string app, string id, [AliasAs("file")] IEnumerable<StreamPart> streams);
 
-    [Get("/api/apps/{app}/assets/{id}")]
-    Task<HttpContent> Get(string app, string id, [Query] AttachmentRequest request);
+    [Get("/api/apps/{app}/assets/{id}/")]
+    Task<AttachmentContent> Get(string app, string id);
 
     [Delete("/api/apps/{app}/assets/{id}")]
     Task<HttpContent> Delete(string app, string id);
 
-    [Put("/api/apps/{app}/assets/{id}")]
-    Task Tags(string app, string id, [Body(BodySerializationMethod.Json)] string[ ] tags);
+    [Put("/api/apps/{app}/assets/{id}/")]
+    Task UpdateTags(string app, string id, [Body(BodySerializationMethod.Json)] UpdateAssetDto request);
 
     [Get("/api/apps/{app}/assets")]
     Task<ListResponse<AttachmentContent>> List(string app, [Query] ListRequest request);
