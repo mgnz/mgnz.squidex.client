@@ -13,6 +13,8 @@ namespace MGNZ.Squidex.Client.Tests
 
   using MGNZ.Squidex.Client.Handlers;
   using MGNZ.Squidex.Client.Tests.Plumbing;
+  using MGNZ.Squidex.Client.Tests.Shared.Assets;
+  using MGNZ.Squidex.Client.Tests.Shared.Code;
 
   using Microsoft.Extensions.Configuration;
 
@@ -24,14 +26,37 @@ namespace MGNZ.Squidex.Client.Tests
   [Trait("category", "squidex-api-integration")]
   public class ISquidexAttachmentClientIntegrationTest : BaseHandlerIntegrationTest
   {
-    [Fact( Skip = "in progress")]
+    [Fact()]
     public async Task AttachmentPost_Execute_EndToEnd()
     {
+      var attachmentName = $"{base.GetRandomSchemaName}.jpg";
+
+      await AttachmentClient.AssertNoAttachmentsExist("aut");
+
+      var createResponse = await AttachmentClient.Post("aut", new[] { new StreamPart(AssetLoader.Asset2, attachmentName, "image/jpeg") });
+      await AttachmentClient.AssertAttachmentMustExist("aut", attachmentName, delay: TimeSpan.FromSeconds(2));
+
+      var id = createResponse.Id;
+      var deleteResponse = await AttachmentClient.Delete("aut", id);
+
+      await AttachmentClient.AssertNoAttachmentsExist("aut", delay: TimeSpan.FromSeconds(2));
     }
 
-    [Fact(Skip = "in progress")]
+    [Fact]
     public async Task AttachmentPut_Execute_EndToEnd()
     {
+      var attachmentName = $"{base.GetRandomSchemaName}.jpg";
+
+      await AttachmentClient.AssertNoAttachmentsExist("aut");
+      var createResponse = await AttachmentClient.Post("aut", new[] { new StreamPart(AssetLoader.Asset2, attachmentName, "image/jpeg") });
+      await AttachmentClient.AssertAttachmentMustExist("aut", attachmentName, delay: TimeSpan.FromSeconds(2));
+
+      var id = createResponse.Id;
+
+      var updateResponse = await AttachmentClient.Update("aut", id, new [] { new StreamPart(AssetLoader.Asset3, attachmentName, "image/jpeg") });
+
+      var deleteResponse = await AttachmentClient.Delete("aut", id);
+      await AttachmentClient.AssertNoAttachmentsExist("aut", delay: TimeSpan.FromSeconds(2));
     }
 
     [Fact(Skip = "in progress")]
@@ -80,7 +105,7 @@ namespace MGNZ.Squidex.Client.Tests
     {
       return RestService.For<TClient>(
         new HttpClient(new SimpleAccessTokenHttpClientHandler(() =>
-          this.OAuthClient.GetToken(oauthAppName, oauthClientId, oauthClientSecret)))
+          this.ExtractToken(oauthAppName, oauthClientId, oauthClientSecret)))
         {
           BaseAddress = baseAddress
         });
@@ -88,7 +113,14 @@ namespace MGNZ.Squidex.Client.Tests
 
     protected TClient GetUnsecuredClient<TClient>(Uri baseAddress)
     {
-      return RestService.For<TClient>(baseAddress.AbsolutePath);
+      return RestService.For<TClient>(baseAddress.AbsoluteUri);
+    }
+
+    private async Task<string> ExtractToken(string oauthAppName, string oauthClientId, string oauthClientSecret)
+    {
+      var result = await OAuthClient.GetToken(oauthAppName, oauthClientId, oauthClientSecret);
+
+      return result.AccessToken;
     }
   }
 }

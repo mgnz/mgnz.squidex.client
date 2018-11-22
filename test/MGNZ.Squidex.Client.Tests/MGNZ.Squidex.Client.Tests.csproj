@@ -12,6 +12,24 @@
     <None Remove="Assets\SchemaIntegrationSchema1Asset.json" />
     <None Remove="Assets\SchemaIntegrationSchema1NestedAsset.json" />
     <None Remove="Assets\SchemaIntegrationSchema1ScriptsAsset.json" />
+    <None Remove="Shared\Assets\app1.asset1.7z" />
+    <None Remove="Shared\Assets\app1.asset1.7z.post.response.json" />
+    <None Remove="Shared\Assets\app1.asset1.7z.tag.response.json" />
+    <None Remove="Shared\Assets\app1.asset2.jpg" />
+    <None Remove="Shared\Assets\app1.asset2.jpg.post.response.json" />
+    <None Remove="Shared\Assets\app1.asset2.jpg.tag.response.json" />
+    <None Remove="Shared\Assets\app1.asset3.jpg" />
+    <None Remove="Shared\Assets\app1.asset3.jpg.post.response.json" />
+    <None Remove="Shared\Assets\app1.asset3.jpg.tag.response.json" />
+    <None Remove="Shared\Assets\schema1.data.1.post.json" />
+    <None Remove="Shared\Assets\schema1.data.1.post.response.json" />
+    <None Remove="Shared\Assets\schema1.data.2.post.json" />
+    <None Remove="Shared\Assets\schema1.data.2.post.response.json" />
+    <None Remove="Shared\Assets\schema1.data.export.response.json" />
+    <None Remove="Shared\Assets\schema1.data.import.json" />
+    <None Remove="Shared\Assets\schema1.data.import.response.json" />
+    <None Remove="Shared\Assets\schema1.data.query.response.json" />
+    <None Remove="Shared\Assets\schema1.json" />
     <None Remove="testsettings.json" />
   </ItemGroup>
 
@@ -42,6 +60,24 @@
     <EmbeddedResource Include="Assets\SchemaIntegrationSchema1Asset.json" />
     <EmbeddedResource Include="Assets\SchemaIntegrationSchema1NestedAsset.json" />
     <EmbeddedResource Include="Assets\SchemaIntegrationSchema1ScriptsAsset.json" />
+    <EmbeddedResource Include="Shared\Assets\app1.asset3.jpg" />
+    <EmbeddedResource Include="Shared\Assets\app1.asset3.jpg.post.response.json" />
+    <EmbeddedResource Include="Shared\Assets\app1.asset3.jpg.tag.response.json" />
+    <EmbeddedResource Include="Shared\Assets\app1.asset1.7z" />
+    <EmbeddedResource Include="Shared\Assets\app1.asset1.7z.post.response.json" />
+    <EmbeddedResource Include="Shared\Assets\app1.asset1.7z.tag.response.json" />
+    <EmbeddedResource Include="Shared\Assets\app1.asset2.jpg" />
+    <EmbeddedResource Include="Shared\Assets\app1.asset2.jpg.post.response.json" />
+    <EmbeddedResource Include="Shared\Assets\app1.asset2.jpg.tag.response.json" />
+    <EmbeddedResource Include="Shared\Assets\schema1.data.1.post.json" />
+    <EmbeddedResource Include="Shared\Assets\schema1.data.1.post.response.json" />
+    <EmbeddedResource Include="Shared\Assets\schema1.data.2.post.json" />
+    <EmbeddedResource Include="Shared\Assets\schema1.data.2.post.response.json" />
+    <EmbeddedResource Include="Shared\Assets\schema1.data.export.response.json" />
+    <EmbeddedResource Include="Shared\Assets\schema1.data.import.json" />
+    <EmbeddedResource Include="Shared\Assets\schema1.data.import.response.json" />
+    <EmbeddedResource Include="Shared\Assets\schema1.data.query.response.json" />
+    <EmbeddedResource Include="Shared\Assets\schema1.json" />
   </ItemGroup>
 
   <ItemGroup>

@@ -16,22 +16,25 @@ namespace MGNZ.Squidex.Client.Tests.Shared.Assets
     public static string AssetPath => Path.Combine(ExecutingPath, "Assets");
     private static string ns => typeof(AssetLoader).Namespace;
 
-    public static Lazy<Stream> Asset1 => new Lazy<Stream>(LoadBinaryAsset($"{ns}.app1.asset1.7z"));
-    public static Lazy<dynamic> Asset1PostResponse => new Lazy<dynamic>(LoadAsset($"{ns}.app1.asset1.7z.post.response.json"));
-    public static Lazy<dynamic> Asset1TagResponse => new Lazy<dynamic>(LoadAsset($"{ns}.app1.asset1.7z.tag.response.json"));
-    public static Lazy<Stream> Asset2 => new Lazy<Stream>(LoadBinaryAsset($"{ns}.app1.asset2.jpg"));
-    public static Lazy<dynamic> Asset2PostResponse => new Lazy<dynamic>(LoadAsset($"{ns}.app1.asset2.jpg.post.response.json"));
-    public static Lazy<dynamic> Asset2TagResponse => new Lazy<dynamic>(LoadAsset($"{ns}.app1.asset2.jpg.tag.response.json"));
+    public static Stream Asset1 => LoadBinaryAsset($"{ns}.app1.asset1.7z");
+    public static dynamic Asset1PostResponse => LoadAsset($"{ns}.app1.asset1.7z.post.response.json");
+    public static dynamic Asset1TagResponse => LoadAsset($"{ns}.app1.asset1.7z.tag.response.json");
+    public static Stream Asset2 => LoadBinaryAsset($"{ns}.app1.asset2.jpg");
+    public static dynamic Asset2PostResponse => LoadAsset($"{ns}.app1.asset2.jpg.post.response.json");
+    public static dynamic Asset2TagResponse => LoadAsset($"{ns}.app1.asset2.jpg.tag.response.json");
+    public static Stream Asset3 => LoadBinaryAsset($"{ns}.app1.asset3.jpg");
+    public static dynamic Asset3PostResponse => LoadAsset($"{ns}.app1.asset3.jpg.post.response.json");
+    public static dynamic Asset3TagResponse => LoadAsset($"{ns}.app1.asset3.jpg.tag.response.json");
 
-    public static Lazy<dynamic> Schema1 => LoadAsset($"{ns}.schema1.json");
-    public static Lazy<dynamic> Schema1Data1Post => new Lazy<dynamic>(LoadAsset($"{ns}.schema1.data.1.post.json"));
-    public static Lazy<dynamic> Schema1Data1PostResponse => new Lazy<dynamic>(LoadAsset($"{ns}.schema1.data.1.post.response.json"));
-    public static Lazy<dynamic> Schema1Data2Post => new Lazy<dynamic>(LoadAsset($"{ns}.schema1.data.2.post.json"));
-    public static Lazy<dynamic> Schema1Data2PostResponse => new Lazy<dynamic>(LoadAsset($"{ns}.schema1.data.2.post.response.json"));
-    public static Lazy<dynamic> Schema1DataImport => new Lazy<dynamic>(LoadAsset($"{ns}.schema1.data.import.json"));
-    public static Lazy<dynamic> Schema1DataImportResponse => new Lazy<dynamic>(LoadAsset($"{ns}.schema1.data.import.response.json"));
-    public static Lazy<dynamic> Schema1DataQueryResponse => new Lazy<dynamic>(LoadAsset($"{ns}.schema1.data.query.response.json"));
-    public static Lazy<dynamic> Schema1DataExportResponse => new Lazy<dynamic>(LoadAsset($"{ns}.schema1.data.export.response.json"));
+    public static dynamic Schema1 => LoadAsset($"{ns}.schema1.json");
+    public static dynamic Schema1Data1Post => LoadAsset($"{ns}.schema1.data.1.post.json");
+    public static dynamic Schema1Data1PostResponse => LoadAsset($"{ns}.schema1.data.1.post.response.json");
+    public static dynamic Schema1Data2Post => LoadAsset($"{ns}.schema1.data.2.post.json");
+    public static dynamic Schema1Data2PostResponse => LoadAsset($"{ns}.schema1.data.2.post.response.json");
+    public static dynamic Schema1DataImport => LoadAsset($"{ns}.schema1.data.import.json");
+    public static dynamic Schema1DataImportResponse => LoadAsset($"{ns}.schema1.data.import.response.json");
+    public static dynamic Schema1DataQueryResponse => LoadAsset($"{ns}.schema1.data.query.response.json");
+    public static dynamic Schema1DataExportResponse => LoadAsset($"{ns}.schema1.data.export.response.json");
 
 
     public static string Asset1Path => Path.Combine(AssetPath, "app1.asset1.7z");
@@ -40,6 +43,9 @@ namespace MGNZ.Squidex.Client.Tests.Shared.Assets
     public static string Asset2Path => Path.Combine(AssetPath, "app1.asset2.jpg");
     public static string Asset2PostResponsePath => Path.Combine(AssetPath, "app1.asset2.jpg.post.response.json");
     public static string Asset2TagResponsePath => Path.Combine(AssetPath, "app1.asset2.jpg.tag.response.json");
+    public static string Asset3Path => Path.Combine(AssetPath, "app1.asset3.jpg");
+    public static string Asset3PostResponsePath => Path.Combine(AssetPath, "app1.asset3.jpg.post.response.json");
+    public static string Asset3TagResponsePath => Path.Combine(AssetPath, "app1.asset3.jpg.tag.response.json");
 
     public static string Schema1Path => Path.Combine(AssetPath, "schema1.json");
     public static string Schema1Data1PostPath => Path.Combine(AssetPath, "schema1.data.1.post.json");

@@ -1,5 +1,7 @@
 namespace MGNZ.Squidex.Client
 {
+  using System.Collections.Generic;
+  using System.IO;
   using System.Net.Http;
   using System.Threading.Tasks;
 
@@ -8,17 +10,16 @@ namespace MGNZ.Squidex.Client
 
   using Refit;
 
-  [Headers("Authorization: Bearer", "Cache-Control: no-cache", "Connection: keep-alive",
-    "Content-Type: application/json", "Pragma: no-cache", "Accept: application/json")]
+  [Headers("Authorization: Bearer", "Cache-Control: no-cache", "Connection: keep-alive","Pragma: no-cache")]
   public interface ISquidexAttachmentClient
   {
     [Multipart]
-    [Post("/api/apps/{app}/assets/")]
-    Task<AttachmentContent> Post(string app, [AliasAs("file")] StreamPart stream);
+    [Post("/api/apps/{app}/assets")]
+    Task<AttachmentContent> Post(string app, [AliasAs("file")] IEnumerable<StreamPart> streams);
 
     [Multipart]
     [Put("/api/apps/{app}/assets/{id}/content")]
-    Task<AttachmentContent> Update(string app, string id, [AliasAs("file")] StreamPart stream);
+    Task<AttachmentContent> Update(string app, string id, [AliasAs("file")] IEnumerable<StreamPart> streams);
 
     [Get("/api/apps/{app}/assets/{id}")]
     Task<HttpContent> Get(string app, string id, [Query] AttachmentRequest request);
@@ -29,7 +30,7 @@ namespace MGNZ.Squidex.Client
     [Put("/api/apps/{app}/assets/{id}")]
     Task Tags(string app, string id, [Body(BodySerializationMethod.Json)] string[ ] tags);
 
-    [Get("/api/content/{app}/{schema}")]
-    Task<ListResponse<AttachmentContent>> List(string app, string schema, [Query] ListRequest request);
+    [Get("/api/apps/{app}/assets")]
+    Task<ListResponse<AttachmentContent>> List(string app, [Query] ListRequest request);
   }
 }
