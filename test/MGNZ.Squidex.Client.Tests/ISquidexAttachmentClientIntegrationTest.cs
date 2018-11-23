@@ -29,7 +29,7 @@ namespace MGNZ.Squidex.Client.Tests
   public class ISquidexAttachmentClientIntegrationTest : BaseHandlerIntegrationTest
   {
     [Fact()]
-    public async Task AttachmentPost_Execute_EndToEnd()
+    public async Task PostAsset_Execute_EndToEnd()
     {
       var attachmentName = $"{base.GetRandomSchemaName}.jpg";
 
@@ -40,13 +40,13 @@ namespace MGNZ.Squidex.Client.Tests
       // todo : assert the postresponse matches 
 
       var id = createResponse.Id;
-      var deleteResponse = await AttachmentClient.Delete("aut", id);
+      var deleteResponse = await AttachmentClient.DeleteAsset("aut", id);
 
       await AttachmentClient.AssertNoAttachmentsExist("aut", delay: TimeSpan.FromSeconds(2));
     }
 
     [Fact]
-    public async Task AttachmentPut_Execute_EndToEnd()
+    public async Task UpdateAssetContent_Execute_EndToEnd()
     {
       var attachmentName = $"{base.GetRandomSchemaName}.jpg";
 
@@ -59,12 +59,12 @@ namespace MGNZ.Squidex.Client.Tests
       var updateResponse = await AttachmentClient.Update("aut", id, attachmentName, "image/jpeg", AssetLoader.Asset3);
       // todo : assert the putresponse matches 
 
-      var deleteResponse = await AttachmentClient.Delete("aut", id);
+      var deleteResponse = await AttachmentClient.DeleteAsset("aut", id);
       await AttachmentClient.AssertNoAttachmentsExist("aut", delay: TimeSpan.FromSeconds(2));
     }
 
     [Fact]
-    public async Task AttachmentTagPut_Execute_EndToEnd()
+    public async Task UpdateAssetTags_Execute_EndToEnd()
     {
       var attachmentName = $"{base.GetRandomSchemaName}.jpg";
 
@@ -77,26 +77,36 @@ namespace MGNZ.Squidex.Client.Tests
       var existingTags = createResponse.Tags;
       var modifiedTags = existingTags.Append("new-tag").Append("another-new-tag").ToArray();
 
-      await AttachmentClient.UpdateTags("aut", id, new UpdateAssetDto()
+      await AttachmentClient.UpdateAssetTags("aut", id, new UpdateAssetDto()
       {
         FileName = fileName,
         Tags = modifiedTags
       });
 
-      var updatedAttachment = await AttachmentClient.Get("aut", id);
+      var updatedAttachment = await AttachmentClient.GetAsset("aut", id);
       // todo : assert the updatedresponse matches 
 
-      var deleteResponse = await AttachmentClient.Delete("aut", id);
+      var deleteResponse = await AttachmentClient.DeleteAsset("aut", id);
       await AttachmentClient.AssertNoAttachmentsExist("aut", delay: TimeSpan.FromSeconds(2));
     }
 
     [Fact(Skip = "in progress")]
-    public async Task AttachmentList_Execute_EndToEnd()
+    public async Task GetAsset_Execute_EndToEnd()
     {
     }
 
     [Fact(Skip = "in progress")]
-    public async Task AttachmentDelete_Execute_EndToEnd()
+    public async Task DeleteAsset_Execute_EndToEnd()
+    {
+    }
+
+    [Fact(Skip = "in progress")]
+    public async Task GetAllTags_Execute_EndToEnd()
+    {
+    }
+
+    [Fact(Skip = "in progress")]
+    public async Task GetAssets_Execute_EndToEnd()
     {
     }
   }

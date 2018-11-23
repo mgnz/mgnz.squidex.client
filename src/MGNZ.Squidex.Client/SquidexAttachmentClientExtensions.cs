@@ -13,7 +13,7 @@ namespace MGNZ.Squidex.Client
   {
     public static async Task<AttachmentContent> Post(this ISquidexAttachmentClient that, string app, string fileName, string mimeType, Stream stream)
     {
-      return await that.Post(app, new[]
+      return await that.PostAsset(app, new[]
       {
         new StreamPart(stream, fileName, mimeType)
       });
@@ -21,7 +21,7 @@ namespace MGNZ.Squidex.Client
 
     public static async Task<AttachmentContent> Update(this ISquidexAttachmentClient that, string app, string id, string fileName, string mimeType, Stream stream)
     {
-      return await that.Update(app, id, new[]
+      return await that.UpdateAssetContent(app, id, new[]
       {
         new StreamPart(stream, fileName, mimeType)
       });
@@ -31,7 +31,7 @@ namespace MGNZ.Squidex.Client
       string name = null)
     {
       // todo : pagination
-      var data = await that.List(application, new ListRequest()
+      var data = await that.GetAssets(application, new ListRequest()
       {
         Skip = 0, Top = 200
       });
