@@ -1,15 +1,10 @@
 namespace MGNZ.Squidex.Client.Tests.Shared.Assets
 {
-  using System;
   using System.IO;
   using System.Reflection;
 
   using Newtonsoft.Json;
 
-  using Xunit;
-
-  [Collection("Sequential Squidex Integration Tests")]
-  [Trait("category", "squidex-api-integration")]
   public class AssetLoader
   {
     public static string ExecutingPath => Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
