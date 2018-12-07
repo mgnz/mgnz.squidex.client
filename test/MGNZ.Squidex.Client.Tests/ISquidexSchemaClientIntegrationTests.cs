@@ -9,6 +9,7 @@ namespace MGNZ.Squidex.Client.Tests
 
   using Xunit;
 
+  [Obsolete]
   public class ISquidexSchemaClientIntegrationTests : SquidexClientIntegrationTest
   {
     [Fact]

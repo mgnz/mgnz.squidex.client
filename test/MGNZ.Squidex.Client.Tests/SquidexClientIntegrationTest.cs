@@ -19,8 +19,9 @@ namespace MGNZ.Squidex.Client.Tests
 
   using Xunit;
 
+  [Obsolete]
   [Collection("Sequential Squidex Integration Tests")]
-  [Trait("category", "squidex-api-integration")]
+  [Trait("category", "obsolete-squidex-api-integration")]
   public class SquidexClientIntegrationTest
   {
     private TestConfigurationOptions _options;
