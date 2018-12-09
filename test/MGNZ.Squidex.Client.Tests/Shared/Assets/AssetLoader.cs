@@ -21,7 +21,16 @@ namespace MGNZ.Squidex.Client.Tests.Shared.Assets
     public static dynamic Asset3PostResponse => LoadAsset($"{ns}.app1.asset3.jpg.post.response.json");
     public static dynamic Asset3TagResponse => LoadAsset($"{ns}.app1.asset3.jpg.tag.response.json");
 
-    public static dynamic Schema1 => LoadAsset($"{ns}.schema1.json");
+    public static dynamic Schema1() => LoadAsset($"{ns}.schema1.json");
+    public static dynamic Schema1(string name)
+    {
+      // note : because my asset data does not store a reference to a name we add it on the fly.
+
+      var schema = Schema1();
+      schema.name = name;
+      return schema;
+    }
+
     public static dynamic Schema1Data1Post => LoadAsset($"{ns}.schema1.data.1.post.json");
     public static dynamic Schema1Data1PostResponse => LoadAsset($"{ns}.schema1.data.1.post.response.json");
     public static dynamic Schema1Data2Post => LoadAsset($"{ns}.schema1.data.2.post.json");
