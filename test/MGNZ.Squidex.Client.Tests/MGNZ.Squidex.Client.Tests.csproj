@@ -2,8 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-
     <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -12,6 +15,24 @@
     <None Remove="Assets\SchemaIntegrationSchema1Asset.json" />
     <None Remove="Assets\SchemaIntegrationSchema1NestedAsset.json" />
     <None Remove="Assets\SchemaIntegrationSchema1ScriptsAsset.json" />
+    <None Remove="Shared\Assets\app1.asset1.7z" />
+    <None Remove="Shared\Assets\app1.asset1.7z.post.response.json" />
+    <None Remove="Shared\Assets\app1.asset1.7z.tag.response.json" />
+    <None Remove="Shared\Assets\app1.asset2.jpg" />
+    <None Remove="Shared\Assets\app1.asset2.jpg.post.response.json" />
+    <None Remove="Shared\Assets\app1.asset2.jpg.tag.response.json" />
+    <None Remove="Shared\Assets\app1.asset3.jpg" />
+    <None Remove="Shared\Assets\app1.asset3.jpg.post.response.json" />
+    <None Remove="Shared\Assets\app1.asset3.jpg.tag.response.json" />
+    <None Remove="Shared\Assets\schema1.data.1.post.json" />
+    <None Remove="Shared\Assets\schema1.data.1.post.response.json" />
+    <None Remove="Shared\Assets\schema1.data.2.post.json" />
+    <None Remove="Shared\Assets\schema1.data.2.post.response.json" />
+    <None Remove="Shared\Assets\schema1.data.export.response.json" />
+    <None Remove="Shared\Assets\schema1.data.import.json" />
+    <None Remove="Shared\Assets\schema1.data.import.response.json" />
+    <None Remove="Shared\Assets\schema1.data.query.response.json" />
+    <None Remove="Shared\Assets\schema1.json" />
     <None Remove="testsettings.json" />
   </ItemGroup>
 
@@ -22,6 +43,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Bogus" Version="24.3.1" />
+    <PackageReference Include="coverlet.msbuild" Version="2.3.1" />
+    <PackageReference Include="dotnet-reportgenerator-cli" Version="4.0.4" />
     <PackageReference Include="FluentAssertions" Version="5.5.3" />
     <PackageReference Include="FluentAssertions.Analyzers" Version="0.11.4" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.2.0" />
@@ -32,7 +56,14 @@
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
     <PackageReference Include="xunit" Version="2.4.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <DotNetCliToolReference Include="dotnet-xunit" Version="2.3.1" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp2.1' ">
+    <PackageReference Include="Microsoft.CodeCoverage" Version="15.9.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -41,6 +72,24 @@
     <EmbeddedResource Include="Assets\SchemaIntegrationSchema1Asset.json" />
     <EmbeddedResource Include="Assets\SchemaIntegrationSchema1NestedAsset.json" />
     <EmbeddedResource Include="Assets\SchemaIntegrationSchema1ScriptsAsset.json" />
+    <EmbeddedResource Include="Shared\Assets\app1.asset3.jpg" />
+    <EmbeddedResource Include="Shared\Assets\app1.asset3.jpg.post.response.json" />
+    <EmbeddedResource Include="Shared\Assets\app1.asset3.jpg.tag.response.json" />
+    <EmbeddedResource Include="Shared\Assets\app1.asset1.7z" />
+    <EmbeddedResource Include="Shared\Assets\app1.asset1.7z.post.response.json" />
+    <EmbeddedResource Include="Shared\Assets\app1.asset1.7z.tag.response.json" />
+    <EmbeddedResource Include="Shared\Assets\app1.asset2.jpg" />
+    <EmbeddedResource Include="Shared\Assets\app1.asset2.jpg.post.response.json" />
+    <EmbeddedResource Include="Shared\Assets\app1.asset2.jpg.tag.response.json" />
+    <EmbeddedResource Include="Shared\Assets\schema1.data.1.post.json" />
+    <EmbeddedResource Include="Shared\Assets\schema1.data.1.post.response.json" />
+    <EmbeddedResource Include="Shared\Assets\schema1.data.2.post.json" />
+    <EmbeddedResource Include="Shared\Assets\schema1.data.2.post.response.json" />
+    <EmbeddedResource Include="Shared\Assets\schema1.data.export.response.json" />
+    <EmbeddedResource Include="Shared\Assets\schema1.data.import.json" />
+    <EmbeddedResource Include="Shared\Assets\schema1.data.import.response.json" />
+    <EmbeddedResource Include="Shared\Assets\schema1.data.query.response.json" />
+    <EmbeddedResource Include="Shared\Assets\schema1.json" />
   </ItemGroup>
 
   <ItemGroup>

@@ -17,6 +17,7 @@ namespace MGNZ.Squidex.Client.Tests
   // https://docs.microsoft.com/en-us/aspnet/core/fundamentals/configuration/?view=aspnetcore-2.1&tabs=basicconfiguration
   // https://blogs.msdn.microsoft.com/fkaduk/2017/02/22/using-strongly-typed-configuration-in-net-core-console-app/
 
+  [Obsolete]
   public class ISquidexContentClientIntegrationTests : SquidexClientIntegrationTest
   {
     [Fact]

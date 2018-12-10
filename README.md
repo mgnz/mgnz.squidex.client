@@ -27,4 +27,4 @@ Things are a bit quiet here because I am spending most time working on a command
 ## todos
 
 - ContentClient : dynamic QCRUD for schema-content; like what we already have but with the raw dynamic objects you get form the server. see https://github.com/mgnz/mgnz.squidex.client/issues/3
-- AssetClient : CRUD over the asset api. see https://github.com/mgnz/mgnz.squidex.client/issues/4
+- [x] AssetClient : CRUD over the asset api. see https://github.com/mgnz/mgnz.squidex.client/issues/4

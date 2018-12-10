@@ -1,0 +1,61 @@
+{
+  "id": null,
+  "data": {
+    "stringfield": {
+      "iv": "data 1 stringfield value"
+    },
+    "localizablestringfield": {
+      "en": "localizablestringfield value en",
+      "sm": "localizablestringfield  value sm"
+    },
+    "datetimefield": {
+      "iv": "2018-11-13T07:57:34Z"
+    },
+    "numberfield": {
+      "iv": 666777
+    },
+    "arrayfield": {
+      "iv": [
+        {
+          "arraystringfield1": "arraystringfield1 value",
+          "arraydatetimefield1": "2018-11-13T07:57:52Z"
+        },
+        {
+          "arraystringfield1": "arraystringfield1 value",
+          "arraydatetimefield1": "2018-11-13T07:57:58Z"
+        }
+      ]
+    },
+    "geolocationfield": {
+      "iv": {
+        "latitude": -45.885814152652991,
+        "longitude": 170.57995319366455
+      }
+    },
+    "booleanfield": {
+      "iv": true
+    },
+    "jsonfield": {
+      "iv": {
+        "blah": "blah-value"
+      }
+    },
+    "tagsfield": {
+      "iv": [
+        "tag-a",
+        "tag-x"
+      ]
+    },
+    "assetsfield": {
+      "iv": []
+    },
+    "referencesfield": {
+      "iv": []
+    }
+  },
+  "version": null,
+  "created": null,
+  "createdby": null,
+  "lastmodified": null,
+  "lastmodifiedby": null
+}
