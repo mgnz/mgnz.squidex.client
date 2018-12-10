@@ -8,7 +8,6 @@ namespace MGNZ.Squidex.Client.Tests
   using MGNZ.Squidex.Client.Model;
   using MGNZ.Squidex.Client.Tests.Shared.Assets;
   using MGNZ.Squidex.Client.Tests.Shared.Code;
-  using MGNZ.Squidex.Client.Tests.Stories;
   using MGNZ.Squidex.Client.Transport;
 
   using Xunit;
@@ -105,16 +104,36 @@ namespace MGNZ.Squidex.Client.Tests
       await SchemaClient.DeleteSchema("aut", schemaName);
     }
 
-    [Fact(Skip = "todo")]
+    [Fact]
     public async Task Put_EndToEnd()
     {
-      throw new NotImplementedException();
+      var schemaName = GetRandomSchemaName;
+      await SchemaClient.AssertNoSchemasExist("aut", delay: TimeSpan.FromSeconds(0.5));
+      var createschema = await SchemaClient.CreateSchema("aut", AssetLoader.Schema1(schemaName));
+      var publishedschema = await SchemaClient.PublishSchema("aut", schemaName);
+
+      ItemContent<dynamic> create1response = await ContentClient.Create<dynamic>("aut", schemaName, AssetLoader.Schema1Data1Post);
+      var patch1response = await ContentClient.Put<dynamic>("aut", schemaName, create1response.Id, AssetLoader.Schema1Data2Post);
+
+      // clean up
+
+      await SchemaClient.DeleteSchema("aut", schemaName);
     }
 
-    [Fact(Skip = "todo")]
+    [Fact]
     public async Task Patch_EndToEnd()
     {
-      throw new NotImplementedException();
+      var schemaName = GetRandomSchemaName;
+      await SchemaClient.AssertNoSchemasExist("aut", delay: TimeSpan.FromSeconds(0.5));
+      var createschema = await SchemaClient.CreateSchema("aut", AssetLoader.Schema1(schemaName));
+      var publishedschema = await SchemaClient.PublishSchema("aut", schemaName);
+
+      ItemContent<dynamic> create1response = await ContentClient.Create<dynamic>("aut", schemaName, AssetLoader.Schema1Data1Post);
+      var patch1response = await ContentClient.Patch<dynamic>("aut", schemaName, create1response.Id, AssetLoader.Schema1Data2Post);
+
+      // clean up
+
+      await SchemaClient.DeleteSchema("aut", schemaName);
     }
 
     [Fact]
