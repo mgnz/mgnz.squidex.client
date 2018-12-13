@@ -1,0 +1,216 @@
+resources:
+- repo: self
+queue:
+  name: Default
+  # Create or edit the build pipeline for this YAML file, define the variable on the Variables tab. See https://go.microsoft.com/fwlink/?linkid=865972
+  #
+  # ‘mgnz_libversion’
+  # ‘mgnz_libversion_suffix’
+  # ‘baseAddressUri’
+  # ‘administratorToken’
+  # ‘clients.aut-developer.oAuthAppName’
+  # ‘clients.aut-developer.oAuthClientId’
+  # ‘clients.aut-developer.oAuthClientSecret’
+  # ‘clients.aut-editor.oAuthAppName’
+  # ‘clients.aut-editor.oAuthClientId’
+  # ‘clients.aut-editor.oAuthClientSecret’
+  # ‘mgnz_ci_libverssion’
+  # ‘mgnz_ci_libverssion’
+  # ‘mgnz_ci_libverssion_suffix’
+  # ‘mgnz_release_libversion’
+  # ‘mgnz_release_libversion_suffix’
+  # ‘MGNZ_CI_PACKAGEVERSION’
+  # ‘MGNZ_RELEASE_PACKAGEVERSION’
+steps:
+- task: DotNetCoreInstaller@0
+  displayName: 'Use .NET Core sdk 2.2.100'
+  inputs:
+    version: 2.2.100
+
+
+- task: gittools.gitversion.gitversion-task.GitVersion@3
+  displayName: GitVersion
+
+
+- powershell: |
+   $UtcDateTime = (Get-Date).ToUniversalTime()
+   $FormattedDateTime = (Get-Date -Date $UtcDateTime -Format "yyyyMMdd")
+
+   # CI Package Nuget Package Version
+   $mgnz_ci_packageversion = "$env:GITVERSION_MAJORMINORPATCH.$env:BUILD_BUILDID-$FormattedDateTime-unstable"
+   Write-Host ("##vso[task.setvariable variable=mgnz_ci_packageversion;]$mgnz_ci_packageversion")
+   # CI Library (dll) Version
+   $mgnz_ci_libverssion = "$env:GITVERSION_MAJORMINORPATCH.$env:BUILD_BUILDID"
+   Write-Host ("##vso[task.setvariable variable=mgnz_ci_libverssion;]$mgnz_ci_libverssion")
+   # CI Library (dll) Version Suffix
+   $mgnz_ci_libverssion_suffix = "$env:GITVERSION_MAJORMINORPATCH.$env:BUILD_BUILDID-$FormattedDateTime.$env:BUILD_SOURCEBRANCH.sha.$env:GITVERSION_SHA"
+   Write-Host ("##vso[task.setvariable variable=mgnz_ci_libverssion_suffix;]$mgnz_ci_libverssion_suffix")
+
+   # Release Nuget Package Version
+   $mgnz_release_packageversion = "$env:GITVERSION_MAJORMINORPATCH"
+   Write-Host ("##vso[task.setvariable variable=mgnz_release_packageversion;]$mgnz_release_packageversion")
+   # Release Library (dll) Version
+   $mgnz_release_libversion = "$env:GITVERSION_MAJORMINORPATCH.$env:BUILD_BUILDID"
+   Write-Host ("##vso[task.setvariable variable=mgnz_release_libversion;]$mgnz_release_libversion")
+   # Release Library (dll) Version Suffix
+   $mgnz_release_libversion_suffix = "$env:GITVERSION_MAJORMINORPATCH.$env:BUILD_BUILDID-$FormattedDateTime.$env:BUILD_SOURCEBRANCH.sha.$env:GITVERSION_SHA"
+   Write-Host ("##vso[task.setvariable variable=mgnz_release_libversion_suffix;]$mgnz_release_libversion_suffix")
+
+   # if we are pre-release use CI libversion and suffix otherwise keep release
+   $mgnz_libversion = $mgnz_release_libversion
+   $mgnz_libversion_suffix = $mgnz_release_libversion_suffix
+   if (-not ([string]::IsNullOrEmpty("$env:GITVERSION_PRERELEASELABEL")))
+   {
+       $mgnz_libversion = $mgnz_ci_libverssion
+       $mgnz_libversion_suffix = $mgnz_ci_libverssion_suffix
+   }
+   Write-Host ("##vso[task.setvariable variable=mgnz_libversion;]$mgnz_libversion")
+   Write-Host ("##vso[task.setvariable variable=mgnz_libversion_suffix;]$mgnz_libversion_suffix")
+
+   # finally set build identifier
+   Write-Host ("##vso[build.updatebuildnumber]$FormattedDateTime.$env:BUILD_BUILDID-$env:BUILD_SOURCEBRANCHNAME")
+  displayName: 'Generate Version'
+
+- powershell: |
+   $var = (gci env:*).GetEnumerator() | Sort-Object Name
+   $out = ""
+   Foreach ($v in $var) {$out = $out + "`t{0,-28} = {1,-28}`n" -f $v.Name, $v.Value}
+
+   write-output "dump variables on $env:BUILD_ARTIFACTSTAGINGDIRECTORY\test.md"
+   $fileName = "$env:BUILD_ARTIFACTSTAGINGDIRECTORY\test.md"
+   set-content $fileName $out
+
+   write-output "##vso[task.addattachment type=Distributedtask.Core.Summary;name=Environment Variables;]$fileName"
+
+  displayName: 'Save Variables'
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet restore'
+  inputs:
+    command: restore
+
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet build'
+  inputs:
+    arguments: '--configuration $(Build.Configuration) /p:version=$(mgnz_libversion) --version-suffix $(mgnz_libversion_suffix)'
+
+
+- powershell: |
+   $config = "
+   {
+       ""BaseAddressUri"": ""$(baseAddressUri)"",
+       ""AdministratorToken"": ""$(administratorToken)"",
+       ""Clients"": {
+         ""aut-developer"": {
+           ""OAuthAppName"": ""$(clients.aut-developer.oAuthAppName)"",
+           ""OAuthClientId"": ""$(clients.aut-developer.oAuthClientId)"",
+           ""OAuthClientSecret"": ""$(clients.aut-developer.oAuthClientSecret)""
+         },
+         ""aut-editor"": {
+           ""OAuthAppName"": ""$(clients.aut-editor.oAuthAppName)"",
+           ""OAuthClientId"": ""$(clients.aut-editor.oAuthClientId)"",
+           ""OAuthClientSecret"": ""$(clients.aut-editor.oAuthClientSecret)""
+         }
+       }
+     }
+   "
+
+   write-host $config
+   set-content -value $config -path "$(Build.SourcesDirectory)/test/MGNZ.Squidex.Client.Tests/bin/$(Build.Configuration)/netcoreapp2.1/testsettings.aut.json"
+  displayName: 'generate testsettings for integration testing'
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet test and collect coverage (unit)'
+  inputs:
+    command: test
+
+    projects: '**/*Tests.csproj'
+
+    arguments: '--configuration $(Build.Configuration) --filter category=unit /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura  /p:CoverletOutput=$(Build.SourcesDirectory)\TestResults\Coverage\'
+
+
+- script: 'reportgenerator -reports:$(Build.SourcesDirectory)\TestResults\Coverage\coverage.cobertura.xml -targetdir:$(Build.SourcesDirectory)\TestResults\Coverage\Reports -tag:$(mgnz_ci_libverssion) -reportTypes:HTMLInline;HTMLChart;Badges -historydir:"C:\Archive\oss mgnz.squidex.client [ci]\Coverage"'
+  displayName: 'reportgenerator '
+
+- task: PublishCodeCoverageResults@1
+  displayName: 'Publish code coverage'
+  inputs:
+    codeCoverageTool: Cobertura
+
+    summaryFileLocation: '$(Build.SourcesDirectory)\TestResults\Coverage\**\coverage.cobertura.xml'
+
+    reportDirectory: '$(Build.SourcesDirectory)\TestResults\Coverage\Reports'
+
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet publish (unstable)'
+  inputs:
+    command: publish
+
+    publishWebProjects: false
+
+    projects: '**/MGNZ.Squidex.Client.csproj'
+
+    arguments: '--configuration $(Build.Configuration) --no-build --output $(Build.ArtifactStagingDirectory)\publish\unstable /p:Version=$(mgnz_ci_libverssion) --version-suffix $(mgnz_ci_libverssion_suffix)'
+
+  enabled: false
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet publish (release)'
+  inputs:
+    command: publish
+
+    publishWebProjects: false
+
+    projects: '**/MGNZ.Squidex.Client.csproj'
+
+    arguments: '--configuration $(Build.Configuration) --no-build --output $(Build.ArtifactStagingDirectory)\publish\stable /p:Version=$(mgnz_release_libversion) --version-suffix $(mgnz_release_libversion_suffix)'
+
+  enabled: false
+
+- script: 'dotnet pack  src\MGNZ.Squidex.Client\MGNZ.Squidex.Client.csproj --configuration $(Build.Configuration) --include-symbols --output $(Build.ArtifactStagingDirectory)\packages\unstable /p:PackageVersion=$(MGNZ_CI_PACKAGEVERSION)'
+  displayName: 'dotnet pack (unstable)'
+  enabled: false
+
+- script: 'dotnet pack  src\MGNZ.Squidex.Client\MGNZ.Squidex.Client.csproj --configuration $(Build.Configuration) --include-symbols --output $(Build.ArtifactStagingDirectory)\packages\stable /p:PackageVersion=$(MGNZ_RELEASE_PACKAGEVERSION)'
+  displayName: 'dotnet pack (stable)'
+  enabled: false
+
+- task: nkdagility.variablehydration.variabledehydration-task.variabledehydration@0
+  displayName: 'Save Build Variables GITVERSION,BUILD,AGENT,SYSTEM,MGNZ'
+  inputs:
+    prefixes: 'GITVERSION,BUILD,AGENT,SYSTEM,MGNZ'
+
+    outpath: '$(Build.ArtifactStagingDirectory)\variables'
+
+  enabled: false
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: packages'
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)\packages'
+
+    ArtifactName: packages
+
+  enabled: false
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: publish'
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)\publish'
+
+    ArtifactName: publish
+
+  enabled: false
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: variables'
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)\variables'
+
+    ArtifactName: variables
+
+  enabled: false
+
+
