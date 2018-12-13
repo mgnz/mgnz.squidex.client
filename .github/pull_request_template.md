@@ -4,4 +4,4 @@ Summary of changes
 -
 -
 
-semver:[major|minor]
++semver: [major|minor|patch]

@@ -12,6 +12,7 @@ Things are a bit quiet here because I am spending most time working on a command
 - OAuthClient : gets a token (you need to supply a HttpClientHandler to get the key in fligt; see SimpleAccessTokenHttpClientHandler for a sample reference; also see https://github.com/mgnz/mgnz.squidex.client/issues/2 for a case to make this less retarded).
 - SchemaClient : CRUD for schema''s technically you can use this as a poor mans 'import' 'export' if you dont care about history. 
 - ContentClient : Typesafe QCRUD for schema-content; currently implemneted a 'typesafe' wrapper over your domain (assuming you construct your dto''s using the objects in Model)
+- AttachmentClient : CRUD for managing assets / attachments
 - Reasonable test coverage; not public yet but Integration testing is done on VSTS and hits a private Squidex instance.
 
 ## examples
