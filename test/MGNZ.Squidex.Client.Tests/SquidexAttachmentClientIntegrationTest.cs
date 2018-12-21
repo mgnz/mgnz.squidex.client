@@ -43,7 +43,7 @@ namespace MGNZ.Squidex.Client.Tests
 
       var id = createResponse.Id;
 
-      var updateResponse = await AttachmentClient.Update("aut", id, attachmentName, "image/jpeg", AssetLoader.Asset3);
+      var updateResponse = await AttachmentClient.UpdateAssetContentById("aut", id, attachmentName, "image/jpeg", AssetLoader.Asset3);
       // todo : assert the putresponse matches 
 
       var deleteResponse = await AttachmentClient.DeleteAsset("aut", id);
