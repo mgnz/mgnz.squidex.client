@@ -5,6 +5,12 @@ nuget : https://www.nuget.org/packages/MGNZ.Squidex.Client/
 
 ## current focus
 
+2018 Dec 20
+Updated to work with assets (images, files etc..); core interface is working, also working on a few extension methods to do things a bit easier.
+
+Nuget release at : https://www.nuget.org/packages/MGNZ.Squidex.Client/0.2.6-unstable.1214
+
+2018 Oct 26
 Things are a bit quiet here because I am spending most time working on a command line client that uses this library over at https://github.com/mgnz/mgnz.squidex.cli once that is a bit more polished the intention is to come back here and fix up the remaining issues.
 
 ## done bits
