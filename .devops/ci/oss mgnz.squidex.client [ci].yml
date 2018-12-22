@@ -1,3 +1,8 @@
+
+#
+# Documentation : https://docs.microsoft.com/en-us/azure/devops/pipelines/build/triggers?view=vsts&tabs=yaml
+#
+
 resources:
 - repo: self
 queue:
@@ -21,6 +26,31 @@ queue:
   # ‘mgnz_release_libversion_suffix’
   # ‘MGNZ_CI_PACKAGEVERSION’
   # ‘MGNZ_RELEASE_PACKAGEVERSION’
+  # 
+  # C:\Users\steve\Source\Repos\mgnz.squidex.client\.devops\ci\oss mgnz.squidex.client [ci].yml
+trigger:
+  branches:
+    include:
+    - feature/*
+    - features/*
+    - bug/*
+    - bugs/*
+    exclude:
+    - master
+    - release/*
+    - releases/*
+  paths:
+    exclude:
+    - .devops/*
+    - ALL.sln
+    
+pr:
+  branches:
+    exclude:
+    - master
+    - release/*
+    - releases/*
+
 steps:
 - task: DotNetCoreInstaller@0
   displayName: 'Use .NET Core sdk 2.2.100'
