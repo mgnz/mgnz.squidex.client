@@ -39,11 +39,12 @@ namespace MGNZ.Squidex.Client.Tests
 
       await Task.Delay(TimeSpan.FromSeconds(1));
 
-      var content = await ContentClient.Query<dynamic>("aut", schemaName, new QueryRequest()
-      {
-        Skip = 0,
-        Top = 100
-      });
+      //var content = await ContentClient.Query<dynamic>("aut", schemaName, new QueryRequest()
+      //{
+      //  Skip = 0,
+      //  Top = 100
+      //});
+      var content = await ContentClient.Query("aut", schemaName, top: 100, skip: 0);
 
       content.Total.Should().Be(2);
       var actualFirst = content.Items[0];
@@ -64,17 +65,19 @@ namespace MGNZ.Squidex.Client.Tests
 
       // act
 
-      ItemContent<dynamic> create1response = await ContentClient.Post("aut", schemaName, AssetLoader.Schema1Data1Post);
-      ItemContent<dynamic> create2response = await ContentClient.Post("aut", schemaName, AssetLoader.Schema1Data2Post);
-      await ContentClient.Publish("aut", schemaName, create1response.Id);
-      await ContentClient.Publish("aut", schemaName, create2response.Id);
+      dynamic create1response = await ContentClient.Post("aut", schemaName, AssetLoader.Schema1Data1Post);
+      dynamic create2response = await ContentClient.Post("aut", schemaName, AssetLoader.Schema1Data2Post);
+      string create1id = Convert.ToString(create1response.id);
+      string create2id = Convert.ToString(create2response.id);
+      await ContentClient.Publish("aut", schemaName, create1id);
+      await ContentClient.Publish("aut", schemaName, create2id);
 
       // note : eventual consistency and all that sometimes we don't get away with validating right away.
 
       await Task.Delay(TimeSpan.FromSeconds(1));
 
-      await ContentClient.AssertContentMustExists("aut", schemaName, create1response.Id, delay: TimeSpan.FromSeconds(0.5));
-      await ContentClient.AssertContentMustExists("aut", schemaName, create2response.Id, delay: TimeSpan.FromSeconds(0.5));
+      await ContentClient.AssertContentMustExists("aut", schemaName, create1id, delay: TimeSpan.FromSeconds(0.5));
+      await ContentClient.AssertContentMustExists("aut", schemaName, create2id, delay: TimeSpan.FromSeconds(0.5));
 
       // todo : verify export content
 
@@ -204,11 +207,12 @@ namespace MGNZ.Squidex.Client.Tests
 
       await Task.Delay(TimeSpan.FromSeconds(1));
 
-      var content = await ContentClient.Query<dynamic>("aut", schemaName, new QueryRequest()
-      {
-        Skip = 0,
-        Top = 100
-      });
+      //var content = await ContentClient.Query<dynamic>("aut", schemaName, new QueryRequest()
+      //{
+      //  Skip = 0,
+      //  Top = 100
+      //});
+      var content = await ContentClient.Query("aut", schemaName, top: 100, skip: 0);
 
       content.Total.Should().Be(0);
 
@@ -249,11 +253,12 @@ namespace MGNZ.Squidex.Client.Tests
 
       await Task.Delay(TimeSpan.FromSeconds(1));
 
-      var content = await ContentClient.Query<dynamic>("aut", schemaName, new QueryRequest()
-      {
-        Skip = 0,
-        Top = 100
-      });
+      //var content = await ContentClient.Query<dynamic>("aut", schemaName, new QueryRequest()
+      //{
+      //  Skip = 0,
+      //  Top = 100
+      //});
+      var content = await ContentClient.Query("aut", schemaName, top: 100, skip: 0);
 
       content.Total.Should().Be(0);
 
@@ -297,11 +302,12 @@ namespace MGNZ.Squidex.Client.Tests
 
       await Task.Delay(TimeSpan.FromSeconds(1));
 
-      var content = await ContentClient.Query<dynamic>("aut", schemaName, new QueryRequest()
-      {
-        Skip = 0,
-        Top = 100
-      });
+      //var content = await ContentClient.Query<dynamic>("aut", schemaName, new QueryRequest()
+      //{
+      //  Skip = 0,
+      //  Top = 100
+      //});
+      var content = await ContentClient.Query("aut", schemaName, top: 100, skip: 0);
 
       // ma
       content.Total.Should().Be(2);
