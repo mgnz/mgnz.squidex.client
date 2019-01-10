@@ -12,7 +12,7 @@ namespace MGNZ.Squidex.Client.Tests
   [Obsolete]
   public class ISquidexSchemaClientIntegrationTests : SquidexClientIntegrationTest
   {
-    [Fact]
+    [Fact(Skip = "obsoleted")]
     public async Task EndToEnd_HappyPath()
     {
       var oauthStories = new OAuthStories(this.Options);

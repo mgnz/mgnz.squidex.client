@@ -20,7 +20,7 @@ namespace MGNZ.Squidex.Client.Tests
   [Obsolete]
   public class ISquidexContentClientIntegrationTests : SquidexClientIntegrationTest
   {
-    [Fact]
+    [Fact(Skip = "obsoleted")]
     public async Task EndToEnd_HappyPath()
     {
       JsonConvert.DefaultSettings = () => new JsonSerializerSettings
