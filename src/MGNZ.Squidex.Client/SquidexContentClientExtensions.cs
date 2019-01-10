@@ -1,5 +1,6 @@
 namespace MGNZ.Squidex.Client
 {
+  using System;
   using System.Threading.Tasks;
 
   using MGNZ.Squidex.Client.Model;
@@ -7,6 +8,7 @@ namespace MGNZ.Squidex.Client
 
   using Newtonsoft.Json;
 
+  [Obsolete("dont use under development")]
   public static class SquidexContentClientExtensions
   {
     public static async Task<QueryResponse<TModel>> Query<TModel>(this ISquidexContentClient that, string app, string schema, int top = 20, int skip = 0, string orderBy = null, string search = null, string filter = null)
@@ -19,8 +21,8 @@ namespace MGNZ.Squidex.Client
 
     public static async Task<QueryResponse<TModel>> Query<TModel>(this ISquidexContentClient that, string app, string schema, QueryRequest request)
     {
-      var raw = await that.Query(app, schema, request.Top, request.Skip, request.OrderBy, request.Search, request.Filter);
-      var deserialized = JsonConvert.DeserializeObject<QueryResponse<TModel>>(raw);
+      dynamic raw = await that.Query(app, schema, request.Top, request.Skip, request.OrderBy, request.Search, request.Filter);
+      var deserialized = JsonConvert.DeserializeObject<QueryResponse<TModel>>(raw.ToString());
 
       return deserialized;
     }
