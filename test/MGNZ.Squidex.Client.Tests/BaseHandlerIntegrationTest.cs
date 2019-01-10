@@ -1,7 +1,9 @@
 namespace MGNZ.Squidex.Client.Tests
 {
   using System;
+  using System.Collections.Generic;
   using System.IO;
+  using System.Linq;
   using System.Net.Http;
   using System.Reflection;
   using System.Threading.Tasks;
@@ -15,7 +17,7 @@ namespace MGNZ.Squidex.Client.Tests
 
   using Refit;
 
-  public class BaseHandlerIntegrationTest
+  public class BaseHandlerIntegrationTest : IDisposable
   {
     protected ISquidexAppSchemaClient SchemaClient { get; set; } = null;
     protected ISquidexContentClient ContentClient { get; } = null;
@@ -61,6 +63,23 @@ namespace MGNZ.Squidex.Client.Tests
       var result = await OAuthClient.GetToken(oauthAppName, oauthClientId, oauthClientSecret);
 
       return result.AccessToken;
+    }
+
+    public void Dispose()
+    {
+      Task.Run(async () => await Tidy()).Wait();
+    }
+
+    private async Task Tidy()
+    {
+      var data = await SchemaClient.GetAllSchemas("aut");
+      var count = Convert.ToInt32(data.Count);
+
+      if (count == 0) return;
+
+      var allnames = ((IEnumerable<dynamic>) data).Select(d => Convert.ToString(d.name));
+      foreach (var name in allnames)
+        await SchemaClient.DeleteSchema("aut", name);
     }
   }
 }
