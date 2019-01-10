@@ -43,7 +43,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Bogus" Version="25.0.2" />
+    <PackageReference Include="Bogus" Version="25.0.3" />
     <PackageReference Include="coverlet.msbuild" Version="2.5.0" />
     <PackageReference Include="dotnet-reportgenerator-cli" Version="4.0.5" />
     <PackageReference Include="FluentAssertions" Version="5.5.3" />
