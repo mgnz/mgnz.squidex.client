@@ -8,7 +8,7 @@ namespace MGNZ.Squidex.Client.Tests
   using MGNZ.Squidex.Client.Tests.Shared.Assets;
   using MGNZ.Squidex.Client.Tests.Shared.Code;
   using MGNZ.Squidex.Client.Transport;
-
+  using Refit;
   using Xunit;
 
   [Collection("Sequential Squidex Integration Tests")]
@@ -22,7 +22,11 @@ namespace MGNZ.Squidex.Client.Tests
 
       await AttachmentClient.AssertNoAttachmentsExist("aut");
 
-      var createResponse = await AttachmentClient.Post("aut", attachmentName, "image/jpeg", AssetLoader.Asset2);
+      var createResponse = await AttachmentClient.PostAsset("aut", new[]
+      {
+        new StreamPart(AssetLoader.Asset2, attachmentName, "image/jpeg")
+      });
+
       await AttachmentClient.AssertAttachmentMustExist("aut", attachmentName, delay: TimeSpan.FromSeconds(2));
       // todo : assert the postresponse matches 
 
@@ -43,7 +47,10 @@ namespace MGNZ.Squidex.Client.Tests
 
       var id = createResponse.Id;
 
-      var updateResponse = await AttachmentClient.UpdateAssetContentById("aut", id, attachmentName, "image/jpeg", AssetLoader.Asset3);
+      var updateResponse = await AttachmentClient.UpdateAssetContent("aut", id, new[]
+      {
+        new StreamPart(AssetLoader.Asset3, attachmentName, "image/jpeg")
+      });
       // todo : assert the putresponse matches 
 
       var deleteResponse = await AttachmentClient.DeleteAsset("aut", id);

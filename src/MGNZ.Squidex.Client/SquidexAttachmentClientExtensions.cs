@@ -34,7 +34,7 @@ namespace MGNZ.Squidex.Client
       return await that.UpdateAssetContentById(application, item.Id, fileName, mimeType, stream);
     }
 
-    public static async Task DeleteByNamePost(this ISquidexAttachmentClient that, string application, string fileName)
+    public static async Task DeleteByName(this ISquidexAttachmentClient that, string application, string fileName)
     {
       var item = await that.GetByNameOrDefault(application, fileName);
 

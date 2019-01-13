@@ -11,6 +11,7 @@ namespace MGNZ.Squidex.Client.Tests
   using Bogus;
 
   using MGNZ.Squidex.Client.Handlers;
+  using MGNZ.Squidex.Client.Model;
   using MGNZ.Squidex.Client.Tests.Plumbing;
 
   using Microsoft.Extensions.Configuration;
@@ -67,10 +68,11 @@ namespace MGNZ.Squidex.Client.Tests
 
     public void Dispose()
     {
-      Task.Run(async () => await Tidy()).Wait();
+      Task.Run(async () => await PurgeSchema()).Wait();
+      Task.Run(async () => await PurgeAttachments()).Wait();
     }
 
-    private async Task Tidy()
+    private async Task PurgeSchema()
     {
       var data = await SchemaClient.GetAllSchemas("aut");
       var count = Convert.ToInt32(data.Count);
@@ -80,6 +82,20 @@ namespace MGNZ.Squidex.Client.Tests
       var allnames = ((IEnumerable<dynamic>) data).Select(d => Convert.ToString(d.name));
       foreach (var name in allnames)
         await SchemaClient.DeleteSchema("aut", name);
+    }
+
+    private async Task PurgeAttachments()
+    {
+      var data = await AttachmentClient.GetAssets("aut", new ListRequest()
+      {
+        Skip = 0, Top = 200
+      });
+      var count = data.Total;
+
+      if (count == 0) return;
+
+      foreach (var attachment in data.Items)
+        await AttachmentClient.DeleteAsset("aut", attachment.Id);
     }
   }
 }
