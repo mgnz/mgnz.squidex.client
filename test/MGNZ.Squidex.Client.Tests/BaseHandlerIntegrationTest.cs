@@ -86,7 +86,7 @@ namespace MGNZ.Squidex.Client.Tests
 
     private async Task PurgeAttachments()
     {
-      var data = await AttachmentClient.GetAssets("aut", new ListRequest()
+      var data = await AttachmentClient.GetAllAssets("aut", new ListRequest()
       {
         Skip = 0, Top = 200
       });

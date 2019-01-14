@@ -40,59 +40,59 @@ namespace MGNZ.Squidex.Client.Tests.Stories
     public async Task<QueryResponse<TModel>> Query<TModel>(string app, string schema,
       QueryRequest request)
     {
-      return await this.AuthenticatedContentClient.Query<TModel>(app, schema, request);
+      return await this.AuthenticatedContentClient.QueryContent<TModel>(app, schema, request);
     }
 
     public async Task<QueryResponse<TModel>> Query<TModel>(string app, string schema, int top = 20, int skip = 0,
       string orderBy = null, string search = null,
       string filter = null)
     {
-      return await this.AuthenticatedContentClient.Query<TModel>(app, schema, top, skip, orderBy, search, filter);
+      return await this.AuthenticatedContentClient.QueryContent<TModel>(app, schema, top, skip, orderBy, search, filter);
     }
 
     public async Task<ItemContent<TModel>> Create<TModel>(string app, string schema, TModel content)
     {
-      return await this.AuthenticatedContentClient.Create(app, schema, content);
+      return await SquidexContentClientExtensions.CreateContent(this.AuthenticatedContentClient, app, schema, content);
     }
 
     public async Task<ItemContent<TModel>> Get<TModel>(string app, string schema, string id)
     {
-      return await this.AuthenticatedContentClient.Get<TModel>(app, schema, id);
+      return await this.AuthenticatedContentClient.GetContent<TModel>(app, schema, id);
     }
 
     public async Task<TModel> Put<TModel>(string app, string schema, string id, TModel content)
     {
-      return await this.AuthenticatedContentClient.Put(app, schema, id, content);
+      return await this.AuthenticatedContentClient.PutContent(app, schema, id, content);
     }
 
     public async Task<TModel> Patch<TModel>(string app, string schema, string id, TModel content)
     {
-      return await this.AuthenticatedContentClient.Patch(app, schema, id, content);
+      return await this.AuthenticatedContentClient.PatchContent(app, schema, id, content);
     }
 
     public async Task Publish(string app, string schema, string id)
     {
-      await this.AuthenticatedContentClient.Publish(app, schema, id);
+      await this.AuthenticatedContentClient.PublishContent(app, schema, id);
     }
 
     public async Task Unpublish(string app, string schema, string id)
     {
-      await this.AuthenticatedContentClient.Unpublish(app, schema, id);
+      await this.AuthenticatedContentClient.UnpublishContent(app, schema, id);
     }
 
     public async Task Archive(string app, string schema, string id)
     {
-      await this.AuthenticatedContentClient.Archive(app, schema, id);
+      await this.AuthenticatedContentClient.ArchiveContent(app, schema, id);
     }
 
     public async Task Restore(string app, string schema, string id)
     {
-      await this.AuthenticatedContentClient.Restore(app, schema, id);
+      await this.AuthenticatedContentClient.RestoreContent(app, schema, id);
     }
 
     public async Task Delete(string app, string schema, string id)
     {
-      await this.AuthenticatedContentClient.Delete(app, schema, id);
+      await this.AuthenticatedContentClient.DeleteContent(app, schema, id);
     }
   }
 }

@@ -16,13 +16,13 @@ namespace MGNZ.Squidex.Client.Tests
   public class SquidexAttachmentClientIntegrationTest : BaseHandlerIntegrationTest
   {
     [Fact()]
-    public async Task PostAsset_Execute_EndToEnd()
+    public async Task CreateAsset_EndToEnd()
     {
       var attachmentName = $"{base.GetRandomSchemaName}.jpg";
 
       await AttachmentClient.AssertNoAttachmentsExist("aut");
 
-      var createResponse = await AttachmentClient.PostAsset("aut", new[]
+      var createResponse = await AttachmentClient.CreateAsset("aut", new[]
       {
         new StreamPart(AssetLoader.Asset2, attachmentName, "image/jpeg")
       });
@@ -37,17 +37,17 @@ namespace MGNZ.Squidex.Client.Tests
     }
 
     [Fact]
-    public async Task UpdateAssetContent_Execute_EndToEnd()
+    public async Task UpdateAsset_EndToEnd()
     {
       var attachmentName = $"{base.GetRandomSchemaName}.jpg";
 
       await AttachmentClient.AssertNoAttachmentsExist("aut");
-      var createResponse = await AttachmentClient.Post("aut", attachmentName, "image/jpeg", AssetLoader.Asset2);
+      var createResponse = await AttachmentClient.CreateAsset("aut", attachmentName, "image/jpeg", AssetLoader.Asset2);
       await AttachmentClient.AssertAttachmentMustExist("aut", attachmentName, delay: TimeSpan.FromSeconds(2));
 
       var id = createResponse.Id;
 
-      var updateResponse = await AttachmentClient.UpdateAssetContent("aut", id, new[]
+      var updateResponse = await AttachmentClient.UpdateAsset("aut", id, new[]
       {
         new StreamPart(AssetLoader.Asset3, attachmentName, "image/jpeg")
       });
@@ -58,12 +58,12 @@ namespace MGNZ.Squidex.Client.Tests
     }
 
     [Fact]
-    public async Task UpdateAssetTags_Execute_EndToEnd()
+    public async Task UpdateAssetTags_EndToEnd()
     {
       var attachmentName = $"{base.GetRandomSchemaName}.jpg";
 
       await AttachmentClient.AssertNoAttachmentsExist("aut");
-      var createResponse = await AttachmentClient.Post("aut", attachmentName, "image/jpeg", AssetLoader.Asset2);
+      var createResponse = await AttachmentClient.CreateAsset("aut", attachmentName, "image/jpeg", AssetLoader.Asset2);
       await AttachmentClient.AssertAttachmentMustExist("aut", attachmentName, delay: TimeSpan.FromSeconds(2));
 
       var id = createResponse.Id;
@@ -85,12 +85,12 @@ namespace MGNZ.Squidex.Client.Tests
     }
 
     [Fact]
-    public async Task GetAsset_Execute_EndToEnd()
+    public async Task GetAsset_EndToEnd()
     {
       var attachmentName = $"{base.GetRandomSchemaName}.jpg";
 
       await AttachmentClient.AssertNoAttachmentsExist("aut");
-      var createResponse = await AttachmentClient.Post("aut", attachmentName, "image/jpeg", AssetLoader.Asset2);
+      var createResponse = await AttachmentClient.CreateAsset("aut", attachmentName, "image/jpeg", AssetLoader.Asset2);
       await AttachmentClient.AssertAttachmentMustExist("aut", attachmentName, delay: TimeSpan.FromSeconds(2));
 
       var id = createResponse.Id;
@@ -102,12 +102,12 @@ namespace MGNZ.Squidex.Client.Tests
     }
 
     [Fact]
-    public async Task DeleteAsset_Execute_EndToEnd()
+    public async Task DeleteAsset_EndToEnd()
     {
       var attachmentName = $"{base.GetRandomSchemaName}.jpg";
 
       await AttachmentClient.AssertNoAttachmentsExist("aut");
-      var createResponse = await AttachmentClient.Post("aut", attachmentName, "image/jpeg", AssetLoader.Asset2);
+      var createResponse = await AttachmentClient.CreateAsset("aut", attachmentName, "image/jpeg", AssetLoader.Asset2);
       await AttachmentClient.AssertAttachmentMustExist("aut", attachmentName, delay: TimeSpan.FromSeconds(2));
 
       var id = createResponse.Id;
@@ -116,24 +116,24 @@ namespace MGNZ.Squidex.Client.Tests
     }
 
     [Fact(Skip = "in progress")]
-    public async Task GetAllTags_Execute_EndToEnd()
+    public async Task GetAllTags_EndToEnd()
     {
     }
 
     [Fact]
-    public async Task GetAssets_Execute_EndToEnd()
+    public async Task GetAllAssets_EndToEnd()
     {
       var attachmen1tName = $"{base.GetRandomSchemaName}.jpg";
       var attachment2Name = $"{base.GetRandomSchemaName}.jpg";
 
       await AttachmentClient.AssertNoAttachmentsExist("aut");
 
-      var createResponse1 = await AttachmentClient.Post("aut", attachmen1tName, "image/jpeg", AssetLoader.Asset2);
+      var createResponse1 = await AttachmentClient.CreateAsset("aut", attachmen1tName, "image/jpeg", AssetLoader.Asset2);
       await AttachmentClient.AssertAttachmentMustExist("aut", attachmen1tName, delay: TimeSpan.FromSeconds(2));
-      var createResponse2 = await AttachmentClient.Post("aut", attachment2Name, "image/jpeg", AssetLoader.Asset3);
+      var createResponse2 = await AttachmentClient.CreateAsset("aut", attachment2Name, "image/jpeg", AssetLoader.Asset3);
       await AttachmentClient.AssertAttachmentMustExist("aut", attachment2Name, delay: TimeSpan.FromSeconds(2));
 
-      var getAllResponse = await AttachmentClient.GetAssets("aut", new ListRequest()
+      var getAllResponse = await AttachmentClient.GetAllAssets("aut", new ListRequest()
       {
         Skip = 0,
         Top = 2,

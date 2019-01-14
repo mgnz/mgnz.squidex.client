@@ -21,7 +21,7 @@ namespace MGNZ.Squidex.Client.Tests.Shared.Code
       // because of eventual consistency
       if (delay.HasValue) await Task.Delay(delay.Value);
 
-      var item = await that.Get(application, schema, id);
+      var item = await that.GetContent(application, schema, id);
       var isValid = assert(item);
 
       isValid.Should().BeTrue();
@@ -36,7 +36,7 @@ namespace MGNZ.Squidex.Client.Tests.Shared.Code
 
       try
       {
-        await that.Get(application, schema, id);
+        await that.GetContent(application, schema, id);
         exists = true;
       }
       catch (Exception e)
@@ -56,7 +56,7 @@ namespace MGNZ.Squidex.Client.Tests.Shared.Code
 
       try
       {
-        await that.Get(application, schema, id);
+        await that.GetContent(application, schema, id);
         exists = true;
       }
       catch (Exception e)

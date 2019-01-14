@@ -28,12 +28,12 @@ namespace MGNZ.Squidex.Client.Tests
       var createschema = await SchemaClient.CreateSchema("aut", AssetLoader.Schema1(schemaName));
       var publishedschema = await SchemaClient.PublishSchema("aut", schemaName);
 
-      dynamic create1response = await ContentClient.Post("aut", schemaName, AssetLoader.Schema1Data1Post);
-      dynamic create2response = await ContentClient.Post("aut", schemaName, AssetLoader.Schema1Data2Post);
+      dynamic create1response = await ContentClient.CreateContent("aut", schemaName, AssetLoader.Schema1Data1Post);
+      dynamic create2response = await ContentClient.CreateContent("aut", schemaName, AssetLoader.Schema1Data2Post);
       string create1id = Convert.ToString(create1response.id);
       string create2id = Convert.ToString(create2response.id);
-      await ContentClient.Publish("aut", schemaName, create1id);
-      await ContentClient.Publish("aut", schemaName, create2id);
+      await ContentClient.PublishContent("aut", schemaName, create1id);
+      await ContentClient.PublishContent("aut", schemaName, create2id);
 
       // act
 
@@ -46,7 +46,7 @@ namespace MGNZ.Squidex.Client.Tests
       //  Skip = 0,
       //  Top = 100
       //});
-      var content = await ContentClient.Query("aut", schemaName, top: 100, skip: 0);
+      var content = await ContentClient.QueryContent("aut", schemaName, top: 100, skip: 0);
 
       int contenttotal = Convert.ToInt32(content.total);
       contenttotal.Should().Be(2);
@@ -68,12 +68,12 @@ namespace MGNZ.Squidex.Client.Tests
 
       // act
 
-      dynamic create1response = await ContentClient.Post("aut", schemaName, AssetLoader.Schema1Data1Post);
-      dynamic create2response = await ContentClient.Post("aut", schemaName, AssetLoader.Schema1Data2Post);
+      dynamic create1response = await ContentClient.CreateContent("aut", schemaName, AssetLoader.Schema1Data1Post);
+      dynamic create2response = await ContentClient.CreateContent("aut", schemaName, AssetLoader.Schema1Data2Post);
       string create1id = Convert.ToString(create1response.id);
       string create2id = Convert.ToString(create2response.id);
-      await ContentClient.Publish("aut", schemaName, create1id);
-      await ContentClient.Publish("aut", schemaName, create2id);
+      await ContentClient.PublishContent("aut", schemaName, create1id);
+      await ContentClient.PublishContent("aut", schemaName, create2id);
 
       // note : eventual consistency and all that sometimes we don't get away with validating right away.
 
@@ -95,17 +95,17 @@ namespace MGNZ.Squidex.Client.Tests
       var createschema = await SchemaClient.CreateSchema("aut", AssetLoader.Schema1(schemaName));
       var publishedschema = await SchemaClient.PublishSchema("aut", schemaName);
 
-      dynamic create1response = await ContentClient.Post("aut", schemaName, AssetLoader.Schema1Data1Post);
-      dynamic create2response = await ContentClient.Post("aut", schemaName, AssetLoader.Schema1Data2Post);
+      dynamic create1response = await ContentClient.CreateContent("aut", schemaName, AssetLoader.Schema1Data1Post);
+      dynamic create2response = await ContentClient.CreateContent("aut", schemaName, AssetLoader.Schema1Data2Post);
       string create1id = Convert.ToString(create1response.id);
       string create2id = Convert.ToString(create2response.id);
-      await ContentClient.Publish("aut", schemaName, create1id);
-      await ContentClient.Publish("aut", schemaName, create2id);
+      await ContentClient.PublishContent("aut", schemaName, create1id);
+      await ContentClient.PublishContent("aut", schemaName, create2id);
 
       // act
 
-      var get1response = await ContentClient.Get("aut", schemaName, create1id);
-      var get2response = await ContentClient.Get("aut", schemaName, create2id);
+      var get1response = await ContentClient.GetContent("aut", schemaName, create1id);
+      var get2response = await ContentClient.GetContent("aut", schemaName, create2id);
 
       // todo : verify export content 
 
@@ -120,9 +120,9 @@ namespace MGNZ.Squidex.Client.Tests
       var createschema = await SchemaClient.CreateSchema("aut", AssetLoader.Schema1(schemaName));
       var publishedschema = await SchemaClient.PublishSchema("aut", schemaName);
 
-      dynamic create1response = await ContentClient.Post("aut", schemaName, AssetLoader.Schema1Data1Post);
+      dynamic create1response = await ContentClient.CreateContent("aut", schemaName, AssetLoader.Schema1Data1Post);
       string create1id = Convert.ToString(create1response.id);
-      dynamic put1response = await ContentClient.Put("aut", schemaName, create1id, AssetLoader.Schema1Data2Post);
+      dynamic put1response = await ContentClient.PutContent("aut", schemaName, create1id, AssetLoader.Schema1Data2Post);
 
       // clean up
 
@@ -137,9 +137,9 @@ namespace MGNZ.Squidex.Client.Tests
       var createschema = await SchemaClient.CreateSchema("aut", AssetLoader.Schema1(schemaName));
       var publishedschema = await SchemaClient.PublishSchema("aut", schemaName);
 
-      dynamic create1response = await ContentClient.Post("aut", schemaName, AssetLoader.Schema1Data1Post);
+      dynamic create1response = await ContentClient.CreateContent("aut", schemaName, AssetLoader.Schema1Data1Post);
       string create1id = Convert.ToString(create1response.id);
-      dynamic patch1response = await ContentClient.Patch("aut", schemaName, create1id, AssetLoader.Schema1Data2Post);
+      dynamic patch1response = await ContentClient.PatchContent("aut", schemaName, create1id, AssetLoader.Schema1Data2Post);
 
       // clean up
 
@@ -160,8 +160,8 @@ namespace MGNZ.Squidex.Client.Tests
       var createschema = await SchemaClient.CreateSchema("aut", AssetLoader.Schema1(schemaName));
       var publishedschema = await SchemaClient.PublishSchema("aut", schemaName);
 
-      dynamic create1response = await ContentClient.Post("aut", schemaName, AssetLoader.Schema1Data1Post);
-      dynamic create2response = await ContentClient.Post("aut", schemaName, AssetLoader.Schema1Data2Post);
+      dynamic create1response = await ContentClient.CreateContent("aut", schemaName, AssetLoader.Schema1Data1Post);
+      dynamic create2response = await ContentClient.CreateContent("aut", schemaName, AssetLoader.Schema1Data2Post);
       string create1id = Convert.ToString(create1response.id);
       string create2id = Convert.ToString(create2response.id);
 
@@ -172,8 +172,8 @@ namespace MGNZ.Squidex.Client.Tests
 
       await Task.Delay(TimeSpan.FromSeconds(1));
 
-      await ContentClient.Publish("aut", schemaName, create1id);
-      await ContentClient.Publish("aut", schemaName, create2id);
+      await ContentClient.PublishContent("aut", schemaName, create1id);
+      await ContentClient.PublishContent("aut", schemaName, create2id);
 
       await Task.Delay(TimeSpan.FromSeconds(1));
 
@@ -199,15 +199,15 @@ namespace MGNZ.Squidex.Client.Tests
       var createschema = await SchemaClient.CreateSchema("aut", AssetLoader.Schema1(schemaName));
       var publishedschema = await SchemaClient.PublishSchema("aut", schemaName);
 
-      dynamic create1response = await ContentClient.Post("aut", schemaName, AssetLoader.Schema1Data1Post);
-      dynamic create2response = await ContentClient.Post("aut", schemaName, AssetLoader.Schema1Data2Post);
+      dynamic create1response = await ContentClient.CreateContent("aut", schemaName, AssetLoader.Schema1Data1Post);
+      dynamic create2response = await ContentClient.CreateContent("aut", schemaName, AssetLoader.Schema1Data2Post);
       string create1id = Convert.ToString(create1response.id);
       string create2id = Convert.ToString(create2response.id);
 
       await Task.Delay(TimeSpan.FromSeconds(1));
 
-      await ContentClient.Publish("aut", schemaName, create1id);
-      await ContentClient.Publish("aut", schemaName, create2id);
+      await ContentClient.PublishContent("aut", schemaName, create1id);
+      await ContentClient.PublishContent("aut", schemaName, create2id);
 
       // act
 
@@ -215,8 +215,8 @@ namespace MGNZ.Squidex.Client.Tests
 
       await Task.Delay(TimeSpan.FromSeconds(1));
 
-      await ContentClient.Unpublish("aut", schemaName, create1id);
-      await ContentClient.Unpublish("aut", schemaName, create2id);
+      await ContentClient.UnpublishContent("aut", schemaName, create1id);
+      await ContentClient.UnpublishContent("aut", schemaName, create2id);
 
       await Task.Delay(TimeSpan.FromSeconds(1));
 
@@ -225,7 +225,7 @@ namespace MGNZ.Squidex.Client.Tests
       //  Skip = 0,
       //  Top = 100
       //});
-      var content = await ContentClient.Query("aut", schemaName, top: 100, skip: 0);
+      var content = await ContentClient.QueryContent("aut", schemaName, top: 100, skip: 0);
 
       int contenttotal = Convert.ToInt32(content.total);
       contenttotal.Should().Be(0);
@@ -249,14 +249,14 @@ namespace MGNZ.Squidex.Client.Tests
       var createschema = await SchemaClient.CreateSchema("aut", AssetLoader.Schema1(schemaName));
       var publishedschema = await SchemaClient.PublishSchema("aut", schemaName);
 
-      dynamic create1response = await ContentClient.Post("aut", schemaName, AssetLoader.Schema1Data1Post);
-      dynamic create2response = await ContentClient.Post("aut", schemaName, AssetLoader.Schema1Data2Post);
+      dynamic create1response = await ContentClient.CreateContent("aut", schemaName, AssetLoader.Schema1Data1Post);
+      dynamic create2response = await ContentClient.CreateContent("aut", schemaName, AssetLoader.Schema1Data2Post);
       string create1id = Convert.ToString(create1response.id);
       string create2id = Convert.ToString(create2response.id);
 
       await Task.Delay(TimeSpan.FromSeconds(1));
-      await ContentClient.Publish("aut", schemaName, create1id);
-      await ContentClient.Publish("aut", schemaName, create2id);
+      await ContentClient.PublishContent("aut", schemaName, create1id);
+      await ContentClient.PublishContent("aut", schemaName, create2id);
 
       // act
 
@@ -264,8 +264,8 @@ namespace MGNZ.Squidex.Client.Tests
 
       await Task.Delay(TimeSpan.FromSeconds(1));
 
-      await ContentClient.Archive("aut", schemaName, create1id);
-      await ContentClient.Archive("aut", schemaName, create2id);
+      await ContentClient.ArchiveContent("aut", schemaName, create1id);
+      await ContentClient.ArchiveContent("aut", schemaName, create2id);
 
       await Task.Delay(TimeSpan.FromSeconds(1));
 
@@ -274,7 +274,7 @@ namespace MGNZ.Squidex.Client.Tests
       //  Skip = 0,
       //  Top = 100
       //});
-      var content = await ContentClient.Query("aut", schemaName, top: 100, skip: 0);
+      var content = await ContentClient.QueryContent("aut", schemaName, top: 100, skip: 0);
 
       int contenttotal = Convert.ToInt32(content.total);
       contenttotal.Should().Be(0);
@@ -298,15 +298,15 @@ namespace MGNZ.Squidex.Client.Tests
       var createschema = await SchemaClient.CreateSchema("aut", AssetLoader.Schema1(schemaName));
       var publishedschema = await SchemaClient.PublishSchema("aut", schemaName);
 
-      var create1response = await ContentClient.Post("aut", schemaName, AssetLoader.Schema1Data1Post);
-      var create2response = await ContentClient.Post("aut", schemaName, AssetLoader.Schema1Data2Post);
+      var create1response = await ContentClient.CreateContent("aut", schemaName, AssetLoader.Schema1Data1Post);
+      var create2response = await ContentClient.CreateContent("aut", schemaName, AssetLoader.Schema1Data2Post);
 
       await Task.Delay(TimeSpan.FromSeconds(1));
-      await ContentClient.Publish("aut", schemaName, create1response.Id);
-      await ContentClient.Publish("aut", schemaName, create2response.Id);
+      await ContentClient.PublishContent("aut", schemaName, create1response.Id);
+      await ContentClient.PublishContent("aut", schemaName, create2response.Id);
       await Task.Delay(TimeSpan.FromSeconds(1));
-      await ContentClient.Archive("aut", schemaName, create1response.Id);
-      await ContentClient.Archive("aut", schemaName, create2response.Id);
+      await ContentClient.ArchiveContent("aut", schemaName, create1response.Id);
+      await ContentClient.ArchiveContent("aut", schemaName, create2response.Id);
 
       // act
 
@@ -314,8 +314,8 @@ namespace MGNZ.Squidex.Client.Tests
 
       await Task.Delay(TimeSpan.FromSeconds(1));
 
-      await ContentClient.Restore("aut", schemaName, create1response.Id);
-      await ContentClient.Restore("aut", schemaName, create2response.Id);
+      await ContentClient.RestoreContent("aut", schemaName, create1response.Id);
+      await ContentClient.RestoreContent("aut", schemaName, create2response.Id);
 
       await Task.Delay(TimeSpan.FromSeconds(1));
 
@@ -324,7 +324,7 @@ namespace MGNZ.Squidex.Client.Tests
       //  Skip = 0,
       //  Top = 100
       //});
-      var content = await ContentClient.Query("aut", schemaName, top: 100, skip: 0);
+      var content = await ContentClient.QueryContent("aut", schemaName, top: 100, skip: 0);
 
       // ma
       content.Total.Should().Be(2);
@@ -342,17 +342,17 @@ namespace MGNZ.Squidex.Client.Tests
       var createschema = await SchemaClient.CreateSchema("aut", AssetLoader.Schema1(schemaName));
       var publishedschema = await SchemaClient.PublishSchema("aut", schemaName);
 
-      dynamic create1response = await ContentClient.Post("aut", schemaName, AssetLoader.Schema1Data1Post);
-      dynamic create2response = await ContentClient.Post("aut", schemaName, AssetLoader.Schema1Data2Post);
+      dynamic create1response = await ContentClient.CreateContent("aut", schemaName, AssetLoader.Schema1Data1Post);
+      dynamic create2response = await ContentClient.CreateContent("aut", schemaName, AssetLoader.Schema1Data2Post);
       string create1id = Convert.ToString(create1response.id);
       string create2id = Convert.ToString(create2response.id);
-      await ContentClient.Publish("aut", schemaName, create1id);
-      await ContentClient.Publish("aut", schemaName, create2id);
+      await ContentClient.PublishContent("aut", schemaName, create1id);
+      await ContentClient.PublishContent("aut", schemaName, create2id);
 
       // act
 
-      await ContentClient.Delete("aut", schemaName, create1id);
-      await ContentClient.Delete("aut", schemaName, create2id);
+      await ContentClient.DeleteContent("aut", schemaName, create1id);
+      await ContentClient.DeleteContent("aut", schemaName, create2id);
 
       // note : eventual consistency and all that sometimes we don't get away with validating right away.
 
