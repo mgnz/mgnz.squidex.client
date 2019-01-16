@@ -8,8 +8,8 @@ namespace MGNZ.Squidex.Client.Tests.Shared.Assets
   public class AssetLoader
   {
     public static string ExecutingPath => Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-    public static string AssetPath => Path.Combine(ExecutingPath, "Assets");
-    private static string ns => typeof(AssetLoader).Namespace;
+    public static string AssetPath => Path.Combine(ExecutingPath, "Shared", "Assets");
+    private static string ns => "MGNZ.Squidex.Client.Tests.Shared.Assets";
 
     public static Stream Asset1 => LoadBinaryAsset($"{ns}.app1.asset1.7z");
     public static dynamic Asset1PostResponse => LoadAsset($"{ns}.app1.asset1.7z.post.response.json");
@@ -72,6 +72,6 @@ namespace MGNZ.Squidex.Client.Tests.Shared.Assets
     {
       using (var reader = new StreamReader(inputStream))
         return reader.ReadToEnd();
-    }
+}
   }
 }
