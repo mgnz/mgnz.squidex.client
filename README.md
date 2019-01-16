@@ -3,6 +3,43 @@ A netstandard2 client library for accessing the Squidex REST API; built on top o
 
 nuget : https://www.nuget.org/packages/MGNZ.Squidex.Client/
 
+## show me some code
+
+Untill the documentation is sorted; have a good look at the Integration Tests; we have an integration test for most of the functionality on the library.
+
+Importing schema form somewhere (assumed to be on disk); keep in mind that the schema-blob you have on disk has the schema name encoded into it.
+
+```csharp
+// import schema
+// - see also SquidexSchemaClientIntegrationTests.CreateSchema_EndToEnd
+
+// construct schema client; we use SimpleAccessTokenHttpClientHandler because it will apply your token to all requests
+var schemaClient = RestService.For<ISquidexAppSchemaClient>(
+  new HttpClient(new SimpleAccessTokenHttpClientHandler(() => "your-token"))
+  {
+    BaseAddress = "your-squidex-server-base-address"
+  });
+
+// get your schema form somewhere (say from the output of ISquidexAppSchemaClient.GetSchema)
+
+// pull it into the aplication
+dynamic schema = GetSchemaFromDisk();
+string schemaName = Convert.ToString(schema.name);
+
+var importResult = await schemaClient.CreateSchema("application", schema);
+
+// publish it (otherwise you cant use it) - its asumed you got 'schema-name' form somewhere
+var publishresult = await schemaClient.PublishSchema("aut", schemaName);
+
+
+```
+
+Doing stuff with data
+```csharp
+```
+
+
+
 ## current focus
 
 2018 Dec 20

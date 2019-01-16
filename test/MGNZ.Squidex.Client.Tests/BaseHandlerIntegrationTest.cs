@@ -1,7 +1,9 @@
 namespace MGNZ.Squidex.Client.Tests
 {
   using System;
+  using System.Collections.Generic;
   using System.IO;
+  using System.Linq;
   using System.Net.Http;
   using System.Reflection;
   using System.Threading.Tasks;
@@ -9,13 +11,14 @@ namespace MGNZ.Squidex.Client.Tests
   using Bogus;
 
   using MGNZ.Squidex.Client.Handlers;
+  using MGNZ.Squidex.Client.Model;
   using MGNZ.Squidex.Client.Tests.Plumbing;
 
   using Microsoft.Extensions.Configuration;
 
   using Refit;
 
-  public class BaseHandlerIntegrationTest
+  public class BaseHandlerIntegrationTest : IDisposable
   {
     protected ISquidexAppSchemaClient SchemaClient { get; set; } = null;
     protected ISquidexContentClient ContentClient { get; } = null;
@@ -61,6 +64,38 @@ namespace MGNZ.Squidex.Client.Tests
       var result = await OAuthClient.GetToken(oauthAppName, oauthClientId, oauthClientSecret);
 
       return result.AccessToken;
+    }
+
+    public void Dispose()
+    {
+      Task.Run(async () => await PurgeSchema()).Wait();
+      Task.Run(async () => await PurgeAttachments()).Wait();
+    }
+
+    private async Task PurgeSchema()
+    {
+      var data = await SchemaClient.GetAllSchemas("aut");
+      var count = Convert.ToInt32(data.Count);
+
+      if (count == 0) return;
+
+      var allnames = ((IEnumerable<dynamic>) data).Select(d => Convert.ToString(d.name));
+      foreach (var name in allnames)
+        await SchemaClient.DeleteSchema("aut", name);
+    }
+
+    private async Task PurgeAttachments()
+    {
+      var data = await AttachmentClient.GetAllAssets("aut", new ListRequest()
+      {
+        Skip = 0, Top = 200
+      });
+      var count = data.Total;
+
+      if (count == 0) return;
+
+      foreach (var attachment in data.Items)
+        await AttachmentClient.DeleteAsset("aut", attachment.Id);
     }
   }
 }

@@ -15,11 +15,11 @@ namespace MGNZ.Squidex.Client
   {
     [Multipart]
     [Post("/api/apps/{app}/assets")]
-    Task<AttachmentContent> PostAsset(string app, [AliasAs("file")] IEnumerable<StreamPart> streams);
+    Task<AttachmentContent> CreateAsset(string app, [AliasAs("file")] IEnumerable<StreamPart> streams);
 
     [Multipart]
     [Put("/api/apps/{app}/assets/{id}/content")]
-    Task<AttachmentContent> UpdateAssetContent(string app, string id, [AliasAs("file")] IEnumerable<StreamPart> streams);
+    Task<AttachmentContent> UpdateAsset(string app, string id, [AliasAs("file")] IEnumerable<StreamPart> streams);
 
     [Get("/api/apps/{app}/assets/{id}/")]
     Task<AttachmentContent> GetAsset(string app, string id);
@@ -34,9 +34,9 @@ namespace MGNZ.Squidex.Client
     Task UpdateAssetTags(string app, string id, [Body(BodySerializationMethod.Json)] UpdateAssetDto request);
 
     [Get("/api/apps/{app}/assets/tags")]
-    Task<Dictionary<string, int>> GetAllTags(string app);
+    Task<Dictionary<string, int>> GetAllAssetTags(string app);
 
     [Get("/api/apps/{app}/assets")]
-    Task<ListResponse<AttachmentContent>> GetAssets(string app, [Query] ListRequest request);
+    Task<ListResponse<AttachmentContent>> GetAllAssets(string app, [Query] ListRequest request);
   }
 }
