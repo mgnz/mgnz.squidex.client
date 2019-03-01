@@ -63,7 +63,7 @@
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp2.1' ">
-    <PackageReference Include="Microsoft.CodeCoverage" Version="15.9.0" />
+    <PackageReference Include="Microsoft.CodeCoverage" Version="16.0.0" />
   </ItemGroup>
 
   <ItemGroup>
