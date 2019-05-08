@@ -147,7 +147,7 @@ steps:
    "
 
    write-host $config
-   set-content -value $config -path "$(Build.SourcesDirectory)/test/MGNZ.Squidex.Client.Tests/bin/$(Build.Configuration)/netcoreapp2.1/testsettings.aut.json"
+   set-content -value $config -path "$(Build.SourcesDirectory)/test/MGNZ.Squidex.Client.Tests/bin/$(Build.Configuration)/netcoreapp2.2/testsettings.aut.json"
   displayName: 'generate testsettings for integration testing'
 
 - task: DotNetCoreCLI@2
