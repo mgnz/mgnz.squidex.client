@@ -1,0 +1,7 @@
+<Project>
+  <PropertyGroup>
+    <PackageProjectUrl>https://www.nuget.org/packages/MGNZ.Squidex.Client/</PackageProjectUrl>
+    <Product>MGNZ.Squidex.Client</Product>
+    <Description>Client Library for Squidex (the headless cms built on .net core) : https://github.com/Squidex/squidex</Description>
+  </PropertyGroup>
+</Project>

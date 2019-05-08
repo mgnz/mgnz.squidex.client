@@ -1,24 +1,27 @@
 <Project>
   <PropertyGroup>
-    <!-- Optional: Include PDB in the built .nupkg -->
-    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+    <Copyright>Copyright (c) MGNZ</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/mgnz/mgnz.squidex.client/</RepositoryUrl>
+    <PackageReleaseNotes>https://github.com/mgnz/mgnz.squidex.client/releases</PackageReleaseNotes>
 
-    <!-- Optional: Declare that the Repository URL can be published to NuSpec -->
-    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>squidex;dotnetstandard;works-on-my-machine;magic</PackageTags>
+    <Authors>https://github.com/shiggan;https://github.com/mgnz</Authors>
+    <Company>https://github.com/shiggan</Company>
+  </PropertyGroup>
 
-    <!-- Optional: Embed source files that are not tracked by the source control manager to the PDB -->
-    <!-- This is useful if you generate files during the build -->
-    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+  <PropertyGroup>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>portable</DebugType>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
-    <!-- Required -->
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-*" PrivateAssets="All"/>
-
-    <!-- Required if your repository is on VSTS -->
-    <!--<PackageReference Include="Microsoft.SourceLink.Vsts.Git" Version="1.0.0-*" PrivateAssets="All"/>-->
-
-    <!-- Required if your repository is on GitLab -->
-    <!--<PackageReference Include="Microsoft.SourceLink.GitLab" Version="1.0.0-*" PrivateAssets="All"/>-->
+    <PackageReference Include="Roslynator.Analyzers" Version="2.1.0-rc" PrivateAssets="All" />
+    <PackageReference Include="Roslynator.CodeFixes" Version="2.0.0" PrivateAssets="All" />
   </ItemGroup>
 </Project>
