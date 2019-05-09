@@ -1,4 +1,4 @@
-namespace MGNZ.Squidex.Client.Tests.Stories
+namespace MGNZ.Squidex.Client.Tests.Plumbing
 {
   public class KnownUserOAuthCreds
   {

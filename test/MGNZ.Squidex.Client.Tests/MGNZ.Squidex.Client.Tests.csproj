@@ -76,4 +76,8 @@
     <ProjectReference Include="..\..\src\MGNZ.Squidex.Client\MGNZ.Squidex.Client.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Stories\" />
+  </ItemGroup>
+
 </Project>
