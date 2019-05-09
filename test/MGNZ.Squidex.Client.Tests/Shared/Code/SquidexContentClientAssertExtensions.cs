@@ -39,7 +39,7 @@ namespace MGNZ.Squidex.Client.Tests.Shared.Code
         await that.GetContent(application, schema, id);
         exists = true;
       }
-      catch (Exception e)
+      catch
       {
         exists = false;
       }
@@ -59,7 +59,7 @@ namespace MGNZ.Squidex.Client.Tests.Shared.Code
         await that.GetContent(application, schema, id);
         exists = true;
       }
-      catch (Exception e)
+      catch
       {
         exists = false;
       }

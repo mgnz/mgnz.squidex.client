@@ -19,8 +19,10 @@ namespace MGNZ.Squidex.Client.Tests
   public class SquidexContentClientExtensionsIntegrationTests : BaseHandlerIntegrationTest
   {
     [Fact(Skip = "typesafe is broken for array child elements")]
-    public async Task Query_EndToEnd()
+    public Task Query_EndToEnd()
     {
+      throw new NotImplementedException();
+
       //var schemaName = GetRandomSchemaName;
       //await SchemaClient.AssertNoSchemasExist("aut", delay: TimeSpan.FromSeconds(0.5));
       //var createschema = await SchemaClient.CreateSchema("aut", AssetLoader.Schema1(schemaName));
@@ -54,8 +56,10 @@ namespace MGNZ.Squidex.Client.Tests
     }
 
     [Fact(Skip = "typesafe is broken for array child elements")]
-    public async Task Query2_EndToEnd()
+    public Task Query2_EndToEnd()
     {
+      throw new NotImplementedException();
+
       //var schemaName = GetRandomSchemaName;
       //await SchemaClient.AssertNoSchemasExist("aut", delay: TimeSpan.FromSeconds(0.5));
       //var createschema = await SchemaClient.CreateSchema("aut", AssetLoader.Schema1(schemaName));
@@ -89,8 +93,10 @@ namespace MGNZ.Squidex.Client.Tests
     }
 
     [Fact(Skip = "typesafe is broken for array child elements")]
-    public async Task Create_EndToEnd()
+    public Task Create_EndToEnd()
     {
+      throw new NotImplementedException();
+
       //var schemaName = GetRandomSchemaName;
       //await SchemaClient.AssertNoSchemasExist("aut", delay: TimeSpan.FromSeconds(0.5));
       //var createschema = await SchemaClient.CreateSchema("aut", AssetLoader.Schema1(schemaName));
@@ -116,15 +122,15 @@ namespace MGNZ.Squidex.Client.Tests
     }
 
     [Fact(Skip = "typesafe is broken for array child elements")]
-    public async Task Get_EndToEnd()
+    public Task Get_EndToEnd()
     {
-      Assert.False(false);
+      throw new NotImplementedException();
     }
 
     [Fact(Skip = "typesafe is broken for array child elements")]
-    public async Task Update_EndToEnd()
+    public Task Update_EndToEnd()
     {
-      Assert.False(false);
+      throw new NotImplementedException();
     }
   }
 }

@@ -54,6 +54,7 @@ namespace MGNZ.Squidex.Client.Tests.Transport
     [MemberData(nameof(Build_SadPath_Data))]
     public void Build_SadPath(string testCase, Exception expectedException, string requestedPageIn, string requestedOrderByIn, string requestedFilterIn, string requestedSearchIn)
     {
+      var x = testCase;
       Assert.Throws(expectedException.GetType(), () => QueryRequestBuilder
         .Build(requestedPageIn, requestedOrderByIn, requestedFilterIn, requestedSearchIn));
     }

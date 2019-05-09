@@ -13,7 +13,6 @@ namespace MGNZ.Squidex.Client.Tests.Stories
   public class ContentStories : StoryBase
   {
     private ISquidexContentClient _authenticatedContentClient;
-
     private readonly OAuthStories _oAuthStories;
 
     public ContentStories(TestConfigurationOptions options) : base(options)

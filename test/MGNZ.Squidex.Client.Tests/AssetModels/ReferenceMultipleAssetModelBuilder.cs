@@ -4,7 +4,7 @@ namespace MGNZ.Squidex.Client.Tests.AssetModels
 
   using MGNZ.Squidex.Client.Model;
 
-  internal class ReferenceMultipleAssetModelBuilder
+  internal static class ReferenceMultipleAssetModelBuilder
   {
     public static Lazy<ReferenceMultipleAssetModel> Reference1 => new Lazy<ReferenceMultipleAssetModel>(ValueFactory($"Reference 1 {DateTime.Now.ToShortTimeString()}"));
     public static Lazy<ReferenceMultipleAssetModel> Reference2 => new Lazy<ReferenceMultipleAssetModel>(ValueFactory($"Reference 2 {DateTime.Now.ToShortTimeString()}"));
@@ -29,7 +29,7 @@ namespace MGNZ.Squidex.Client.Tests.AssetModels
         StringField = new InvariantField<string>() {Iv = $"{seed} stringfield"},
         LocalizableStringField = new LocalizableField() {{"en", $"{seed} language item en"}, {"sm", $"{seed} language item sm"}},
         DateTimeField = new InvariantField<DateTime>() {Iv = DateTime.Now.AddHours(-20)},
-        NumberField = new InvariantField<Int32>() {Iv = seed.GetHashCode()},
+        NumberField = new InvariantField<int>() {Iv = seed.GetHashCode()},
         ArrayField = new ArrayField<ReferenceMultipleChildAssetModel>()
         {
           Iv = new[ ]

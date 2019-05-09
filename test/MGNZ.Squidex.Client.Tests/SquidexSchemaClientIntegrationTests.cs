@@ -105,7 +105,7 @@ namespace MGNZ.Squidex.Client.Tests
     }
 
     [Fact(Skip = "in progress")]
-    public async Task UpdateScripts_EndToEnd()
+    public Task UpdateScripts_EndToEnd()
     {
       throw new NotImplementedException();
     }

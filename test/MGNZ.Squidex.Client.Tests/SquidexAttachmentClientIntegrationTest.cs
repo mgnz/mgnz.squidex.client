@@ -116,8 +116,9 @@ namespace MGNZ.Squidex.Client.Tests
     }
 
     [Fact(Skip = "in progress")]
-    public async Task GetAllTags_EndToEnd()
+    public Task GetAllTags_EndToEnd()
     {
+      throw new NotImplementedException();
     }
 
     [Fact]
