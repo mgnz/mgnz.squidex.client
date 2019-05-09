@@ -17,7 +17,7 @@ namespace MGNZ.Squidex.Client.Tests
     [Fact]
     public async Task SchemaExists_EndToEnd()
     {
-      var schemaName = GetRandomSchemaName;
+      var schemaName = GetRandomName;
 
       var nothingExists = await SchemaClient.SchemaExists("aut");
       nothingExists.Should().BeFalse();

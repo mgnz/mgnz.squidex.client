@@ -17,7 +17,7 @@ namespace MGNZ.Squidex.Client.Tests
     [Fact]
     public async Task CreateSchema_EndToEnd()
     {
-      var schemaName = GetRandomSchemaName;
+      var schemaName = GetRandomName;
       await SchemaClient.AssertNoSchemasExist("aut", delay: TimeSpan.FromSeconds(0.5));
 
       var createresult = await SchemaClient.CreateSchema("aut", AssetLoader.Schema1(schemaName));
@@ -30,7 +30,7 @@ namespace MGNZ.Squidex.Client.Tests
     [Fact]
     public async Task DeleteSchema_EndToEnd()
     {
-      var schemaName = GetRandomSchemaName;
+      var schemaName = GetRandomName;
       await SchemaClient.AssertNoSchemasExist("aut", delay: TimeSpan.FromSeconds(0.5));
       var createresult = await SchemaClient.CreateSchema("aut", AssetLoader.Schema1(schemaName));
 
@@ -41,8 +41,8 @@ namespace MGNZ.Squidex.Client.Tests
     [Fact]
     public async Task GetAllSchemas_EndToEnd()
     {
-      var schema1name = GetRandomSchemaName;
-      var schema2name = GetRandomSchemaName;
+      var schema1name = GetRandomName;
+      var schema2name = GetRandomName;
       await SchemaClient.AssertNoSchemasExist("aut", delay: TimeSpan.FromSeconds(0.5));
       var create1result = await SchemaClient.CreateSchema("aut", AssetLoader.Schema1(schema1name));
       var create2result = await SchemaClient.CreateSchema("aut", AssetLoader.Schema1(schema2name));
@@ -59,7 +59,7 @@ namespace MGNZ.Squidex.Client.Tests
     [Fact]
     public async Task GetSchema_EndToEnd()
     {
-      var schema1name = GetRandomSchemaName;
+      var schema1name = GetRandomName;
       await SchemaClient.AssertNoSchemasExist("aut", delay: TimeSpan.FromSeconds(0.5));
       var create1result = await SchemaClient.CreateSchema("aut", AssetLoader.Schema1(schema1name));
 
@@ -74,7 +74,7 @@ namespace MGNZ.Squidex.Client.Tests
     [Fact]
     public async Task PublishSchema_EndToEnd()
     {
-      var schema1name = GetRandomSchemaName;
+      var schema1name = GetRandomName;
       await SchemaClient.AssertNoSchemasExist("aut", delay: TimeSpan.FromSeconds(0.5));
       var create1result = await SchemaClient.CreateSchema("aut", AssetLoader.Schema1(schema1name));
 
@@ -90,7 +90,7 @@ namespace MGNZ.Squidex.Client.Tests
     [Fact]
     public async Task UnpublishSchema_EndToEnd()
     {
-      var schema1name = GetRandomSchemaName;
+      var schema1name = GetRandomName;
       await SchemaClient.AssertNoSchemasExist("aut", delay: TimeSpan.FromSeconds(0.5));
       var create1result = await SchemaClient.CreateSchema("aut", AssetLoader.Schema1(schema1name));
       var publishresult = await SchemaClient.PublishSchema("aut", schema1name);

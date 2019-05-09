@@ -18,7 +18,7 @@ namespace MGNZ.Squidex.Client.Tests
     [Fact()]
     public async Task CreateAsset_EndToEnd()
     {
-      var attachmentName = $"{base.GetRandomSchemaName}.jpg";
+      var attachmentName = $"{base.GetRandomName}.jpg";
 
       await AttachmentClient.AssertNoAttachmentsExist("aut");
 
@@ -39,7 +39,7 @@ namespace MGNZ.Squidex.Client.Tests
     [Fact]
     public async Task UpdateAsset_EndToEnd()
     {
-      var attachmentName = $"{base.GetRandomSchemaName}.jpg";
+      var attachmentName = $"{base.GetRandomName}.jpg";
 
       await AttachmentClient.AssertNoAttachmentsExist("aut");
       var createResponse = await AttachmentClient.CreateAsset("aut", attachmentName, "image/jpeg", AssetLoader.Asset2);
@@ -60,7 +60,7 @@ namespace MGNZ.Squidex.Client.Tests
     [Fact]
     public async Task UpdateAssetTags_EndToEnd()
     {
-      var attachmentName = $"{base.GetRandomSchemaName}.jpg";
+      var attachmentName = $"{base.GetRandomName}.jpg";
 
       await AttachmentClient.AssertNoAttachmentsExist("aut");
       var createResponse = await AttachmentClient.CreateAsset("aut", attachmentName, "image/jpeg", AssetLoader.Asset2);
@@ -87,7 +87,7 @@ namespace MGNZ.Squidex.Client.Tests
     [Fact]
     public async Task GetAsset_EndToEnd()
     {
-      var attachmentName = $"{base.GetRandomSchemaName}.jpg";
+      var attachmentName = $"{base.GetRandomName}.jpg";
 
       await AttachmentClient.AssertNoAttachmentsExist("aut");
       var createResponse = await AttachmentClient.CreateAsset("aut", attachmentName, "image/jpeg", AssetLoader.Asset2);
@@ -104,7 +104,7 @@ namespace MGNZ.Squidex.Client.Tests
     [Fact]
     public async Task DeleteAsset_EndToEnd()
     {
-      var attachmentName = $"{base.GetRandomSchemaName}.jpg";
+      var attachmentName = $"{base.GetRandomName}.jpg";
 
       await AttachmentClient.AssertNoAttachmentsExist("aut");
       var createResponse = await AttachmentClient.CreateAsset("aut", attachmentName, "image/jpeg", AssetLoader.Asset2);
@@ -124,8 +124,8 @@ namespace MGNZ.Squidex.Client.Tests
     [Fact]
     public async Task GetAllAssets_EndToEnd()
     {
-      var attachmen1tName = $"{base.GetRandomSchemaName}.jpg";
-      var attachment2Name = $"{base.GetRandomSchemaName}.jpg";
+      var attachmen1tName = $"{base.GetRandomName}.jpg";
+      var attachment2Name = $"{base.GetRandomName}.jpg";
 
       await AttachmentClient.AssertNoAttachmentsExist("aut");
 

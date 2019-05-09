@@ -25,7 +25,7 @@ namespace MGNZ.Squidex.Client.Tests
     protected ISquidexAttachmentClient AttachmentClient { get; } = null;
     protected ISquidexOAuthClient OAuthClient { get; } = null;
 
-    protected string GetRandomSchemaName => new Faker().Random.AlphaNumeric(10).ToLower();
+    protected string GetRandomName => new Faker().Random.AlphaNumeric(10).ToLower();
 
     public BaseHandlerIntegrationTest()
     {

@@ -18,7 +18,7 @@ namespace MGNZ.Squidex.Client.Tests
     [Fact()]
     public async Task CreateAsset_EndToEnd()
     {
-      var attachmentName = $"{base.GetRandomSchemaName}.jpg";
+      var attachmentName = $"{base.GetRandomName}.jpg";
 
       await AttachmentClient.AssertNoAttachmentsExist("aut");
 
@@ -35,7 +35,7 @@ namespace MGNZ.Squidex.Client.Tests
     [Fact()]
     public async Task UpdateAssetById_EndToEnd()
     {
-      var attachmentName = $"{base.GetRandomSchemaName}.jpg";
+      var attachmentName = $"{base.GetRandomName}.jpg";
 
       await AttachmentClient.AssertNoAttachmentsExist("aut");
       var createResponse = await AttachmentClient.CreateAsset("aut", attachmentName, "image/jpeg", AssetLoader.Asset2);
@@ -53,7 +53,7 @@ namespace MGNZ.Squidex.Client.Tests
     [Fact()]
     public async Task UpdateAssetContentByName_EndToEnd()
     {
-      var attachmentName = $"{base.GetRandomSchemaName}.jpg";
+      var attachmentName = $"{base.GetRandomName}.jpg";
 
       await AttachmentClient.AssertNoAttachmentsExist("aut");
       var createResponse = await AttachmentClient.CreateAsset("aut", attachmentName, "image/jpeg", AssetLoader.Asset2);
@@ -71,7 +71,7 @@ namespace MGNZ.Squidex.Client.Tests
     [Fact()]
     public async Task DeleteAssetByName_EndToEnd()
     {
-      var attachmentName = $"{base.GetRandomSchemaName}.jpg";
+      var attachmentName = $"{base.GetRandomName}.jpg";
 
       await AttachmentClient.AssertNoAttachmentsExist("aut");
       var createResponse = await AttachmentClient.CreateAsset("aut", attachmentName, "image/jpeg", AssetLoader.Asset2);
@@ -88,7 +88,7 @@ namespace MGNZ.Squidex.Client.Tests
     [Fact()]
     public async Task AttachmentExists_EndToEnd()
     {
-      var attachmentName = $"{base.GetRandomSchemaName}.jpg";
+      var attachmentName = $"{base.GetRandomName}.jpg";
 
       await AttachmentClient.AssertNoAttachmentsExist("aut");
 
