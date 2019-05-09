@@ -212,4 +212,4 @@ coverage.json
 
 
 # ignores changes to testsettings (poor-secrets)
-/test/MGNZ.Squidex.Client.Tests/testsettings.aut.json
+/testsettings.aut.json
