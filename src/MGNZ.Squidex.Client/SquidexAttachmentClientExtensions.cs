@@ -9,7 +9,7 @@ namespace MGNZ.Squidex.Client
 
   using Refit;
 
-  public static class SquidexAttachmentClientExtensions
+  public static class SquidexAttachmentClientExtensions 
   {
     public static async Task<AttachmentContent> CreateAsset(this ISquidexAttachmentClient that, string application, string fileName, string mimeType, Stream stream)
     {
@@ -29,16 +29,31 @@ namespace MGNZ.Squidex.Client
 
     public static async Task<AttachmentContent> UpdateAssetContentByName(this ISquidexAttachmentClient that, string application, string fileName, string mimeType, Stream stream)
     {
-      var item = await that.GetAssetByNameOrDefault(application, fileName);
+      var item = await that.GetAssetByNameOrThrow(application, fileName);
 
       return await that.UpdateAssetById(application, item.Id, fileName, mimeType, stream);
     }
 
     public static async Task DeleteAssetByName(this ISquidexAttachmentClient that, string application, string fileName)
     {
-      var item = await that.GetAssetByNameOrDefault(application, fileName);
+      var item = await that.GetAssetByNameOrThrow(application, fileName);
 
       await that.DeleteAsset(application, item.Id);
+    }
+
+    public static async Task<bool> AttachmentExists(this ISquidexAttachmentClient that, string application, string fileName = null)
+    {
+      var item = await that.GetAssetByNameOrDefault(application, fileName);
+
+      return item != null;
+    }
+
+    public static async Task<AttachmentContent> GetAssetByNameOrThrow(this ISquidexAttachmentClient that, string application, string fileName)
+    {
+      var item = await that.GetAssetByNameOrDefault(application, fileName);
+      if (item == null) throw new ArgumentNullException("fileName", $"An 'Attachment' with the fileName '{fileName}' was not found on the application '{application}'");
+
+      return item;
     }
 
     public static async Task<AttachmentContent> GetAssetByNameOrDefault(this ISquidexAttachmentClient that, string application, string fileName)
@@ -56,14 +71,6 @@ namespace MGNZ.Squidex.Client
       var item = data.Items.SingleOrDefault(d => CheckEquality(d, fileName));
 
       return item;
-    }
-
-    public static async Task<bool> AttachmentExists(this ISquidexAttachmentClient that, string application,
-      string fileName = null)
-    {
-      var item = await that.GetAssetByNameOrDefault(application, fileName);
-
-      return item != null;
     }
 
     private static bool CheckEquality(AttachmentContent d, string name)
