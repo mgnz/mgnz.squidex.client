@@ -6,7 +6,6 @@ namespace MGNZ.Squidex.Client.Tests
   using FluentAssertions;
 
   using MGNZ.Squidex.Client.Model;
-  using MGNZ.Squidex.Client.Tests.AssetModels;
   using MGNZ.Squidex.Client.Tests.Shared.Assets;
   using MGNZ.Squidex.Client.Tests.Shared.Code;
   using MGNZ.Squidex.Client.Transport;

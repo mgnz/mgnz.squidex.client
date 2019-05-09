@@ -1,7 +1,0 @@
-{
-  "scriptQuery": null,
-  "scriptCreate": "var data = ctx.data;\ndata.slug = \n{ \n    iv: slugify(data.title.iv) \n};\n\nreplace(data);",
-  "scriptUpdate": "var data = ctx.data;\ndata.slug = \n{ \n    iv: slugify(data.title.iv) \n};\n\nreplace(data);",
-  "scriptDelete": null,
-  "scriptChange": ""
-}

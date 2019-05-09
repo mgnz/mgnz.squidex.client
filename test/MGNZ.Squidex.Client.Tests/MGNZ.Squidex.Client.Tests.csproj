@@ -6,11 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Assets\ReferenceMultipleData1.json" />
-    <None Remove="Assets\ReferenceMultipleSchema.json" />
-    <None Remove="Assets\SchemaIntegrationSchema1Asset.json" />
-    <None Remove="Assets\SchemaIntegrationSchema1NestedAsset.json" />
-    <None Remove="Assets\SchemaIntegrationSchema1ScriptsAsset.json" />
     <None Remove="Shared\Assets\app1.asset1.7z" />
     <None Remove="Shared\Assets\app1.asset1.7z.post.response.json" />
     <None Remove="Shared\Assets\app1.asset1.7z.tag.response.json" />
@@ -47,11 +42,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Assets\ReferenceMultipleData1.json" />
-    <EmbeddedResource Include="Assets\ReferenceMultipleSchema.json" />
-    <EmbeddedResource Include="Assets\SchemaIntegrationSchema1Asset.json" />
-    <EmbeddedResource Include="Assets\SchemaIntegrationSchema1NestedAsset.json" />
-    <EmbeddedResource Include="Assets\SchemaIntegrationSchema1ScriptsAsset.json" />
     <EmbeddedResource Include="Shared\Assets\app1.asset3.jpg" />
     <EmbeddedResource Include="Shared\Assets\app1.asset3.jpg.post.response.json" />
     <EmbeddedResource Include="Shared\Assets\app1.asset3.jpg.tag.response.json" />
@@ -74,10 +64,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\MGNZ.Squidex.Client\MGNZ.Squidex.Client.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Stories\" />
   </ItemGroup>
 
 </Project>
