@@ -25,8 +25,8 @@ namespace MGNZ.Squidex.Client.Tests
       //var createschema = await SchemaClient.CreateSchema("aut", AssetLoader.Schema1(schemaName));
       //var publishedschema = await SchemaClient.PublishSchema("aut", schemaName);
 
-      //dynamic create1response = await ContentClient.Post("aut", schemaName, AssetLoader.Schema1Data1Post);
-      //dynamic create2response = await ContentClient.Post("aut", schemaName, AssetLoader.Schema1Data2Post);
+      //dynamic create1response = await ContentClient.Post("aut", schemaName, AssetLoader.AsDynamic(AssetLoader.Schema1Data1PostName));
+      //dynamic create2response = await ContentClient.Post("aut", schemaName, AssetLoader.AsDynamic(AssetLoader.Schema1Data2PostName));
       //string create1id = Convert.ToString(create1response.id);
       //string create2id = Convert.ToString(create2response.id);
       //await ContentClient.Publish("aut", schemaName, create1id);
@@ -62,8 +62,8 @@ namespace MGNZ.Squidex.Client.Tests
       //var createschema = await SchemaClient.CreateSchema("aut", AssetLoader.Schema1(schemaName));
       //var publishedschema = await SchemaClient.PublishSchema("aut", schemaName);
 
-      //ItemContent<dynamic> create1response = await ContentClient.Post("aut", schemaName, AssetLoader.Schema1Data1Post);
-      //ItemContent<dynamic> create2response = await ContentClient.Post("aut", schemaName, AssetLoader.Schema1Data2Post);
+      //ItemContent<dynamic> create1response = await ContentClient.Post("aut", schemaName, AssetLoader.AsDynamic(AssetLoader.Schema1Data1PostName));
+      //ItemContent<dynamic> create2response = await ContentClient.Post("aut", schemaName, AssetLoader.AsDynamic(AssetLoader.Schema1Data2PostName));
       //await ContentClient.Publish("aut", schemaName, create1response.Id);
       //await ContentClient.Publish("aut", schemaName, create2response.Id);
 
@@ -101,8 +101,8 @@ namespace MGNZ.Squidex.Client.Tests
 
       //// act
 
-      //var create1response = await ContentClient.Create<dynamic>("aut", schemaName, AssetLoader.Schema1Data1Post);
-      //var create2response = await ContentClient.Create<dynamic>("aut", schemaName, AssetLoader.Schema1Data2Post);
+      //var create1response = await ContentClient.Create<dynamic>("aut", schemaName, AssetLoader.AsDynamic(AssetLoader.Schema1Data1PostName));
+      //var create2response = await ContentClient.Create<dynamic>("aut", schemaName, AssetLoader.AsDynamic(AssetLoader.Schema1Data2PostName));
       //await ContentClient.Publish("aut", schemaName, create1response.Id);
       //await ContentClient.Publish("aut", schemaName, create2response.Id);
 

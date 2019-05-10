@@ -24,7 +24,7 @@ namespace MGNZ.Squidex.Client.Tests
 
       var createResponse = await AttachmentClient.CreateAsset("aut", new[]
       {
-        new StreamPart(AssetLoader.Asset2, attachmentName, "image/jpeg")
+        new StreamPart(AssetLoader.AsStream(AssetLoader.App1Asset2Name), attachmentName, "image/jpeg")
       });
 
       await AttachmentClient.AssertAttachmentMustExist("aut", attachmentName, delay: TimeSpan.FromSeconds(2));
@@ -42,14 +42,14 @@ namespace MGNZ.Squidex.Client.Tests
       var attachmentName = $"{base.GetRandomName}.jpg";
 
       await AttachmentClient.AssertNoAttachmentsExist("aut");
-      var createResponse = await AttachmentClient.CreateAsset("aut", attachmentName, "image/jpeg", AssetLoader.Asset2);
+      var createResponse = await AttachmentClient.CreateAsset("aut", attachmentName, "image/jpeg", AssetLoader.AsStream(AssetLoader.App1Asset2Name));
       await AttachmentClient.AssertAttachmentMustExist("aut", attachmentName, delay: TimeSpan.FromSeconds(2));
 
       var id = createResponse.Id;
 
       var updateResponse = await AttachmentClient.UpdateAsset("aut", id, new[]
       {
-        new StreamPart(AssetLoader.Asset3, attachmentName, "image/jpeg")
+        new StreamPart(AssetLoader.AsStream(AssetLoader.App1Asset3Name), attachmentName, "image/jpeg")
       });
       // todo : assert the putresponse matches 
 
@@ -63,7 +63,7 @@ namespace MGNZ.Squidex.Client.Tests
       var attachmentName = $"{base.GetRandomName}.jpg";
 
       await AttachmentClient.AssertNoAttachmentsExist("aut");
-      var createResponse = await AttachmentClient.CreateAsset("aut", attachmentName, "image/jpeg", AssetLoader.Asset2);
+      var createResponse = await AttachmentClient.CreateAsset("aut", attachmentName, "image/jpeg", AssetLoader.AsStream(AssetLoader.App1Asset2Name));
       await AttachmentClient.AssertAttachmentMustExist("aut", attachmentName, delay: TimeSpan.FromSeconds(2));
 
       var id = createResponse.Id;
@@ -90,7 +90,7 @@ namespace MGNZ.Squidex.Client.Tests
       var attachmentName = $"{base.GetRandomName}.jpg";
 
       await AttachmentClient.AssertNoAttachmentsExist("aut");
-      var createResponse = await AttachmentClient.CreateAsset("aut", attachmentName, "image/jpeg", AssetLoader.Asset2);
+      var createResponse = await AttachmentClient.CreateAsset("aut", attachmentName, "image/jpeg", AssetLoader.AsStream(AssetLoader.App1Asset2Name));
       await AttachmentClient.AssertAttachmentMustExist("aut", attachmentName, delay: TimeSpan.FromSeconds(2));
 
       var id = createResponse.Id;
@@ -107,7 +107,7 @@ namespace MGNZ.Squidex.Client.Tests
       var attachmentName = $"{base.GetRandomName}.jpg";
 
       await AttachmentClient.AssertNoAttachmentsExist("aut");
-      var createResponse = await AttachmentClient.CreateAsset("aut", attachmentName, "image/jpeg", AssetLoader.Asset2);
+      var createResponse = await AttachmentClient.CreateAsset("aut", attachmentName, "image/jpeg", AssetLoader.AsStream(AssetLoader.App1Asset2Name));
       await AttachmentClient.AssertAttachmentMustExist("aut", attachmentName, delay: TimeSpan.FromSeconds(2));
 
       var id = createResponse.Id;
@@ -129,9 +129,9 @@ namespace MGNZ.Squidex.Client.Tests
 
       await AttachmentClient.AssertNoAttachmentsExist("aut");
 
-      var createResponse1 = await AttachmentClient.CreateAsset("aut", attachmen1tName, "image/jpeg", AssetLoader.Asset2);
+      var createResponse1 = await AttachmentClient.CreateAsset("aut", attachmen1tName, "image/jpeg", AssetLoader.AsStream(AssetLoader.App1Asset2Name));
       await AttachmentClient.AssertAttachmentMustExist("aut", attachmen1tName, delay: TimeSpan.FromSeconds(2));
-      var createResponse2 = await AttachmentClient.CreateAsset("aut", attachment2Name, "image/jpeg", AssetLoader.Asset3);
+      var createResponse2 = await AttachmentClient.CreateAsset("aut", attachment2Name, "image/jpeg", AssetLoader.AsStream(AssetLoader.App1Asset3Name));
       await AttachmentClient.AssertAttachmentMustExist("aut", attachment2Name, delay: TimeSpan.FromSeconds(2));
 
       var getAllResponse = await AttachmentClient.GetAllAssets("aut", new ListRequest()
