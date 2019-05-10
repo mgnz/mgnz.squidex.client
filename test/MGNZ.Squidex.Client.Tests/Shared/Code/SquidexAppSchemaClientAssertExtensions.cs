@@ -1,4 +1,4 @@
-namespace MGNZ.Squidex.Client.Tests.Shared.Code
+namespace MGNZ.Squidex.Tests.Shared.Code
 {
   using System;
   using System.Threading.Tasks;

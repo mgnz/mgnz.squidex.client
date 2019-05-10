@@ -1,7 +1,7 @@
-namespace MGNZ.Squidex.Client.Tests.Shared.Assets
+namespace MGNZ.Squidex.Tests.Shared.Assets
 {
   public partial class AssetLoader
   {
-    private static string ns => "MGNZ.Squidex.Client.Tests.Shared.Assets";
+    private static string resources => "MGNZ.Squidex.Client.Tests.Shared.Assets";
   }
 }

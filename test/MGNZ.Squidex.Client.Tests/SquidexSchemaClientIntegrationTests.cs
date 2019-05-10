@@ -4,10 +4,8 @@ namespace MGNZ.Squidex.Client.Tests
   using System.Threading.Tasks;
 
   using FluentAssertions;
-
-  using MGNZ.Squidex.Client.Tests.Shared.Assets;
-  using MGNZ.Squidex.Client.Tests.Shared.Code;
-
+  using MGNZ.Squidex.Tests.Shared.Assets;
+  using MGNZ.Squidex.Tests.Shared.Code;
   using Xunit;
 
   [Collection("Sequential Squidex Integration Tests")]
