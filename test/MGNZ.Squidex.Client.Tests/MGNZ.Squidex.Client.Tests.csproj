@@ -42,24 +42,60 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Shared\Assets\app1.asset3.jpg" />
-    <EmbeddedResource Include="Shared\Assets\app1.asset3.jpg.post.response.json" />
-    <EmbeddedResource Include="Shared\Assets\app1.asset3.jpg.tag.response.json" />
-    <EmbeddedResource Include="Shared\Assets\app1.asset1.7z" />
-    <EmbeddedResource Include="Shared\Assets\app1.asset1.7z.post.response.json" />
-    <EmbeddedResource Include="Shared\Assets\app1.asset1.7z.tag.response.json" />
-    <EmbeddedResource Include="Shared\Assets\app1.asset2.jpg" />
-    <EmbeddedResource Include="Shared\Assets\app1.asset2.jpg.post.response.json" />
-    <EmbeddedResource Include="Shared\Assets\app1.asset2.jpg.tag.response.json" />
-    <EmbeddedResource Include="Shared\Assets\schema1.data.1.post.json" />
-    <EmbeddedResource Include="Shared\Assets\schema1.data.1.post.response.json" />
-    <EmbeddedResource Include="Shared\Assets\schema1.data.2.post.json" />
-    <EmbeddedResource Include="Shared\Assets\schema1.data.2.post.response.json" />
-    <EmbeddedResource Include="Shared\Assets\schema1.data.export.response.json" />
-    <EmbeddedResource Include="Shared\Assets\schema1.data.import.json" />
-    <EmbeddedResource Include="Shared\Assets\schema1.data.import.response.json" />
-    <EmbeddedResource Include="Shared\Assets\schema1.data.query.response.json" />
-    <EmbeddedResource Include="Shared\Assets\schema1.json" />
+    <Content Include="Shared\Assets\app1.asset3.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Shared\Assets\app1.asset3.jpg.post.response.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Shared\Assets\app1.asset3.jpg.tag.response.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Shared\Assets\app1.asset1.7z">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Shared\Assets\app1.asset1.7z.post.response.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Shared\Assets\app1.asset1.7z.tag.response.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Shared\Assets\app1.asset2.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Shared\Assets\app1.asset2.jpg.post.response.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Shared\Assets\app1.asset2.jpg.tag.response.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Shared\Assets\schema1.data.1.post.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Shared\Assets\schema1.data.1.post.response.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Shared\Assets\schema1.data.2.post.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Shared\Assets\schema1.data.2.post.response.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Shared\Assets\schema1.data.export.response.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Shared\Assets\schema1.data.import.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Shared\Assets\schema1.data.import.response.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Shared\Assets\schema1.data.query.response.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Shared\Assets\schema1.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>

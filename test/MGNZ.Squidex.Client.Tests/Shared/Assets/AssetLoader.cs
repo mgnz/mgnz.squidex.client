@@ -11,10 +11,10 @@ namespace MGNZ.Squidex.Tests.Shared.Assets
     public static string ExecutingPath => Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
     public static string AssetPath => Path.Combine(ExecutingPath, "Shared", "Assets");
 
-    public static dynamic AsDynamic(string file) => LoadResourceDeserialize<dynamic>($"{resources}.{file}");
-    public static dynamic AsDeserialize(string file) => LoadResourceDeserialize<dynamic>($"{resources}.{file}");
+    public static dynamic AsDynamic(string file) => LoadFileDeserialize<dynamic>(AsPath(file));
+    public static dynamic AsDeserialize(string file) => LoadFileDeserialize<dynamic>(AsPath(file));
     public static string AsPath(string file) => Path.Combine(AssetPath, file);
-    public static Stream AsStream(string file) => LoadBinaryAsset($"{resources}.{file}");
+    public static Stream AsStream(string file) => LoadFileStream(AsPath(file));
 
     public static string Schema1Name => "schema1.json";
 
@@ -48,10 +48,11 @@ namespace MGNZ.Squidex.Tests.Shared.Assets
 
     public static string ExportPath => Path.Combine(ExecutingPath, "Exports");
 
+    public static T LoadFileDeserialize<T>(string path) => JsonConvert.DeserializeObject<T>(StreamToString(LoadFileStream(path)));
+    public static Stream LoadFileStream(string path) => File.OpenRead(path);
+
     public static T LoadResourceDeserialize<T>(string path) => JsonConvert.DeserializeObject<T>(StreamToString(GetManifestResourceStream(path)));
-
-    public static dynamic LoadBinaryAsset(string path) => GetManifestResourceStream(path);
-
+    public static Stream LoadResourceStream(string path) => GetManifestResourceStream(path);
     private static Stream GetManifestResourceStream(string fullyQualifiedNamespace) => GetManifestResourceStream(typeof(AssetLoader).GetTypeInfo().Assembly, fullyQualifiedNamespace);
     private static Stream GetManifestResourceStream(Assembly assembly, string fullyQualifiedNamespace) => assembly.GetManifestResourceStream(fullyQualifiedNamespace);
 
