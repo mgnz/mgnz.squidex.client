@@ -12,7 +12,7 @@ namespace MGNZ.Squidex.Tests.Shared.Assets
     public static string AssetPath => Path.Combine(ExecutingPath, "Shared", "Assets");
 
     public static dynamic AsDynamic(string file) => LoadFileDeserialize<dynamic>(AsPath(file));
-    public static dynamic AsDeserialize(string file) => LoadFileDeserialize<dynamic>(AsPath(file));
+    public static T AsType<T>(string file) => LoadFileDeserialize<T>(AsPath(file));
     public static string AsPath(string file) => Path.Combine(AssetPath, file);
     public static Stream AsStream(string file) => LoadFileStream(AsPath(file));
 
