@@ -1,0 +1,49 @@
+{
+  "StringField": { "iv": "data 1 stringfield value" },
+  "LocalizableStringField": {
+    "en": "localizablestringfield value en",
+    "sm": "localizablestringfield  value sm"
+  },
+  "DateTimeField": { "iv": "2018-11-13T07:57:34Z" },
+  "NumberField": { "iv": 666777 },
+  "ArrayField": {
+    "iv": [
+      {
+        "ArrayStringField1": "arraystringfield1 value",
+        "ArrayDateTimeField1": "2018-11-13T07:57:52Z"
+      },
+      {
+        "ArrayStringField1": "arraystringfield1 value",
+        "ArrayDateTimeField1": "2018-11-13T07:57:58Z"
+      }
+    ]
+  },
+
+  "NullableAssetsFieldWithValue": { "iv": "c56c9b32-143e-47db-89de-d3315f9bfc8c" },
+  "NullableAssetsFieldWithNoValue": { "iv": "c56c9b32-143e-47db-89de-d3315f9bfc8c" },
+  "NonNullableAssetFieldWithValue": { "iv": "c56c9b32-143e-47db-89de-d3315f9bfc8c" },
+
+  "NullableGeolocationFieldWithValue": {
+    "iv": {
+      "Latitude": -45.885814152652991,
+      "Longitude": 170.57995319366455
+    }
+  },
+  "NullableGeolocationFieldNoValue": {
+    "iv": null
+  },
+
+  "NonNullableReferencesFieldWithValue": { "iv": "c56c9b32-143e-47db-89de-d3315f9bfc8c" },
+  "NullableReferencesFieldWithValue": { "iv": "c56c9b32-143e-47db-89de-d3315f9bfc8c" },
+  "NullableReferencesFieldNoValue": { "iv": null },
+
+  "NonNullableBooleanFieldWithValue": { "iv": true },
+  "NullableBooleanFieldWithValue": { "iv": true },
+  "NullableBooleanFieldNoValue": { "iv": null },
+
+  "JsonFieldDynamic": { "iv": { "blah": "blah-value" } },
+  "JsonFieldNull": { "iv": null },
+
+
+  "TagsField": { "iv": [ "tag-a", "tag-x" ] }
+}

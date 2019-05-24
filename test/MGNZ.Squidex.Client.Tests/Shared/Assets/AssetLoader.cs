@@ -15,9 +15,12 @@ namespace MGNZ.Squidex.Tests.Shared.Assets
     public static T AsType<T>(string file) => LoadFileDeserialize<T>(AsPath(file));
     public static string AsPath(string file) => Path.Combine(AssetPath, file);
     public static Stream AsStream(string file) => LoadFileStream(AsPath(file));
+    public static string AsString(string file) => StreamToString(LoadFileStream(AsPath(file)));
+
+    public static string UnitTestsSerialization1 => "unittests.serialization.1.json";
+
 
     public static string Schema1Name => "schema1.json";
-
     public static string Schema1Data1PostName => "schema1.data.1.post.json";
     public static string Schema1Data1PostResponseName => "schema1.data.1.post.response.json";
     public static string Schema1Data2PostName => "schema1.data.2.post.json";
@@ -37,12 +40,13 @@ namespace MGNZ.Squidex.Tests.Shared.Assets
     public static string App1Asset3PostResponseName => "app1.asset3.jpg.post.response.json";
     public static string App1Asset3TagResponseName => "app1.asset3.jpg.tag.response.json";
 
-    public static dynamic Schema1(string name)
+    public static dynamic Schema1(string name, bool isSingleton = false)
     {
       // note : because my asset data does not store a reference to a name we add it on the fly.
 
       var schema = AsDynamic(Schema1Name);
       schema.name = name;
+      schema.isSingleton = isSingleton;
       return schema;
     }
 
