@@ -1,13 +1,18 @@
+#if has_typed_client
+
 namespace MGNZ.Squidex.Client.Tests
 {
   using System;
   using System.Threading.Tasks;
 
   using FluentAssertions;
-
+  using MGNZ.Squidex.Client._Serialization;
   using MGNZ.Squidex.Client.Model;
+  using MGNZ.Squidex.Client.Tests._Serialization._Model;
   using MGNZ.Squidex.Client.Transport;
-
+  using MGNZ.Squidex.Tests.Shared.Assets;
+  using MGNZ.Squidex.Tests.Shared.Code;
+  using Newtonsoft.Json;
   using Xunit;
 
   [Collection("Sequential Squidex Integration Tests")]
@@ -15,37 +20,44 @@ namespace MGNZ.Squidex.Client.Tests
   [Trait("category", "developmet")]
   public class SquidexContentClientExtensionsIntegrationTests : BaseHandlerIntegrationTest
   {
-    [Fact(Skip = "typesafe is broken for array child elements")]
-    public Task Query_EndToEnd()
+    [Fact(Skip ="fail")]
+    public async Task Query_EndToEnd()
     {
-      throw new NotImplementedException();
+      //var schemaName = GetRandomName;
+      ////await SchemaClient.AssertNoSchemasExist("aut", delay: TimeSpan.FromSeconds(0.5));
+      ////var createschema = await SchemaClient.CreateSchema("aut", AssetLoader.Schema1(schemaName));
+      ////var publishedschema = await SchemaClient.PublishSchema("aut", schemaName);
 
-      //var schemaName = GetRandomSchemaName;
-      //await SchemaClient.AssertNoSchemasExist("aut", delay: TimeSpan.FromSeconds(0.5));
-      //var createschema = await SchemaClient.CreateSchema("aut", AssetLoader.Schema1(schemaName));
-      //var publishedschema = await SchemaClient.PublishSchema("aut", schemaName);
+      ////var settings = new JsonSerializerSettings { ContractResolver = new SpecialContractResolver() };
 
-      //dynamic create1response = await ContentClient.Post("aut", schemaName, AssetLoader.AsDynamic(AssetLoader.Schema1Data1PostName));
-      //dynamic create2response = await ContentClient.Post("aut", schemaName, AssetLoader.AsDynamic(AssetLoader.Schema1Data2PostName));
-      //string create1id = Convert.ToString(create1response.id);
-      //string create2id = Convert.ToString(create2response.id);
-      //await ContentClient.Publish("aut", schemaName, create1id);
-      //await ContentClient.Publish("aut", schemaName, create2id);
+      //var x = AssetLoader.AsType<ReferenceMultipleAssetModel>(AssetLoader.Schema1Data1PostName);
+      //var y = JsonConvert.SerializeObject(x, Formatting.Indented, settings);
+      //var z = AssetLoader.AsString(AssetLoader.Schema1Data1PostName);
 
-      //// act
+      //var create1response = await ContentClient.CreateContent_<ReferenceMultipleAssetModel>("aut", schemaName, AssetLoader.AsType<ReferenceMultipleAssetModel>(AssetLoader.Schema1Data1PostName));
+      //var create2response = await ContentClient.CreateContent_("aut", schemaName, AssetLoader.AsType<ReferenceMultipleAssetModel>(AssetLoader.Schema1Data2PostName));
+      ////string create1id = Convert.ToString(create1response.Id);
+      ////string create2id = Convert.ToString(create2response.Id);
+      ////await ContentClient.PublishContent("aut", schemaName, create1id);
+      ////await ContentClient.PublishContent("aut", schemaName, create2id);
 
-      //// note : eventual consistency and all that sometimes we don't get away with validating right away.
+      ////// act
 
-      //await Task.Delay(TimeSpan.FromSeconds(1));
-      //var content = await ContentClient.Query<ReferenceMultipleAssetModel>("aut", schemaName, new QueryRequest()
-      //{
-      //  Skip = 0,
-      //  Top = 100
-      //});
+      ////// note : eventual consistency and all that sometimes we don't get away with validating right away.
 
-      //content.Total.Should().Be(2);
-      //var actualFirst = content.Items[0];
-      //var actualSecond = content.Items[1];
+      ////await Task.Delay(TimeSpan.FromSeconds(1));
+
+      //////var content = await ContentClient.Query<dynamic>("aut", schemaName, new QueryRequest()
+      //////{
+      //////  Skip = 0,
+      //////  Top = 100
+      //////});
+      ////var content = await ContentClient.QueryContent("aut", schemaName, top: 100, skip: 0);
+
+      ////int contenttotal = Convert.ToInt32(content.total);
+      ////contenttotal.Should().Be(2);
+      ////var actualFirst = content.items[0];
+      ////var actualSecond = content.items[1];
 
       //// todo : verify export content
 
@@ -131,3 +143,5 @@ namespace MGNZ.Squidex.Client.Tests
     }
   }
 }
+
+#endif

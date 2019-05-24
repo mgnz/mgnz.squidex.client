@@ -24,10 +24,14 @@
     <None Remove="Shared\Assets\schema1.data.import.response.json" />
     <None Remove="Shared\Assets\schema1.data.query.response.json" />
     <None Remove="Shared\Assets\schema1.json" />
+    <None Remove="Shared\Assets\unittests.serialization.1.json" />
     <None Remove="testsettings.json" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Shared\Assets\unittests.serialization.1.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="testsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
