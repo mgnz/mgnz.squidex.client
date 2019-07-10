@@ -1,3 +1,4 @@
+[![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=mgnz/mgnz.squidex.client)](https://dependabot.com)
 
 A netstandard2 client library for accessing the Squidex REST API; built on top of Refit.
 
