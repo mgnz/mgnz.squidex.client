@@ -7,7 +7,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-    <PackageReference Include="Refit" Version="6.0.38" />
+    <PackageReference Include="Refit" Version="6.2.16" />
   </ItemGroup>
 
 </Project>
